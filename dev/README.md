@@ -12,7 +12,7 @@ cd ./cosri-environments/dev
 docker-compose up
 ```
 
-Finally, navigate to the client: https://client.local.stayhome.app:4400
+Finally, navigate to the client: http://dashboard.localtest.me
 
 
 ## Credentials
