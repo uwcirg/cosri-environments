@@ -1,0 +1,86 @@
+version: "3.7"
+services:
+  ingress:
+    image: "traefik:v2.2"
+    command:
+      #- "--log.level=DEBUG"
+
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+
+      # required for Let's Encrypt http challenge
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      # Let's Encrypt challenges
+      - "80:80"
+      # web UI
+      - "8080:8080"
+      # https
+      - "443:443"
+    volumes:
+      - "certificate-data:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  keycloak:
+    image: jboss/keycloak:9.0.0
+    labels:
+      - "traefik.enable=true"
+
+      #- "traefik.http.routers.keycloak.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
+      #- "traefik.http.routers.keycloak.entrypoints=web"
+
+      - "traefik.http.routers.keycloak.rule=Host(`keycloak.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.keycloak.entrypoints=websecure"
+      - "traefik.http.routers.keycloak.tls.certresolver=myresolver"
+    command:
+      - "-b"
+      - "0.0.0.0"
+      - "-Dkeycloak.migration.action=import"
+      - "-Dkeycloak.migration.provider=singleFile"
+      - "-Dkeycloak.profile.feature.upload_scripts=enabled"
+      - "-Dkeycloak.migration.file=/tmp/realm-data.json"
+      - "-Dkeycloak.migration.strategy=IGNORE_EXISTING"
+    environment:
+      KEYCLOAK_HOSTNAME: "keycloak.${BASE_DOMAIN:-localtest.me}"
+      PROXY_ADDRESS_FORWARDING: "true"
+      DB_VENDOR: postgres
+      DB_ADDR: db
+      DB_PORT: 5432
+      DB_DATABASE: keycloak
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    volumes:
+      # todo: fixup stayhome references
+      - "./config/keycloak/realm-data.json:/tmp/realm-data.json"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+      # create keycloak and HAPI databases
+      - "./config/db:/docker-entrypoint-initdb.d"
+
+  fhir:
+    image: uwcirg/hapi-fhir-oauth2-starter
+    environment:
+      JAVA_OPTIONS: "-Dhapi.properties=/opt/hapi.properties"
+    volumes:
+      - "./config/fhir/hapi.properties:/opt/hapi.properties"
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+  certificate-data:
