@@ -2926,7 +2926,7 @@
         "id": "e1e8c399-f31a-436c-8874-33e93759580f",
         "clientId": "femr_openid_client",
         "name": "fEMR",
-        "description": "Stayhome app to support home monitoring in voluntary quarantine",
+        "description": "fEMR OIDC client",
         "rootUrl": "",
         "adminUrl": "",
         "baseUrl": "",
