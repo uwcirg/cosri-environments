@@ -629,7 +629,7 @@
       {
         "id": "a7661de8-56b9-45d6-805e-629688bf9b65",
         "clientId": "fEMR-realm",
-        "name": "Stayhome Realm",
+        "name": "fEMR Realm",
         "surrogateAuthRequired": false,
         "enabled": true,
         "alwaysDisplayInConsole": false,
@@ -2229,8 +2229,8 @@
     "userManagedAccessAllowed": false
   },
   {
-    "id": "stayhome",
-    "realm": "Stayhome",
+    "id": "femr",
+    "realm": "fEMR",
     "notBefore": 0,
     "revokeRefreshToken": false,
     "refreshTokenMaxReuse": 0,
@@ -2274,7 +2274,7 @@
           "description": "${role_uma_authorization}",
           "composite": false,
           "clientRole": false,
-          "containerId": "stayhome",
+          "containerId": "femr",
           "attributes": {}
         },
         {
@@ -2283,7 +2283,7 @@
           "description": "${role_offline-access}",
           "composite": false,
           "clientRole": false,
-          "containerId": "stayhome",
+          "containerId": "femr",
           "attributes": {}
         }
       ],
@@ -2495,7 +2495,7 @@
             "attributes": {}
           }
         ],
-        "stayhome_openid_client": [],
+        "femr_openid_client": [],
         "security-admin-console": [],
         "admin-cli": [],
         "account-console": [],
@@ -2924,8 +2924,8 @@
       },
       {
         "id": "e1e8c399-f31a-436c-8874-33e93759580f",
-        "clientId": "stayhome_openid_client",
-        "name": "Stayhome",
+        "clientId": "femr_openid_client",
+        "name": "fEMR",
         "description": "Stayhome app to support home monitoring in voluntary quarantine",
         "rootUrl": "",
         "adminUrl": "",
@@ -2936,7 +2936,7 @@
         "clientAuthenticatorType": "client-secret",
         "secret": "92e9861c-a2f3-40dd-8872-e2ee57a55afe",
         "redirectUris": ["*"],
-        "webOrigins": ["*.local.stayhome.app"],
+        "webOrigins": ["*"],
         "notBefore": 0,
         "bearerOnly": false,
         "consentRequired": false,
