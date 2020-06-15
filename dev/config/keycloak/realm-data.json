@@ -2952,7 +2952,7 @@
           "saml.force.post.binding": "false",
           "saml.multivalued.roles": "false",
           "saml.encrypt": "false",
-          "login_theme": "stayhome",
+          "login_theme": "base",
           "saml.server.signature": "false",
           "saml.server.signature.keyinfo.ext": "false",
           "exclude.session.state.from.auth.response": "false",
@@ -3503,7 +3503,7 @@
       "fromDisplayName": "Stayhome",
       "user": "keycloak-stayhome@cirg.washington.edu"
     },
-    "loginTheme": "stayhome",
+    "loginTheme": "base",
     "accountTheme": "base",
     "adminTheme": "base",
     "eventsEnabled": true,
