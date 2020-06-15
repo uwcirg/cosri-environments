@@ -58,7 +58,7 @@
           "composites": {
             "realm": ["create-realm"],
             "client": {
-              "Stayhome-realm": [
+              "fEMR-realm": [
                 "view-identity-providers",
                 "manage-events",
                 "manage-identity-providers",
@@ -127,7 +127,7 @@
         "security-admin-console": [],
         "admin-cli": [],
         "account-console": [],
-        "Stayhome-realm": [
+        "fEMR-realm": [
           {
             "id": "d2ff90b3-fad8-4eea-acf2-844a76ad2ca2",
             "name": "view-identity-providers",
@@ -270,7 +270,7 @@
             "composite": true,
             "composites": {
               "client": {
-                "Stayhome-realm": ["query-clients"]
+                "fEMR-realm": ["query-clients"]
               }
             },
             "clientRole": true,
@@ -293,7 +293,7 @@
             "composite": true,
             "composites": {
               "client": {
-                "Stayhome-realm": ["query-users", "query-groups"]
+                "fEMR-realm": ["query-users", "query-groups"]
               }
             },
             "clientRole": true,
@@ -628,7 +628,7 @@
     "clients": [
       {
         "id": "a7661de8-56b9-45d6-805e-629688bf9b65",
-        "clientId": "Stayhome-realm",
+        "clientId": "fEMR-realm",
         "name": "Stayhome Realm",
         "surrogateAuthRequired": false,
         "enabled": true,
