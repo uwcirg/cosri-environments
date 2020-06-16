@@ -69,17 +69,30 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - "db-data:/var/lib/postgresql/data"
-      # create keycloak and HAPI databases
+      # create keycloak and HAPI application databases
       - "./config/db:/docker-entrypoint-initdb.d"
 
   fhir:
     image: uwcirg/hapi-fhir-oauth2-starter
     environment:
       JAVA_OPTIONS: "-Dhapi.properties=/opt/hapi.properties"
+      HAPI_SERVER_ADDRESS: 'https://fhir.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir/'
+
     volumes:
       - "./config/fhir/hapi.properties:/opt/hapi.properties"
     depends_on:
       - db
+      - ingress
+
+    labels:
+      - "traefik.enable=true"
+
+      #- "traefik.http.routers.fhir.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
+      #- "traefik.http.routers.fhir.entrypoints=web"
+
+      - "traefik.http.routers.fhir.rule=Host(`fhir.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.fhir.entrypoints=websecure"
+      - "traefik.http.routers.fhir.tls.certresolver=myresolver"
 
 volumes:
   db-data:
