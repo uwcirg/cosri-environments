@@ -77,7 +77,6 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
     volumes:
-      # todo: fixup stayhome references
       - "./config/keycloak/realm-data.json:/tmp/realm-data.json"
     depends_on:
       - db
