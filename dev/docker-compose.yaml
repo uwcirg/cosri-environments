@@ -31,7 +31,7 @@ services:
 
   dashboard:
     build:
-      context: https://github.com/uwcirg/cosri-patient-search-interface.git#pull/1/head
+      context: https://github.com/uwcirg/cosri-patient-search-interface.git
     depends_on:
       - ingress
 
