@@ -43,6 +43,8 @@ services:
       - "-b"
       - "0.0.0.0"
       - "-Dkeycloak.migration.action=import"
+      # todo: use dir migration provider (`keycloak.migration.provider=dir`)
+      # https://github.com/keycloak/keycloak-documentation/blob/master/server_admin/topics/export-import.adoc
       - "-Dkeycloak.migration.provider=singleFile"
       - "-Dkeycloak.profile.feature.upload_scripts=enabled"
       - "-Dkeycloak.migration.file=/tmp/realm-data.json"
@@ -61,6 +63,7 @@ services:
       - "./config/keycloak/realm-data.json:/tmp/realm-data.json"
     depends_on:
       - db
+      - ingress
 
   db:
     image: postgres:12
