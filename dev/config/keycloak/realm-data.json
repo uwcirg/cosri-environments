@@ -58,7 +58,7 @@
           "composites": {
             "realm": ["create-realm"],
             "client": {
-              "Stayhome-realm": [
+              "fEMR-realm": [
                 "view-identity-providers",
                 "manage-events",
                 "manage-identity-providers",
@@ -127,7 +127,7 @@
         "security-admin-console": [],
         "admin-cli": [],
         "account-console": [],
-        "Stayhome-realm": [
+        "fEMR-realm": [
           {
             "id": "d2ff90b3-fad8-4eea-acf2-844a76ad2ca2",
             "name": "view-identity-providers",
@@ -270,7 +270,7 @@
             "composite": true,
             "composites": {
               "client": {
-                "Stayhome-realm": ["query-clients"]
+                "fEMR-realm": ["query-clients"]
               }
             },
             "clientRole": true,
@@ -293,7 +293,7 @@
             "composite": true,
             "composites": {
               "client": {
-                "Stayhome-realm": ["query-users", "query-groups"]
+                "fEMR-realm": ["query-users", "query-groups"]
               }
             },
             "clientRole": true,
@@ -628,8 +628,8 @@
     "clients": [
       {
         "id": "a7661de8-56b9-45d6-805e-629688bf9b65",
-        "clientId": "Stayhome-realm",
-        "name": "Stayhome Realm",
+        "clientId": "fEMR-realm",
+        "name": "fEMR Realm",
         "surrogateAuthRequired": false,
         "enabled": true,
         "alwaysDisplayInConsole": false,
@@ -2229,8 +2229,8 @@
     "userManagedAccessAllowed": false
   },
   {
-    "id": "stayhome",
-    "realm": "Stayhome",
+    "id": "femr",
+    "realm": "fEMR",
     "notBefore": 0,
     "revokeRefreshToken": false,
     "refreshTokenMaxReuse": 0,
@@ -2274,7 +2274,7 @@
           "description": "${role_uma_authorization}",
           "composite": false,
           "clientRole": false,
-          "containerId": "stayhome",
+          "containerId": "femr",
           "attributes": {}
         },
         {
@@ -2283,7 +2283,7 @@
           "description": "${role_offline-access}",
           "composite": false,
           "clientRole": false,
-          "containerId": "stayhome",
+          "containerId": "femr",
           "attributes": {}
         }
       ],
@@ -2495,7 +2495,7 @@
             "attributes": {}
           }
         ],
-        "stayhome_openid_client": [],
+        "femr_openid_client": [],
         "security-admin-console": [],
         "admin-cli": [],
         "account-console": [],
@@ -2655,14 +2655,14 @@
         "clientId": "account",
         "name": "${client_account}",
         "rootUrl": "${authBaseUrl}",
-        "baseUrl": "/realms/Stayhome/account/",
+        "baseUrl": "/realms/fEMR/account/",
         "surrogateAuthRequired": false,
         "enabled": true,
         "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "**********",
         "defaultRoles": ["manage-account", "view-profile"],
-        "redirectUris": ["/realms/Stayhome/account/*"],
+        "redirectUris": ["/realms/fEMR/account/*"],
         "webOrigins": [],
         "notBefore": 0,
         "bearerOnly": false,
@@ -2697,13 +2697,13 @@
         "clientId": "account-console",
         "name": "${client_account-console}",
         "rootUrl": "${authBaseUrl}",
-        "baseUrl": "/realms/stayhome/account/",
+        "baseUrl": "/realms/femr/account/",
         "surrogateAuthRequired": false,
         "enabled": true,
         "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "**********",
-        "redirectUris": ["/realms/stayhome/account/*"],
+        "redirectUris": ["/realms/femr/account/*"],
         "webOrigins": [],
         "notBefore": 0,
         "bearerOnly": false,
@@ -2867,13 +2867,13 @@
         "clientId": "security-admin-console",
         "name": "${client_security-admin-console}",
         "rootUrl": "${authAdminUrl}",
-        "baseUrl": "/admin/Stayhome/console/",
+        "baseUrl": "/admin/fEMR/console/",
         "surrogateAuthRequired": false,
         "enabled": true,
         "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "**********",
-        "redirectUris": ["/admin/Stayhome/console/*"],
+        "redirectUris": ["/admin/fEMR/console/*"],
         "webOrigins": ["+"],
         "notBefore": 0,
         "bearerOnly": false,
@@ -2924,9 +2924,9 @@
       },
       {
         "id": "e1e8c399-f31a-436c-8874-33e93759580f",
-        "clientId": "stayhome_openid_client",
-        "name": "Stayhome",
-        "description": "Stayhome app to support home monitoring in voluntary quarantine",
+        "clientId": "femr_openid_client",
+        "name": "fEMR",
+        "description": "fEMR OIDC client",
         "rootUrl": "",
         "adminUrl": "",
         "baseUrl": "",
@@ -2936,7 +2936,7 @@
         "clientAuthenticatorType": "client-secret",
         "secret": "92e9861c-a2f3-40dd-8872-e2ee57a55afe",
         "redirectUris": ["*"],
-        "webOrigins": ["*.local.stayhome.app"],
+        "webOrigins": ["*"],
         "notBefore": 0,
         "bearerOnly": false,
         "consentRequired": false,
@@ -2952,7 +2952,7 @@
           "saml.force.post.binding": "false",
           "saml.multivalued.roles": "false",
           "saml.encrypt": "false",
-          "login_theme": "stayhome",
+          "login_theme": "base",
           "saml.server.signature": "false",
           "saml.server.signature.keyinfo.ext": "false",
           "exclude.session.state.from.auth.response": "false",
@@ -3493,17 +3493,17 @@
       "replyToDisplayName": "CIRG Support",
       "starttls": "",
       "auth": "true",
-      "envelopeFrom": "noreply@stayhome.cirg.washington.edu",
+      "envelopeFrom": "support@cirg.washington.edu",
       "ssl": "true",
       "password": "**********",
       "port": "465",
       "host": "mail.cirg.washington.edu",
-      "replyTo": "support+stayhome@cirg.washington.edu",
-      "from": "noreply@stayhome.cirg.washington.edu",
-      "fromDisplayName": "Stayhome",
-      "user": "keycloak-stayhome@cirg.washington.edu"
+      "replyTo": "support+femr@cirg.washington.edu",
+      "from": "support@cirg.washington.edu",
+      "fromDisplayName": "fEMR",
+      "user": "keycloak-femr@cirg.washington.edu"
     },
-    "loginTheme": "stayhome",
+    "loginTheme": "base",
     "accountTheme": "base",
     "adminTheme": "base",
     "eventsEnabled": true,
