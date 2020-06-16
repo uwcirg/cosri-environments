@@ -12,7 +12,7 @@ cd ./cosri-environments/dev
 docker-compose up
 ```
 
-Finally, navigate to the client: http://dashboard.localtest.me
+Finally, navigate to the client: https://dashboard.localtest.me
 
 
 ## Credentials
