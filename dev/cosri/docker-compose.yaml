@@ -4,16 +4,23 @@ services:
     build:
       context: https://github.com/uwcirg/AHRQ-CDS-Connect-PAIN-MANAGEMENT-SUMMARY.git
       dockerfile: ${FRONTEND_DOCKERFILE:-Dockerfile}
-    ports:
-      # allow override of target and published port
-      - ${P_PORT:-8000}:${T_PORT:-8000}
+
     volumes:
       - ./:/opt/app
-    env_file:
+    #env_file:
       # Reuse .env from CRA
-      - .env
+      #- .env
+    labels:
+      - "traefik.enable=true"
 
-  sof_wrapper:
+      #- "traefik.http.routers.frontend.rule=Host(`frontend.${BASE_DOMAIN:-localtest.me}`)"
+      #- "traefik.http.routers.frontend.entrypoints=web"
+
+      - "traefik.http.routers.frontend.rule=Host(`frontend.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=myresolver"
+
+  backend:
     build:
       context: https://github.com/uwcirg/sof-api-wrapper.git
     volumes:
@@ -22,14 +29,17 @@ services:
       - /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro
       # mount host hosts file into container
       - /etc/hosts:/etc/hosts:ro
-    ports:
-      # allow override of published port
-      - ${P_PORT:-5000}:5000
+
     environment:
       REQUESTS_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt
-    env_file:
-      - sof_wrapper.env
+    #env_file:
+      #- sof_wrapper.env
+    labels:
+      - "traefik.enable=true"
 
-volumes:
-  db-data:
-  certificate-data:
+      #- "traefik.http.routers.backend.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"
+      #- "traefik.http.routers.backend.entrypoints=web"
+
+      - "traefik.http.routers.backend.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.backend.entrypoints=websecure"
+      - "traefik.http.routers.backend.tls.certresolver=myresolver"
