@@ -14,9 +14,6 @@ services:
     labels:
       - "traefik.enable=true"
 
-      #- "traefik.http.routers.frontend.rule=Host(`frontend.${BASE_DOMAIN:-localtest.me}`)"
-      #- "traefik.http.routers.frontend.entrypoints=web"
-
       - "traefik.http.routers.frontend.rule=Host(`frontend.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.tls.certresolver=myresolver"
@@ -41,9 +38,6 @@ services:
       SOF_CLIENT_SCOPES: "patient/*.read launch openid profile"
     labels:
       - "traefik.enable=true"
-
-      #- "traefik.http.routers.backend.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"
-      #- "traefik.http.routers.backend.entrypoints=web"
 
       - "traefik.http.routers.backend.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.backend.entrypoints=websecure"
