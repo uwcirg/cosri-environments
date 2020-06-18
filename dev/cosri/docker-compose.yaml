@@ -19,6 +19,8 @@ services:
       - "traefik.http.routers.frontend.rule=Host(`frontend.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.tls.certresolver=myresolver"
+    networks:
+     - ingress-network
 
   backend:
     build:
@@ -43,3 +45,10 @@ services:
       - "traefik.http.routers.backend.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.backend.entrypoints=websecure"
       - "traefik.http.routers.backend.tls.certresolver=myresolver"
+    networks:
+     - ingress-network
+
+networks:
+  ingress-network:
+    # override COMPOSE_PROJECT_NAME namespacing; use exact network name
+    name: ingress-network

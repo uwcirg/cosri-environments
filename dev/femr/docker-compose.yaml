@@ -27,7 +27,8 @@ services:
     volumes:
       - "certificate-data:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-
+    networks:
+      - ingress-network
 
   dashboard:
     build:
@@ -44,7 +45,8 @@ services:
       - "traefik.http.routers.dashboard.rule=Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.tls.certresolver=myresolver"
-
+    networks:
+      - ingress-network
 
   keycloak:
     image: jboss/keycloak:9.0.0
@@ -81,6 +83,8 @@ services:
     depends_on:
       - db
       - ingress
+    networks:
+      - ingress-network
 
   db:
     image: postgres:12
@@ -113,7 +117,14 @@ services:
       - "traefik.http.routers.fhir.rule=Host(`fhir.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.fhir.entrypoints=websecure"
       - "traefik.http.routers.fhir.tls.certresolver=myresolver"
+    networks:
+      - ingress-network
 
 volumes:
   db-data:
   certificate-data:
+
+networks:
+  ingress-network:
+    # override COMPOSE_PROJECT_NAME namespacing; use exact network name
+    name: ingress-network
