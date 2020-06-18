@@ -34,23 +34,6 @@ services:
     networks:
       - ingress-network
 
-  dashboard:
-    build:
-      context: https://github.com/uwcirg/cosri-patient-search-interface.git
-    depends_on:
-      - ingress
-
-    labels:
-      - "traefik.enable=true"
-
-      #- "traefik.http.routers.dashboard.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
-      #- "traefik.http.routers.dashboard.entrypoints=web"
-
-      - "traefik.http.routers.dashboard.rule=Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.dashboard.entrypoints=websecure"
-      - "traefik.http.routers.dashboard.tls.certresolver=myresolver"
-    networks:
-      - ingress-network
 
   keycloak:
     image: jboss/keycloak:9.0.0
