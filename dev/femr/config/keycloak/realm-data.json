@@ -2989,6 +2989,7 @@
         "enabled": true,
         "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
+        "secret": "a92b4f24-82cb-4b04-baee-b933f55e2039",
         "redirectUris": ["*"],
         "webOrigins": ["*"],
         "notBefore": 0,

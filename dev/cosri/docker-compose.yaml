@@ -29,9 +29,9 @@ services:
     environment:
       SECRET_KEY: qiLYeYMJf8i7y0xU
 
-      # client ID set up with Epic, for HIMSS system
-      SOF_CLIENT_ID: 9bbd6a99-fd9c-40b5-9c09-f7773c70f98b
-      SOF_CLIENT_SECRET: NaleCtOinglOaKeR
+      # client ID registered with SoF host (Keycloak)
+      SOF_CLIENT_ID: fe6ccba2-7bef-47db-8ca7-32b916dcdd8a
+      SOF_CLIENT_SECRET: a92b4f24-82cb-4b04-baee-b933f55e2039
 
       PREFERRED_URL_SCHEME: https
       # ultimate destination after SoF launch and backend auth
