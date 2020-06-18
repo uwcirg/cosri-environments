@@ -3,7 +3,7 @@ services:
   frontend:
     build:
       context: https://github.com/uwcirg/AHRQ-CDS-Connect-PAIN-MANAGEMENT-SUMMARY.git
-      dockerfile: ${FRONTEND_DOCKERFILE:-Dockerfile}
+      dockerfile: Dockerfile.production
 
     volumes:
       - ./:/opt/app
