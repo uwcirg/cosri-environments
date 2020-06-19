@@ -56,6 +56,7 @@ services:
     depends_on:
       - ingress
       - keycloak
+      - pdmp
 
     labels:
       - "traefik.enable=true"
@@ -66,6 +67,9 @@ services:
       - "traefik.http.routers.dashboard.rule=Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.tls.certresolver=myresolver"
+    networks:
+      - ingress-network
+      - internal
 
 
   keycloak:
@@ -103,9 +107,11 @@ services:
     depends_on:
       - db
       - ingress
+      - fhir
     networks:
       - ingress-network
       - internal
+
 
   db:
     image: postgres:12
@@ -126,7 +132,7 @@ services:
       HAPI_SERVER_ADDRESS: 'https://fhir.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir/'
 
     volumes:
-      - "./config/fhir/hapi.properties:/opt/hapi.properties"
+      - "./config/fhir/hapi.properties:/opt/hapi.properties:ro"
     depends_on:
       - db
       - ingress
@@ -144,13 +150,11 @@ services:
       - ingress-network
       - internal
 
+
   pdmp:
     image: uwcirg/script-fhir-facade
     volumes:
-      - ./config/pdmp:/opt/app/config
-    depends_on:
-      - ingress
-
+      - ./config/pdmp:/opt/app/config:ro
     labels:
       - "traefik.enable=true"
 
@@ -160,14 +164,17 @@ services:
       - "traefik.http.routers.pdmp.rule=Host(`pdmp.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.pdmp.entrypoints=websecure"
       - "traefik.http.routers.pdmp.tls.certresolver=myresolver"
-
+    networks:
+      - internal
 
 volumes:
   db-data:
   certificate-data:
 
 networks:
+  # internal network for backing services
   internal:
+
   ingress-network:
     # override COMPOSE_PROJECT_NAME namespacing; use exact network name
     name: ingress-network
