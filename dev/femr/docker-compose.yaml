@@ -35,6 +35,39 @@ services:
       - ingress-network
 
 
+  dashboard:
+    image: uwcirg/cosri-patientsearch:develop
+    environment:
+      SECRET_KEY: lknyrrtehpyjtyjojwjbnblewth
+      OIDC_CLIENT_SECRETS: '
+        {"web": {
+          "auth_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/auth",
+          "client_id": "femr_openid_client",
+          "client_secret": "92e9861c-a2f3-40dd-8872-e2ee57a55afe",
+          "issuer": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR",
+          "redirect_uris": ["https://keycloak.${BASE_DOMAIN:-localtest.me}/oidc_callback"],
+          "userinfo_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/userinfo",
+          "token_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token",
+          "token_introspection_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token/introspect"
+        }}'
+      EXTERNAL_FHIR_API: 'https://pdmp.${BASE_DOMAIN:-localtest.me}/v/r2/fhir/'
+      MAP_API: 'https://stayhome-test-api.cirg.washington.edu/api/r4/'
+
+    depends_on:
+      - ingress
+      - keycloak
+
+    labels:
+      - "traefik.enable=true"
+
+      #- "traefik.http.routers.dashboard.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
+      #- "traefik.http.routers.dashboard.entrypoints=web"
+
+      - "traefik.http.routers.dashboard.rule=Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.dashboard.entrypoints=websecure"
+      - "traefik.http.routers.dashboard.tls.certresolver=myresolver"
+
+
   keycloak:
     image: jboss/keycloak:9.0.0
     labels:
@@ -110,6 +143,24 @@ services:
     networks:
       - ingress-network
       - internal
+
+  pdmp:
+    image: uwcirg/script-fhir-facade
+    volumes:
+      - ./config/pdmp:/opt/app/config
+    depends_on:
+      - ingress
+
+    labels:
+      - "traefik.enable=true"
+
+      #- "traefik.http.routers.pdmp.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
+      #- "traefik.http.routers.pdmp.entrypoints=web"
+
+      - "traefik.http.routers.pdmp.rule=Host(`pdmp.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.pdmp.entrypoints=websecure"
+      - "traefik.http.routers.pdmp.tls.certresolver=myresolver"
+
 
 volumes:
   db-data:
