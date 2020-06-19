@@ -13,6 +13,10 @@ services:
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
 
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+
       - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
 
@@ -27,23 +31,8 @@ services:
     volumes:
       - "certificate-data:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-
-
-  dashboard:
-    build:
-      context: https://github.com/uwcirg/cosri-patient-search-interface.git
-    depends_on:
-      - ingress
-
-    labels:
-      - "traefik.enable=true"
-
-      #- "traefik.http.routers.dashboard.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
-      #- "traefik.http.routers.dashboard.entrypoints=web"
-
-      - "traefik.http.routers.dashboard.rule=Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.dashboard.entrypoints=websecure"
-      - "traefik.http.routers.dashboard.tls.certresolver=myresolver"
+    networks:
+      - ingress-network
 
 
   keycloak:
@@ -81,6 +70,9 @@ services:
     depends_on:
       - db
       - ingress
+    networks:
+      - ingress-network
+      - internal
 
   db:
     image: postgres:12
@@ -91,6 +83,8 @@ services:
       - "db-data:/var/lib/postgresql/data"
       # create keycloak and HAPI application databases
       - "./config/db:/docker-entrypoint-initdb.d"
+    networks:
+      - internal
 
   fhir:
     image: uwcirg/hapi-fhir-oauth2-starter
@@ -113,7 +107,16 @@ services:
       - "traefik.http.routers.fhir.rule=Host(`fhir.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.fhir.entrypoints=websecure"
       - "traefik.http.routers.fhir.tls.certresolver=myresolver"
+    networks:
+      - ingress-network
+      - internal
 
 volumes:
   db-data:
   certificate-data:
+
+networks:
+  internal:
+  ingress-network:
+    # override COMPOSE_PROJECT_NAME namespacing; use exact network name
+    name: ingress-network
