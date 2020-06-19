@@ -2,9 +2,7 @@ version: "3.7"
 services:
   frontend:
     build:
-      context: https://github.com/uwcirg/AHRQ-CDS-Connect-PAIN-MANAGEMENT-SUMMARY.git
-      dockerfile: Dockerfile.production
-
+      image: uwcirg/cosri-summary
     environment:
       # confidential backend API endpoint
       # NB: domain is required for cookies to be set
