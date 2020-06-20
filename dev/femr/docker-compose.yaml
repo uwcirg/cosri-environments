@@ -10,6 +10,8 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=ingress-network"
       - "--entrypoints.web.address=:80"
+      # forward headers on requests from infrastructure apache
+      - "--entryPoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,172.0.0.1/8"
     ports:
       - "80:80"
       # web UI
