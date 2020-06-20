@@ -8,6 +8,8 @@ services:
   frontend:
     labels:
       traefik.http.routers.frontend.entrypoints: websecure
+      traefik.http.routers.frontend.tls.certresolver: myresolver
   backend:
     labels:
       traefik.http.routers.backend.entrypoints: websecure
+      traefik.http.routers.backend.tls.certresolver: myresolver

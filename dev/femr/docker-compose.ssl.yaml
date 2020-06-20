@@ -38,11 +38,14 @@ services:
   dashboard:
     labels:
       traefik.http.routers.dashboard.entrypoints: websecure
+      traefik.http.routers.dashboard.tls.certresolver: myresolver
   
   keycloak:
     labels:
       traefik.http.routers.keycloak.entrypoints: websecure
+      traefik.http.routers.keycloak.tls.certresolver: myresolver
   
   fhir:
     labels:
       traefik.http.routers.fhir.entrypoints: websecure
+      traefik.http.routers.fhir.tls.certresolver: myresolver
