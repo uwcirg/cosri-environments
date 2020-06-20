@@ -7,10 +7,9 @@ services:
       # NB: domain is required for cookies to be set
       REACT_APP_CONF_API_URL: "https://backend.${BASE_DOMAIN:-localtest.me}"
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`frontend.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.frontend.entrypoints=websecure"
-      - "traefik.http.routers.frontend.tls.certresolver=myresolver"
+      traefik.enable: 'true'
+      traefik.http.routers.frontend.rule: Host(`frontend.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.frontend.entrypoints: web
     networks:
      - ingress-network
 
@@ -32,10 +31,9 @@ services:
       SOF_ACCESS_TOKEN_URL: 'https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token'
       SOF_AUTHORIZE_URL: 'https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/auth'
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.backend.entrypoints=websecure"
-      - "traefik.http.routers.backend.tls.certresolver=myresolver"
+      traefik.enable: 'true'
+      traefik.http.routers.backend.rule: Host(`backend.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.backend.entrypoints: web
     networks:
      - ingress-network
 

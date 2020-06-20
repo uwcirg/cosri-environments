@@ -63,10 +63,9 @@ services:
       - keycloak
       - pdmp
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.dashboard.entrypoints=websecure"
-      - "traefik.http.routers.dashboard.tls.certresolver=myresolver"
+      traefik.enable: 'true'
+      traefik.http.routers.dashboard.rule: Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.dashboard.entrypoints: web
     networks:
       - ingress-network
       - internal
@@ -75,10 +74,9 @@ services:
   keycloak:
     image: jboss/keycloak:9.0.0
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.keycloak.rule=Host(`keycloak.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.keycloak.entrypoints=websecure"
-      - "traefik.http.routers.keycloak.tls.certresolver=myresolver"
+      traefik.enable: 'true'
+      traefik.http.routers.keycloak.rule: Host(`keycloak.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.keycloak.entrypoints: web
     command:
       - "-b"
       - "0.0.0.0"
@@ -121,10 +119,9 @@ services:
       - db
       - ingress
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.fhir.rule=Host(`fhir.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.fhir.entrypoints=websecure"
-      - "traefik.http.routers.fhir.tls.certresolver=myresolver"
+      traefik.enable: 'true'
+      traefik.http.routers.fhir.rule: Host(`fhir.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.fhir.entrypoints: web
     networks:
       - ingress-network
       - internal
@@ -135,10 +132,9 @@ services:
     volumes:
       - ./config/pdmp:/opt/app/config:ro
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.pdmp.rule=Host(`pdmp.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.pdmp.entrypoints=websecure"
-      - "traefik.http.routers.pdmp.tls.certresolver=myresolver"
+      traefik.enable: 'true'
+      traefik.http.routers.pdmp.rule: Host(`pdmp.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.pdmp.entrypoints: web
     networks:
       - internal
 
