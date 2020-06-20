@@ -14,6 +14,7 @@ services:
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
 
+      # redirect http to https
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
@@ -53,18 +54,12 @@ services:
         }}'
       EXTERNAL_FHIR_API: 'https://pdmp.${BASE_DOMAIN:-localtest.me}/v/r2/fhir/'
       MAP_API: 'https://stayhome-test-api.cirg.washington.edu/api/r4/'
-
     depends_on:
       - ingress
       - keycloak
       - pdmp
-
     labels:
       - "traefik.enable=true"
-
-      #- "traefik.http.routers.dashboard.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
-      #- "traefik.http.routers.dashboard.entrypoints=web"
-
       - "traefik.http.routers.dashboard.rule=Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.dashboard.entrypoints=websecure"
       - "traefik.http.routers.dashboard.tls.certresolver=myresolver"
@@ -77,10 +72,6 @@ services:
     image: jboss/keycloak:9.0.0
     labels:
       - "traefik.enable=true"
-
-      #- "traefik.http.routers.keycloak.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
-      #- "traefik.http.routers.keycloak.entrypoints=web"
-
       - "traefik.http.routers.keycloak.rule=Host(`keycloak.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.keycloak.entrypoints=websecure"
       - "traefik.http.routers.keycloak.tls.certresolver=myresolver"
@@ -114,18 +105,6 @@ services:
       - internal
 
 
-  db:
-    image: postgres:12
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - "db-data:/var/lib/postgresql/data"
-      # create keycloak and HAPI application databases
-      - "./config/db:/docker-entrypoint-initdb.d"
-    networks:
-      - internal
-
   fhir:
     image: uwcirg/hapi-fhir-oauth2-starter
     environment:
@@ -137,13 +116,8 @@ services:
     depends_on:
       - db
       - ingress
-
     labels:
       - "traefik.enable=true"
-
-      #- "traefik.http.routers.fhir.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
-      #- "traefik.http.routers.fhir.entrypoints=web"
-
       - "traefik.http.routers.fhir.rule=Host(`fhir.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.fhir.entrypoints=websecure"
       - "traefik.http.routers.fhir.tls.certresolver=myresolver"
@@ -158,13 +132,22 @@ services:
       - ./config/pdmp:/opt/app/config:ro
     labels:
       - "traefik.enable=true"
-
-      #- "traefik.http.routers.pdmp.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
-      #- "traefik.http.routers.pdmp.entrypoints=web"
-
       - "traefik.http.routers.pdmp.rule=Host(`pdmp.${BASE_DOMAIN:-localtest.me}`)"
       - "traefik.http.routers.pdmp.entrypoints=websecure"
       - "traefik.http.routers.pdmp.tls.certresolver=myresolver"
+    networks:
+      - internal
+
+
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+      # create keycloak and HAPI application databases
+      - "./config/db:/docker-entrypoint-initdb.d"
     networks:
       - internal
 
