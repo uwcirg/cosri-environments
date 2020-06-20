@@ -8,6 +8,7 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=ingress-network"
 
       # required for Let's Encrypt http challenge
       - "--entrypoints.web.address=:80"
