@@ -26,6 +26,9 @@ services:
       # ultimate destination after SoF launch and backend auth
       LAUNCH_DEST: 'https://frontend.${BASE_DOMAIN:-localtest.me}/launch.html'
 
+      # todo: push FHIR into HAPI
+      PDMP_URL: 'http://pdmp:8008'
+
       # do not pass launch/patient or Epic will infer standalone launch
       SOF_CLIENT_SCOPES: "patient/*.read launch openid profile"
       SOF_ACCESS_TOKEN_URL: 'https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token'
