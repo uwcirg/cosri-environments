@@ -52,8 +52,8 @@ services:
           "token_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token",
           "token_introspection_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token/introspect"
         }}'
-      EXTERNAL_FHIR_API: 'https://pdmp.${BASE_DOMAIN:-localtest.me}/v/r2/fhir/'
-      MAP_API: 'https://stayhome-test-api.cirg.washington.edu/api/r4/'
+      EXTERNAL_FHIR_API: 'http://pdmp:8008/v/r2/fhir/'
+      MAP_API: 'https://fhir.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir/'
     depends_on:
       - ingress
       - keycloak
