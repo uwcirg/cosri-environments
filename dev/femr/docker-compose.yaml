@@ -117,7 +117,12 @@ services:
     image: uwcirg/script-fhir-facade
     volumes:
       - ./config/pdmp:/opt/app/config:ro
+    labels:
+      traefik.enable: 'true'
+      traefik.http.routers.pdmp.rule: Host(`pdmp.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.pdmp.entrypoints: web
     networks:
+      - ingress-network
       - internal
 
 
