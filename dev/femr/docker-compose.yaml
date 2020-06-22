@@ -9,27 +9,13 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=ingress-network"
-
-      # required for Let's Encrypt http challenge
       - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-
-      # redirect http to https
-      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
-      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
-
-      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
-      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
-
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      # forward headers on requests from infrastructure apache
+      - "--entryPoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,172.0.0.1/8"
     ports:
-      # Let's Encrypt challenges
       - "80:80"
       # web UI
       - "8080:8080"
-      # https
-      - "443:443"
     volumes:
       - "certificate-data:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -53,16 +39,19 @@ services:
           "token_introspection_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token/introspect"
         }}'
       EXTERNAL_FHIR_API: 'http://pdmp:8008/v/r2/fhir/'
+      # FHIR URL queried by PDMP integration backend
       MAP_API: 'https://fhir.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir/'
+      # FHIR URL passed to SoF client
+      SOF_HOST_FHIR_URL: 'https://fhir.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir/'
+      SOF_CLIENT_LAUNCH_URL: 'https://backend.${BASE_DOMAIN:-localtest.me}/auth/launch'
     depends_on:
       - ingress
       - keycloak
       - pdmp
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.dashboard.entrypoints=websecure"
-      - "traefik.http.routers.dashboard.tls.certresolver=myresolver"
+      traefik.enable: 'true'
+      traefik.http.routers.dashboard.rule: Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.dashboard.entrypoints: web
     networks:
       - ingress-network
       - internal
@@ -71,10 +60,9 @@ services:
   keycloak:
     image: jboss/keycloak:9.0.0
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.keycloak.rule=Host(`keycloak.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.keycloak.entrypoints=websecure"
-      - "traefik.http.routers.keycloak.tls.certresolver=myresolver"
+      traefik.enable: 'true'
+      traefik.http.routers.keycloak.rule: Host(`keycloak.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.keycloak.entrypoints: web
     command:
       - "-b"
       - "0.0.0.0"
@@ -117,10 +105,9 @@ services:
       - db
       - ingress
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.fhir.rule=Host(`fhir.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.fhir.entrypoints=websecure"
-      - "traefik.http.routers.fhir.tls.certresolver=myresolver"
+      traefik.enable: 'true'
+      traefik.http.routers.fhir.rule: Host(`fhir.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.fhir.entrypoints: web
     networks:
       - ingress-network
       - internal
@@ -130,11 +117,6 @@ services:
     image: uwcirg/script-fhir-facade
     volumes:
       - ./config/pdmp:/opt/app/config:ro
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.pdmp.rule=Host(`pdmp.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.pdmp.entrypoints=websecure"
-      - "traefik.http.routers.pdmp.tls.certresolver=myresolver"
     networks:
       - internal
 
