@@ -20,7 +20,7 @@ services:
       SECRET_KEY: qiLYeYMJf8i7y0xU
 
       # client ID registered with SoF host (Keycloak)
-      SOF_CLIENT_ID: fe6ccba2-7bef-47db-8ca7-32b916dcdd8a
+      SOF_CLIENT_ID: cosri_openid_client
       SOF_CLIENT_SECRET: a92b4f24-82cb-4b04-baee-b933f55e2039
 
       PREFERRED_URL_SCHEME: https
@@ -29,6 +29,8 @@ services:
 
       # do not pass launch/patient or Epic will infer standalone launch
       SOF_CLIENT_SCOPES: "patient/*.read launch openid profile"
+      SOF_ACCESS_TOKEN_URL: 'https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token'
+      SOF_AUTHORIZE_URL: 'https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/auth'
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"

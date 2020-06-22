@@ -53,7 +53,11 @@ services:
           "token_introspection_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token/introspect"
         }}'
       EXTERNAL_FHIR_API: 'http://pdmp:8008/v/r2/fhir/'
+      # FHIR URL queried by PDMP integration backend
       MAP_API: 'https://fhir.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir/'
+      # FHIR URL passed to SoF client
+      SOF_HOST_FHIR_URL: 'https://fhir.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir/'
+      SOF_CLIENT_LAUNCH_URL: 'https://backend.${BASE_DOMAIN:-localtest.me}/auth/launch'
     depends_on:
       - ingress
       - keycloak
