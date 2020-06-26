@@ -2250,7 +2250,7 @@
     "actionTokenGeneratedByUserLifespan": 300,
     "enabled": true,
     "sslRequired": "external",
-    "registrationAllowed": true,
+    "registrationAllowed": false,
     "registrationEmailAsUsername": true,
     "rememberMe": true,
     "verifyEmail": false,
