@@ -1,27 +1,5 @@
 version: "3.7"
 services:
-  ingress:
-    image: "traefik:v2.2"
-    command:
-      #- "--log.level=DEBUG"
-
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--providers.docker.network=ingress-network"
-      - "--entrypoints.web.address=:80"
-      # forward headers on requests from infrastructure apache
-      - "--entryPoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,172.0.0.1/8"
-    ports:
-      - "80:80"
-      # web UI
-      - "8080:8080"
-    volumes:
-      - "certificate-data:/letsencrypt"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    networks:
-      - ingress-network
-
 
   dashboard:
     image: uwcirg/cosri-patientsearch:develop
@@ -51,9 +29,11 @@ services:
     labels:
       traefik.enable: "true"
       traefik.http.routers.dashboard.rule: Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.dashboard.entrypoints: web
+      traefik.http.routers.dashboard.entrypoints: websecure
+      traefik.http.routers.dashboard.tls: "true"
+      traefik.http.routers.dashboard.tls.certresolver: letsencrypt
     networks:
-      - ingress-network
+      - external_web
       - internal
 
 
@@ -62,7 +42,9 @@ services:
     labels:
       traefik.enable: "true"
       traefik.http.routers.keycloak.rule: Host(`keycloak.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.keycloak.entrypoints: web
+      traefik.http.routers.keycloak.entrypoints: websecure
+      traefik.http.routers.keycloak.tls: "true"
+      traefik.http.routers.keycloak.tls.certresolver: letsencrypt
     command:
       - "-b"
       - "0.0.0.0"
@@ -89,7 +71,7 @@ services:
       - ingress
       - fhir
     networks:
-      - ingress-network
+      - external_web
       - internal
 
 
@@ -107,9 +89,11 @@ services:
     labels:
       traefik.enable: "true"
       traefik.http.routers.fhir.rule: Host(`fhir.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.fhir.entrypoints: web
+      traefik.http.routers.fhir.entrypoints: websecure
+      traefik.http.routers.fhir.tls: "true"
+      traefik.http.routers.fhir.tls.certresolver: letsencrypt
     networks:
-      - ingress-network
+      - external_web
       - internal
 
 
@@ -120,9 +104,11 @@ services:
     labels:
       traefik.enable: "true"
       traefik.http.routers.pdmp.rule: Host(`pdmp.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.pdmp.entrypoints: web
+      traefik.http.routers.pdmp.entrypoints: websecure
+      traefik.http.routers.pdmp.tls: "true"
+      traefik.http.routers.pdmp.tls.certresolver: letsencrypt
     networks:
-      - ingress-network
+      - external_web
       - internal
 
 
@@ -140,12 +126,12 @@ services:
 
 volumes:
   db-data:
-  certificate-data:
 
 networks:
   # internal network for backing services
   internal:
 
-  ingress-network:
-    # override COMPOSE_PROJECT_NAME namespacing; use exact network name
-    name: ingress-network
+  # ingress network
+  external_web:
+    external: true
+    name: external_web
