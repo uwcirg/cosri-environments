@@ -9,9 +9,11 @@ services:
     labels:
       traefik.enable: 'true'
       traefik.http.routers.frontend.rule: Host(`frontend.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.frontend.entrypoints: web
+      traefik.http.routers.frontend.entrypoints: websecure
+      traefik.http.routers.frontend.tls: "true"
+      traefik.http.routers.frontend.tls.certresolver: letsencrypt
     networks:
-     - ingress-network
+     - ingress
 
   backend:
     image: "uwcirg/sof-api-wrapper:develop"
@@ -36,11 +38,18 @@ services:
     labels:
       traefik.enable: 'true'
       traefik.http.routers.backend.rule: Host(`backend.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.backend.entrypoints: web
+      traefik.http.routers.backend.entrypoints: websecure
+      traefik.http.routers.backend.tls: "true"
+      traefik.http.routers.backend.tls.certresolver: letsencrypt
     networks:
-     - ingress-network
+     - ingress
+
 
 networks:
-  ingress-network:
-    # override COMPOSE_PROJECT_NAME namespacing; use exact network name
-    name: ingress-network
+  # internal network for backing services
+  internal:
+
+  # ingress network
+  ingress:
+    external: true
+    name: external_web
