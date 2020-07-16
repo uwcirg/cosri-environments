@@ -46,9 +46,6 @@ services:
 
 
 networks:
-  # internal network for backing services
-  internal:
-
   # ingress network
   ingress:
     external: true
