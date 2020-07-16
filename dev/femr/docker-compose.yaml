@@ -32,7 +32,7 @@ services:
       traefik.http.routers.dashboard.tls: "true"
       traefik.http.routers.dashboard.tls.certresolver: letsencrypt
     networks:
-      - external_web
+      - ingress
       - internal
 
 
@@ -69,7 +69,7 @@ services:
       - db
       - fhir
     networks:
-      - external_web
+      - ingress
       - internal
 
 
@@ -90,7 +90,7 @@ services:
       traefik.http.routers.fhir.tls: "true"
       traefik.http.routers.fhir.tls.certresolver: letsencrypt
     networks:
-      - external_web
+      - ingress
       - internal
 
 
@@ -105,7 +105,7 @@ services:
       traefik.http.routers.pdmp.tls: "true"
       traefik.http.routers.pdmp.tls.certresolver: letsencrypt
     networks:
-      - external_web
+      - ingress
       - internal
 
 
@@ -129,6 +129,6 @@ networks:
   internal:
 
   # ingress network
-  external_web:
+  ingress:
     external: true
-    name: external_web
+    name: ingress
