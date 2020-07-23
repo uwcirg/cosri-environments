@@ -8,10 +8,10 @@ services:
       REACT_APP_CONF_API_URL: "https://backend.${BASE_DOMAIN:-localtest.me}"
     labels:
       traefik.enable: 'true'
-      traefik.http.routers.frontend.rule: Host(`frontend.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.frontend.entrypoints: websecure
-      traefik.http.routers.frontend.tls: "true"
-      traefik.http.routers.frontend.tls.certresolver: letsencrypt
+      traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME:-cosri}.rule: Host(`frontend.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME:-cosri}.entrypoints: websecure
+      traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME:-cosri}.tls: "true"
+      traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME:-cosri}.tls.certresolver: letsencrypt
     networks:
      - ingress
 
@@ -37,10 +37,10 @@ services:
       SOF_AUTHORIZE_URL: 'https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/auth'
     labels:
       traefik.enable: 'true'
-      traefik.http.routers.backend.rule: Host(`backend.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.backend.entrypoints: websecure
-      traefik.http.routers.backend.tls: "true"
-      traefik.http.routers.backend.tls.certresolver: letsencrypt
+      traefik.http.routers.backend-${COMPOSE_PROJECT_NAME:-cosri}.rule: Host(`backend.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.backend-${COMPOSE_PROJECT_NAME:-cosri}.entrypoints: websecure
+      traefik.http.routers.backend-${COMPOSE_PROJECT_NAME:-cosri}.tls: "true"
+      traefik.http.routers.backend-${COMPOSE_PROJECT_NAME:-cosri}.tls.certresolver: letsencrypt
     networks:
      - ingress
 

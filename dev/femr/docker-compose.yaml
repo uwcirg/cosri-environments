@@ -27,10 +27,10 @@ services:
       - pdmp
     labels:
       traefik.enable: "true"
-      traefik.http.routers.dashboard.rule: Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.dashboard.entrypoints: websecure
-      traefik.http.routers.dashboard.tls: "true"
-      traefik.http.routers.dashboard.tls.certresolver: letsencrypt
+      traefik.http.routers.dashboard-${COMPOSE_PROJECT_NAME:-femr}.rule: Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.dashboard-${COMPOSE_PROJECT_NAME:-femr}.entrypoints: websecure
+      traefik.http.routers.dashboard-${COMPOSE_PROJECT_NAME:-femr}.tls: "true"
+      traefik.http.routers.dashboard-${COMPOSE_PROJECT_NAME:-femr}.tls.certresolver: letsencrypt
     networks:
       - ingress
       - internal
@@ -40,10 +40,10 @@ services:
     image: jboss/keycloak:9.0.0
     labels:
       traefik.enable: "true"
-      traefik.http.routers.keycloak.rule: Host(`keycloak.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.keycloak.entrypoints: websecure
-      traefik.http.routers.keycloak.tls: "true"
-      traefik.http.routers.keycloak.tls.certresolver: letsencrypt
+      traefik.http.routers.keycloak-${COMPOSE_PROJECT_NAME:-femr}.rule: Host(`keycloak.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.keycloak-${COMPOSE_PROJECT_NAME:-femr}.entrypoints: websecure
+      traefik.http.routers.keycloak-${COMPOSE_PROJECT_NAME:-femr}.tls: "true"
+      traefik.http.routers.keycloak-${COMPOSE_PROJECT_NAME:-femr}.tls.certresolver: letsencrypt
     command:
       - "-b"
       - "0.0.0.0"
@@ -85,10 +85,10 @@ services:
       - db
     labels:
       traefik.enable: "true"
-      traefik.http.routers.fhir.rule: Host(`fhir.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.fhir.entrypoints: websecure
-      traefik.http.routers.fhir.tls: "true"
-      traefik.http.routers.fhir.tls.certresolver: letsencrypt
+      traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME:-femr}.rule: Host(`fhir.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME:-femr}.entrypoints: websecure
+      traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME:-femr}.tls: "true"
+      traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME:-femr}.tls.certresolver: letsencrypt
     networks:
       - ingress
       - internal
@@ -100,10 +100,10 @@ services:
       - ./config/pdmp:/opt/app/config:ro
     labels:
       traefik.enable: "true"
-      traefik.http.routers.pdmp.rule: Host(`pdmp.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.pdmp.entrypoints: websecure
-      traefik.http.routers.pdmp.tls: "true"
-      traefik.http.routers.pdmp.tls.certresolver: letsencrypt
+      traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME:-femr}.rule: Host(`pdmp.${BASE_DOMAIN:-localtest.me}`)
+      traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME:-femr}.entrypoints: websecure
+      traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME:-femr}.tls: "true"
+      traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME:-femr}.tls.certresolver: letsencrypt
     networks:
       - ingress
       - internal
