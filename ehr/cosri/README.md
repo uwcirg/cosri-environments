@@ -26,5 +26,9 @@ Start all services
 docker-compose up --detach
 
 
+### Launch
+To launch from the [SMART Health IT Launcher](https://launch.smarthealthit.org), set the Launch URL to:
+https://backend.$BASE_DOMAIN/auth/launch
+
 ### Development
 To configure services for development, add the corresponding `docker-compose.dev.yaml` override to `COMPOSE_FILE`
