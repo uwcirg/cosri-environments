@@ -1,0 +1,42 @@
+version: "3.7"
+services:
+  ingress:
+    image: "traefik:v2.2"
+    command:
+      - "--log.level=DEBUG"
+
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=external_web"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      #- "--entryPoints.web.forwardedHeaders.trustedIPs=127.0.0.1/32,172.0.0.1/8"
+      - "--entryPoints.web.forwardedHeaders.insecure=true"
+
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+    ports:
+      - "80:80"
+      - "443:443"
+      # web UI
+      - "8080:8080"
+    volumes:
+      - "certificate-data:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - ingress
+
+volumes:
+  certificate-data:
+
+networks:
+  # ingress network
+  ingress:
+    name: external_web
