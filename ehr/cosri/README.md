@@ -19,7 +19,7 @@ cp default.env .env
 ```
 
 ### Start Services
-If running locally, start the traefik ingress proxy first
+If running locally, start the traefik ingress proxy first (See [extras directory](../../extras))
 
 
 Start all services
