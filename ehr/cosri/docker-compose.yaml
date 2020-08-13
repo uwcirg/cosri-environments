@@ -13,7 +13,7 @@ services:
       - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.tls=true"
       - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
     networks:
-     - ingress
+      - ingress
 
   backend:
     image: "uwcirg/sof-api-wrapper:develop"
@@ -32,6 +32,7 @@ services:
 
       # do not pass launch/patient or Epic will infer standalone launch
       SOF_CLIENT_SCOPES: "patient/*.read launch openid profile"
+      SESSION_REDIS: redis://redis:6379/0
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"
@@ -39,10 +40,20 @@ services:
       - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.tls=true"
       - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
     networks:
-     - ingress
+      - ingress
+      - internal
+    depends_on:
+      - redis
 
+  redis:
+    image: redis
+    networks:
+      - internal
 
 networks:
+  # internal network for backing services
+  internal:
+
   # ingress network
   ingress:
     external: true
