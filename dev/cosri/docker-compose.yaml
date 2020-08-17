@@ -20,6 +20,8 @@ services:
     environment:
       SECRET_KEY: qiLYeYMJf8i7y0xU
 
+      SESSION_REDIS: redis://redis:6379/0
+
       # client ID registered with SoF host (Keycloak)
       SOF_CLIENT_ID: cosri_openid_client
       SOF_CLIENT_SECRET: a92b4f24-82cb-4b04-baee-b933f55e2039
@@ -43,9 +45,19 @@ services:
       - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
     networks:
       - ingress
+      - internal
+    depends_on:
+      - redis
 
+  redis:
+    image: redis
+    networks:
+      - internal
 
 networks:
+  # internal network for backing services
+  internal:
+
   # ingress network
   ingress:
     external: true
