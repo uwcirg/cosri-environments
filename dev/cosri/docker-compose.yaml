@@ -13,7 +13,7 @@ services:
       - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.tls=true"
       - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
     networks:
-     - ingress
+      - ingress
 
   backend:
     image: "uwcirg/sof-api-wrapper:develop"
@@ -42,7 +42,7 @@ services:
       - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.tls=true"
       - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
     networks:
-     - ingress
+      - ingress
 
 
 networks:
