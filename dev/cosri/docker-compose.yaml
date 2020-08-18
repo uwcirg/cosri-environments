@@ -7,18 +7,20 @@ services:
       # NB: domain is required for cookies to be set
       REACT_APP_CONF_API_URL: "https://backend.${BASE_DOMAIN:-localtest.me}"
     labels:
-      traefik.enable: 'true'
-      traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME:-cosri}.rule: Host(`frontend.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME:-cosri}.entrypoints: websecure
-      traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME:-cosri}.tls: "true"
-      traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME:-cosri}.tls.certresolver: letsencrypt
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.rule=Host(`frontend.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
     networks:
-     - ingress
+      - ingress
 
   backend:
     image: "uwcirg/sof-api-wrapper:develop"
     environment:
       SECRET_KEY: qiLYeYMJf8i7y0xU
+
+      SESSION_REDIS: redis://redis:6379/0
 
       # client ID registered with SoF host (Keycloak)
       SOF_CLIENT_ID: cosri_openid_client
@@ -36,16 +38,26 @@ services:
       SOF_ACCESS_TOKEN_URL: 'https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token'
       SOF_AUTHORIZE_URL: 'https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/auth'
     labels:
-      traefik.enable: 'true'
-      traefik.http.routers.backend-${COMPOSE_PROJECT_NAME:-cosri}.rule: Host(`backend.${BASE_DOMAIN:-localtest.me}`)
-      traefik.http.routers.backend-${COMPOSE_PROJECT_NAME:-cosri}.entrypoints: websecure
-      traefik.http.routers.backend-${COMPOSE_PROJECT_NAME:-cosri}.tls: "true"
-      traefik.http.routers.backend-${COMPOSE_PROJECT_NAME:-cosri}.tls.certresolver: letsencrypt
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
     networks:
-     - ingress
+      - ingress
+      - internal
+    depends_on:
+      - redis
 
+  redis:
+    image: redis
+    networks:
+      - internal
 
 networks:
+  # internal network for backing services
+  internal:
+
   # ingress network
   ingress:
     external: true
