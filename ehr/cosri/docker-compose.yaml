@@ -31,7 +31,8 @@ services:
       PDMP_URL: 'https://pdmp.${BASE_DOMAIN:-localtest.me}'
 
       # do not pass launch/patient or Epic will infer standalone launch
-      SOF_CLIENT_SCOPES: "patient/*.read launch openid profile"
+      SOF_CLIENT_SCOPES: ${SOF_CLIENT_SCOPES:-patient/*.read launch openid profile}
+
       SESSION_REDIS: redis://redis:6379/0
     labels:
       - "traefik.enable=true"
