@@ -17,6 +17,7 @@ Copy the template (`.default`) files in the relevant directory and edit as neces
 ```
 cp default.env .env
 ```
+Copy the HTTP client certificates necessary (`pdmp.crt` and `pdmp.key`) for PDMP access into the [certificates directory](./config/pdmp/certs)
 
 ### Start Services
 If running locally, start the traefik ingress proxy first (See [extras directory](../../extras))
