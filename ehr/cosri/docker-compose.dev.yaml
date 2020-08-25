@@ -4,3 +4,7 @@ services:
     volumes:
     # set in .env
       - '${BACKEND_CHECKOUT_DIR}/:/opt/app'
+  pdmp:
+    volumes:
+    # set in .env
+      - '${PDMP_CHECKOUT_DIR}/:/opt/app'
