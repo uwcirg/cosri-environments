@@ -53,6 +53,8 @@ services:
 
   pdmp:
     image: uwcirg/script-fhir-facade
+    environment:
+      RXNAV_LOOKUP_ENABLED: 'true'
     volumes:
       - ./config/pdmp:/opt/app/config:ro
     networks:
