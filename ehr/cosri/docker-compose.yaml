@@ -28,7 +28,7 @@ services:
       # ultimate destination after SoF launch and backend auth
       LAUNCH_DEST: 'https://frontend.${BASE_DOMAIN:-localtest.me}/launch.html'
 
-      PDMP_URL: 'https://pdmp.${BASE_DOMAIN:-localtest.me}'
+      PDMP_URL: 'http://pdmp:8008'
 
       # do not pass launch/patient or Epic will infer standalone launch
       SOF_CLIENT_SCOPES: ${SOF_CLIENT_SCOPES:-patient/*.read launch openid profile}
@@ -48,6 +48,15 @@ services:
 
   redis:
     image: redis
+    networks:
+      - internal
+
+  pdmp:
+    image: uwcirg/script-fhir-facade
+    environment:
+      RXNAV_LOOKUP_ENABLED: 'true'
+    volumes:
+      - ./config/pdmp:/opt/app/config:ro
     networks:
       - internal
 
