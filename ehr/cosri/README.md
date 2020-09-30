@@ -2,6 +2,7 @@
 
 Deployment config for Cosri environments
 
+This README describes how to deploy COSRI to be used with an existing SMART on FHIR host EHR. If you want to instead deploy both COSRI, and the fEMR "free standing" SMART on FHIR host, see https://github.com/uwcirg/cosri-environments/blob/master/README.md .
 
 ## Setup
 
