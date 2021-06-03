@@ -1,0 +1,8 @@
+# docker-compose development override for dashboard service
+---
+version: "3.7"
+services:
+  dashboard:
+    volumes:
+    # set in .env
+      - '${DASHBOARD_CHECKOUT_DIR}/:/opt/app'
