@@ -1,8 +1,7 @@
 version: "3.7"
 services:
-
   dashboard:
-    image: uwcirg/cosri-patientsearch:develop
+    image: uwcirg/cosri-patientsearch:${DASHBOARD_IMAGE_TAG:-develop}
     environment:
       SECRET_KEY: lknyrrtehpyjtyjojwjbnblewth
       OIDC_CLIENT_SECRETS: '
@@ -74,7 +73,7 @@ services:
 
 
   fhir:
-    image: uwcirg/hapi-fhir-oauth2-starter
+    image: uwcirg/hapi-fhir-oauth2-starter:${FHIR_IMAGE_TAG:-latest}
     environment:
       JAVA_OPTIONS: "-Dhapi.properties=/opt/hapi.properties"
       HAPI_SERVER_ADDRESS: 'https://fhir.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir/'
@@ -95,7 +94,7 @@ services:
 
 
   pdmp:
-    image: uwcirg/script-fhir-facade
+    image: uwcirg/script-fhir-facade:${PDMP_IMAGE_TAG:-latest}
     volumes:
       - ./config/pdmp:/opt/app/config:ro
     labels:
