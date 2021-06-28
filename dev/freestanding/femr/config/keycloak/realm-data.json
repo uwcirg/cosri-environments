@@ -2231,6 +2231,7 @@
   {
     "id": "femr",
     "realm": "fEMR",
+    "displayName": "Cosri",
     "notBefore": 0,
     "revokeRefreshToken": false,
     "refreshTokenMaxReuse": 0,
