@@ -2231,6 +2231,7 @@
   {
     "id": "femr",
     "realm": "fEMR",
+    "displayName": "COSRI (Clinical Opioid Summary with Rx Integration)",
     "notBefore": 0,
     "revokeRefreshToken": false,
     "refreshTokenMaxReuse": 0,
