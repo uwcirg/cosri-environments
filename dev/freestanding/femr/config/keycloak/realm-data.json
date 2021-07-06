@@ -963,6 +963,21 @@
             }
           },
           {
+            "id": "c5237a00-d3ea-4e87-9caf-5146b02d1a15",
+            "name": "DEA",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-property-mapper",
+            "consentRequired": false,
+            "config": {
+              "userinfo.token.claim": "true",
+              "user.attribute": "DEA",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "DEA",
+              "jsonType.label": "String"
+            }
+          },
+          {
             "id": "f5a5f6b3-1872-426f-b23c-75ddbe2e8e55",
             "name": "groups",
             "protocol": "openid-connect",
@@ -2612,6 +2627,7 @@
     "users": [
       {
         "id": "794d2782-e783-4cbb-ae72-b165a4c06e7f",
+        "attributes": {"DEA": "testDEAvalue"},
         "createdTimestamp": 1584919351977,
         "username": "test",
         "enabled": true,
