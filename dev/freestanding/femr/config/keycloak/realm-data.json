@@ -963,21 +963,6 @@
             }
           },
           {
-            "id": "c5237a00-d3ea-4e87-9caf-5146b02d1a15",
-            "name": "DEA",
-            "protocol": "openid-connect",
-            "protocolMapper": "oidc-usermodel-property-mapper",
-            "consentRequired": false,
-            "config": {
-              "userinfo.token.claim": "true",
-              "user.attribute": "DEA",
-              "id.token.claim": "true",
-              "access.token.claim": "true",
-              "claim.name": "DEA",
-              "jsonType.label": "String"
-            }
-          },
-          {
             "id": "f5a5f6b3-1872-426f-b23c-75ddbe2e8e55",
             "name": "groups",
             "protocol": "openid-connect",
@@ -2983,6 +2968,21 @@
         "authenticationFlowBindingOverrides": {},
         "fullScopeAllowed": true,
         "nodeReRegistrationTimeout": -1,
+        "protocolMappers" : [ {
+          "id" : "de38c2d5-0c80-4943-a370-eb5f95c4b67c",
+          "name" : "DEA",
+          "protocol" : "openid-connect",
+          "protocolMapper" : "oidc-usermodel-attribute-mapper",
+          "consentRequired" : false,
+          "config" : {
+            "userinfo.token.claim" : "true",
+            "user.attribute" : "DEA",
+            "id.token.claim" : "true",
+            "access.token.claim" : "true",
+            "claim.name" : "DEA",
+            "jsonType.label" : "String"
+          }
+        } ],
         "defaultClientScopes": [
           "web-origins",
           "role_list",
