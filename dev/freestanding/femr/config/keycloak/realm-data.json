@@ -2612,6 +2612,7 @@
     "users": [
       {
         "id": "794d2782-e783-4cbb-ae72-b165a4c06e7f",
+        "attributes": {"DEA": "testDEAvalue"},
         "createdTimestamp": 1584919351977,
         "username": "test",
         "enabled": true,
@@ -2967,6 +2968,21 @@
         "authenticationFlowBindingOverrides": {},
         "fullScopeAllowed": true,
         "nodeReRegistrationTimeout": -1,
+        "protocolMappers" : [ {
+          "id" : "de38c2d5-0c80-4943-a370-eb5f95c4b67c",
+          "name" : "DEA",
+          "protocol" : "openid-connect",
+          "protocolMapper" : "oidc-usermodel-attribute-mapper",
+          "consentRequired" : false,
+          "config" : {
+            "userinfo.token.claim" : "true",
+            "user.attribute" : "DEA",
+            "id.token.claim" : "true",
+            "access.token.claim" : "true",
+            "claim.name" : "DEA",
+            "jsonType.label" : "String"
+          }
+        } ],
         "defaultClientScopes": [
           "web-origins",
           "role_list",
