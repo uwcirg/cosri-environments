@@ -23,6 +23,7 @@ services:
       SOF_CLIENT_LAUNCH_URL: 'https://backend.${BASE_DOMAIN:-localtest.me}/auth/launch'
       LOGSERVER_URL: "https://logs.${LOGS_BASE_DOMAIN:-localtest.me}"
       LOGSERVER_TOKEN: ${LOGSERVER_TOKEN}
+      REDIS_URL: redis://redis:6379/1
     depends_on:
       - keycloak
       - pdmp
