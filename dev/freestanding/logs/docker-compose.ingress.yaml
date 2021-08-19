@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  postgrest:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.rule=Host(`logs.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
+    networks:
+      - ingress
+      - internal
+
+  postgres:
+    networks:
+      - internal
+
+networks:
+  # internal network for backing services
+  internal:
+
+  # ingress network
+  ingress:
+    external: true
+    name: external_web
