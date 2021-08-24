@@ -47,6 +47,8 @@ services:
     networks:
       - ingress
       - internal
+    volumes:
+      - /tmp/conf-backend-debug-output:${DEBUG_OUTPUT_DIR:-/tmp}
     depends_on:
       - redis
 
