@@ -20,6 +20,7 @@ services:
     image: uwcirg/sof-api-wrapper:${BACKEND_IMAGE_TAG:-develop}
     environment:
       SECRET_KEY: qiLYeYMJf8i7y0xU
+      DEBUG_OUTPUT_DIR: /var/local/backend-output
 
       SESSION_REDIS: redis://redis:6379/0
 
@@ -48,7 +49,7 @@ services:
       - ingress
       - internal
     volumes:
-      - /tmp/conf-backend-debug-output:${DEBUG_OUTPUT_DIR:-/tmp}
+      - ./backend-output/:/var/local/backend-output
     depends_on:
       - redis
 
