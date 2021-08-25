@@ -122,7 +122,7 @@ services:
     environment:
       SECRET_KEY: ${HYDRANT_SECRET_KEY:-qiLYeYMJf8i7y0xU}
       PREFERRED_URL_SCHEME: https
-      FHIR_SERVER_URL: 'https://hapi.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir'
+      FHIR_SERVER_URL: "fhir:8080/hapi-fhir-jpaserver/fhir"
 
 
   redis:
