@@ -118,7 +118,7 @@ services:
 
 
   hydrant:
-    image: uwcirg/hydrant:${HYDRANT_IMAGE_TAG:-develop}
+    image: ghcr.io/uwcirg/hydrant:${HYDRANT_IMAGE_TAG:-develop}
     environment:
       SECRET_KEY: ${HYDRANT_SECRET_KEY:-qiLYeYMJf8i7y0xU}
       PREFERRED_URL_SCHEME: https
