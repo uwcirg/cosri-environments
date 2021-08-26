@@ -1,0 +1,7 @@
+# docker-compose development override for backend service
+version: "3.7"
+services:
+  backend:
+    volumes:
+    # set in .env
+      - '${BACKEND_CHECKOUT_DIR}/:/opt/app'
