@@ -96,6 +96,22 @@ services:
       - internal
 
 
+  fhirwall:
+    image: ghcr.io/uwcirg/jwt-proxy:${PROXY_IMAGE_TAG:-develop}
+    environment:
+      UPSTREAM_SERVER: "http://fhir:8080"
+      JWKS_URL: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/certs"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.rule=Host(`fhirwall.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
+    networks:
+      - ingress
+      - internal
+
+
   pdmp:
     image: uwcirg/script-fhir-facade:${PDMP_IMAGE_TAG:-latest}
     environment:
