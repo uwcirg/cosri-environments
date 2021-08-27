@@ -7,6 +7,7 @@ services:
       # NB: domain is required for cookies to be set
       REACT_APP_CONF_API_URL: "https://backend.${BASE_DOMAIN:-localtest.me}"
       REACT_APP_DASHBOARD_URL: "https://dashboard.${FEMR_BASE_DOMAIN:-localtest.me}"
+      REACT_APP_SYSTEM_TYPE: development
 
       REACT_APP_SECTION_HISTORICALTREATMENTS: hidden
       REACT_APP_SECTION_NONPHARMACOLOGICTREATMENTS: hidden
@@ -26,8 +27,10 @@ services:
     image: uwcirg/sof-api-wrapper:${BACKEND_IMAGE_TAG:-develop}
     environment:
       SECRET_KEY: qiLYeYMJf8i7y0xU
+      DEBUG_OUTPUT_DIR: /var/local/backend-output
 
       SESSION_REDIS: redis://redis:6379/0
+      REQUEST_CACHE_URL: redis://redis:6379/1
 
       # client ID registered with SoF host (Keycloak)
       SOF_CLIENT_ID: cosri_openid_client
@@ -53,6 +56,8 @@ services:
     networks:
       - ingress
       - internal
+    volumes:
+      - ./backend-output/:/var/local/backend-output
     depends_on:
       - redis
 

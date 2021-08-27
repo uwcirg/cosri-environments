@@ -23,6 +23,7 @@ services:
       SOF_CLIENT_LAUNCH_URL: 'https://backend.${BASE_DOMAIN:-localtest.me}/auth/launch'
       LOGSERVER_URL: "https://logs.${LOGS_BASE_DOMAIN:-localtest.me}"
       LOGSERVER_TOKEN: ${LOGSERVER_TOKEN}
+      REDIS_URL: redis://redis:6379/1
     depends_on:
       - keycloak
       - pdmp
@@ -114,6 +115,15 @@ services:
       - internal
     depends_on:
       - redis
+
+
+  hydrant:
+    image: ghcr.io/uwcirg/hydrant:${HYDRANT_IMAGE_TAG:-develop}
+    environment:
+      SECRET_KEY: ${HYDRANT_SECRET_KEY:-qiLYeYMJf8i7y0xU}
+      PREFERRED_URL_SCHEME: https
+      FHIR_SERVER_URL: "fhir:8080/hapi-fhir-jpaserver/fhir"
+
 
   redis:
     image: redis
