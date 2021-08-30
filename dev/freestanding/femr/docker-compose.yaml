@@ -17,9 +17,9 @@ services:
         }}'
       EXTERNAL_FHIR_API: 'http://pdmp:8008/v/r2/fhir/'
       # FHIR URL queried by PDMP integration backend
-      MAP_API: 'https://fhir.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir/'
+      MAP_API: "http://fhir:8080/hapi-fhir-jpaserver/fhir/"
       # FHIR URL passed to SoF client
-      SOF_HOST_FHIR_URL: 'https://fhir.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir/'
+      SOF_HOST_FHIR_URL: 'https://fhirwall.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir'
       SOF_CLIENT_LAUNCH_URL: 'https://backend.${BASE_DOMAIN:-localtest.me}/auth/launch'
       LOGSERVER_URL: "https://logs.${LOGS_BASE_DOMAIN:-localtest.me}"
       LOGSERVER_TOKEN: ${LOGSERVER_TOKEN}
@@ -91,6 +91,22 @@ services:
       - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
       - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.tls=true"
       - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
+    networks:
+      - ingress
+      - internal
+
+
+  fhirwall:
+    image: ghcr.io/uwcirg/jwt-proxy:${PROXY_IMAGE_TAG:-develop}
+    environment:
+      UPSTREAM_SERVER: "http://fhir:8080"
+      JWKS_URL: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/certs"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.rule=Host(`fhirwall.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
     networks:
       - ingress
       - internal

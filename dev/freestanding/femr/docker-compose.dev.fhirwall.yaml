@@ -1,0 +1,7 @@
+# docker-compose development override for fhirwall service
+version: "3.7"
+services:
+  fhirwall:
+    volumes:
+    # set in .env
+      - '${FHIRWALL_CHECKOUT_DIR}/:/opt/app'
