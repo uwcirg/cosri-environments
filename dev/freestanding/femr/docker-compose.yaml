@@ -97,7 +97,7 @@ services:
 
 
   fhirwall:
-    image: ghcr.io/uwcirg/jwt-proxy:${PROXY_IMAGE_TAG:-develop}
+    image: ghcr.io/uwcirg/jwt-proxy:${PROXY_IMAGE_TAG:-latest}
     environment:
       UPSTREAM_SERVER: "http://fhir:8080"
       JWKS_URL: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/certs"
