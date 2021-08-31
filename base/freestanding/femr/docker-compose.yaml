@@ -1,0 +1,177 @@
+version: "3.7"
+services:
+  dashboard:
+    image: uwcirg/cosri-patientsearch:${DASHBOARD_IMAGE_TAG:-develop}
+    environment:
+      OIDC_CLIENT_SECRETS: '
+        {"web": {
+          "auth_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/auth",
+          "client_id": "femr_openid_client",
+          "client_secret": "92e9861c-a2f3-40dd-8872-e2ee57a55afe",
+          "issuer": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR",
+          "redirect_uris": ["https://keycloak.${BASE_DOMAIN:-localtest.me}/oidc_callback"],
+          "userinfo_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/userinfo",
+          "token_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token",
+          "token_introspection_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token/introspect"
+        }}'
+      EXTERNAL_FHIR_API: 'http://pdmp:8008/v/r2/fhir/'
+      # FHIR URL queried by PDMP integration backend
+      MAP_API: "http://fhir:8080/hapi-fhir-jpaserver/fhir/"
+      # FHIR URL passed to SoF client
+      SOF_HOST_FHIR_URL: 'https://fhirwall.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir'
+      SOF_CLIENT_LAUNCH_URL: 'https://backend.${BASE_DOMAIN:-localtest.me}/auth/launch'
+      LOGSERVER_URL: "https://logs.${BASE_DOMAIN:-localtest.me}"
+      REDIS_URL: redis://redis:6379/1
+    depends_on:
+      - keycloak
+      - pdmp
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard-${COMPOSE_PROJECT_NAME}.rule=Host(`dashboard.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.dashboard-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.dashboard-${COMPOSE_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.dashboard-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
+    networks:
+      - ingress
+      - internal
+
+
+  keycloak:
+    image: jboss/keycloak:9.0.0
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.keycloak-${COMPOSE_PROJECT_NAME}.rule=Host(`keycloak.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.keycloak-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.keycloak-${COMPOSE_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.keycloak-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
+    entrypoint:
+      # override default keycloak docker entrypoint script with our own
+      - /opt/jboss/tools/docker-entrypoint-override.sh
+      - /opt/jboss/tools/docker-entrypoint.sh
+    command:
+      - "-b"
+      - "0.0.0.0"
+      - "-Dkeycloak.migration.action=import"
+      # TODO use dir migration provider (`keycloak.migration.provider=dir`)
+      # https://github.com/keycloak/keycloak-documentation/blob/master/server_admin/topics/export-import.adoc
+      - "-Dkeycloak.migration.provider=singleFile"
+      - "-Dkeycloak.profile.feature.upload_scripts=enabled"
+      - "-Dkeycloak.migration.file=/opt/jboss/keycloak/realm-data.json"
+      - "-Dkeycloak.migration.strategy=IGNORE_EXISTING"
+    environment:
+      KEYCLOAK_HOSTNAME: "keycloak.${BASE_DOMAIN:-localtest.me}"
+      PROXY_ADDRESS_FORWARDING: "true"
+      DB_VENDOR: postgres
+      DB_ADDR: db
+      DB_PORT: 5432
+      DB_DATABASE: keycloak
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+
+      # environment variables used to configure docker-entrypoint-override.sh
+      __KEYCLOAK_INPUT_CONFIG: /tmp/realm-data.json
+      __KEYCLOAK_OUTPUT_CONFIG: /opt/jboss/keycloak/realm-data.json
+    volumes:
+      - "./config/keycloak/docker-entrypoint-override.sh:/opt/jboss/tools/docker-entrypoint-override.sh:ro"
+      - "./config/keycloak/realm-data.json:/tmp/realm-data.json"
+    depends_on:
+      - db
+      - fhir
+    networks:
+      - ingress
+      - internal
+
+
+  fhir:
+    image: uwcirg/hapi-fhir-oauth2-starter:${FHIR_IMAGE_TAG:-latest}
+    environment:
+      JAVA_OPTIONS: "-Dhapi.properties=/opt/hapi.properties"
+      HAPI_SERVER_ADDRESS: 'https://fhir.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir/'
+
+    volumes:
+      - "./config/fhir/hapi.properties:/opt/hapi.properties:ro"
+    depends_on:
+      - db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.rule=Host(`fhir.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
+    networks:
+      - ingress
+      - internal
+
+
+  fhirwall:
+    image: ghcr.io/uwcirg/jwt-proxy:${PROXY_IMAGE_TAG:-latest}
+    environment:
+      UPSTREAM_SERVER: "http://fhir:8080"
+      JWKS_URL: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/certs"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.rule=Host(`fhirwall.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
+    networks:
+      - ingress
+      - internal
+
+
+  pdmp:
+    image: uwcirg/script-fhir-facade:${PDMP_IMAGE_TAG:-latest}
+    environment:
+      RXNAV_LOOKUP_ENABLED: "true"
+      SCRIPT_MOCK_URL: https://github.com/uwcirg/pdmp-mock-data
+      REQUEST_CACHE_URL: redis://redis:6379/0
+    volumes:
+      - ./config/pdmp:/opt/app/config:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.rule=Host(`pdmp.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
+    networks:
+      - ingress
+      - internal
+    depends_on:
+      - redis
+
+
+  hydrant:
+    image: ghcr.io/uwcirg/hydrant:${HYDRANT_IMAGE_TAG:-develop}
+    environment:
+      PREFERRED_URL_SCHEME: https
+      FHIR_SERVER_URL: "fhir:8080/hapi-fhir-jpaserver/fhir"
+
+
+  redis:
+    image: redis
+    networks:
+      - internal
+
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+      # create keycloak and HAPI application databases
+      - "./config/db:/docker-entrypoint-initdb.d"
+    networks:
+      - internal
+
+volumes:
+  db-data:
+
+networks:
+  # internal network for backing services
+  internal:
+
+  # ingress network
+  ingress:
+    external: true
+    name: external_web

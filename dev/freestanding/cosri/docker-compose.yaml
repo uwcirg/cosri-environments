@@ -1,90 +1,23 @@
 version: "3.7"
 services:
   frontend:
-    image: uwcirg/cosri-summary:${FRONTEND_IMAGE_TAG:-latest}
     environment:
-      # confidential backend API endpoint
-      # NB: domain is required for cookies to be set
-      REACT_APP_CONF_API_URL: "https://backend.${BASE_DOMAIN:-localtest.me}"
-      REACT_APP_DASHBOARD_URL: "https://dashboard.${FEMR_BASE_DOMAIN:-localtest.me}"
       REACT_APP_SYSTEM_TYPE: development
+    env_file:
+      - ../../../dev/freestanding/cosri/frontend.env
 
-      REACT_APP_SECTION_HISTORICALTREATMENTS: hidden
-      REACT_APP_SECTION_NONPHARMACOLOGICTREATMENTS: hidden
-      REACT_APP_SUBSECTION_URINEDRUGSCREENS: hidden
-      REACT_APP_SUBSECTION_NALOXONEMEDICATIONS: hidden
-
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.rule=Host(`frontend.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
-      - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.tls=true"
-      - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
-    networks:
-      - ingress
 
   backend:
-    image: uwcirg/sof-api-wrapper:${BACKEND_IMAGE_TAG:-develop}
     environment:
-      SECRET_KEY: qiLYeYMJf8i7y0xU
       DEBUG_OUTPUT_DIR: /var/local/backend-output
-
-      SESSION_REDIS: redis://redis:6379/0
-      REQUEST_CACHE_URL: redis://redis:6379/1
-
-      # client ID registered with SoF host (Keycloak)
-      SOF_CLIENT_ID: cosri_openid_client
-      SOF_CLIENT_SECRET: a92b4f24-82cb-4b04-baee-b933f55e2039
-
-      PREFERRED_URL_SCHEME: https
-      # ultimate destination after SoF launch and backend auth
-      LAUNCH_DEST: 'https://frontend.${BASE_DOMAIN:-localtest.me}/launch.html'
-
-      PDMP_URL: 'http://pdmp:8008'
-
-      # do not pass launch/patient or Epic will infer standalone launch
-      SOF_CLIENT_SCOPES: "patient/*.read launch openid profile"
-      SOF_ACCESS_TOKEN_URL: 'https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token'
-      SOF_AUTHORIZE_URL: 'https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/auth'
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
-      - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.tls=true"
-      - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
-    networks:
-      - ingress
-      - internal
+    env_file:
+      - ../../../dev/freestanding/cosri/backend.env
     volumes:
-      - ./backend-output/:/var/local/backend-output
-    depends_on:
-      - redis
+      - ../../../dev/freestanding/cosri/backend-output/:/var/local/backend-output
 
 
   pdmp:
-    image: uwcirg/script-fhir-facade:${PDMP_IMAGE_TAG:-latest}
-    environment:
-      RXNAV_LOOKUP_ENABLED: "true"
-      SCRIPT_MOCK_URL: https://github.com/uwcirg/pdmp-mock-data
-      REQUEST_CACHE_URL: redis://redis:6379/0
+    env_file:
+      - ../../../dev/freestanding/cosri/pdmp.env
     volumes:
-      - ./config/pdmp:/opt/app/config:ro
-    networks:
-      - internal
-    depends_on:
-      - redis
-
-
-  redis:
-    image: redis
-    networks:
-      - internal
-
-networks:
-  # internal network for backing services
-  internal:
-
-  # ingress network
-  ingress:
-    external: true
-    name: external_web
+      - ../../../dev/freestanding/cosri/config/pdmp/:/opt/app/config:ro
