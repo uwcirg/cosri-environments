@@ -1,24 +1,13 @@
-# Development Environment
+# fEMR
 
-Sets up a clone of the production environment locally for development use.
+Sets up a copy of the fEMR
 
 
 ## Setup
 
-Start the containers:
+Copy the default env files:
+    for file in *.default; do
+        cp "$file" "${file%%.default}"
+    done
 
-```
-cd ./cosri-environments/dev
-docker-compose up
-```
-
-Finally, navigate to the client: https://dashboard.localtest.me
-
-
-## Credentials
-
-| Account          | Username | Password |
-| ---------------- | -------- | -------- |
-| Database Admin   | postgres | postgres |
-| Keycloak Admin   | admin    | admin    |
-| Application User | test     | test     |
+Modify each newly copied env file as necessary. Lines that are not commented-out are required, commented lines are optional.
