@@ -15,7 +15,7 @@ services:
           "token_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token",
           "token_introspection_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token/introspect"
         }}'
-      EXTERNAL_FHIR_API: 'http://pdmp:8008/v/r2/fhir/'
+      EXTERNAL_FHIR_API: 'http://pdmp-internal:8008/v/r2/fhir/'
       # FHIR URL queried by PDMP integration backend
       MAP_API: "http://fhir-internal:8080/hapi-fhir-jpaserver/fhir/"
       # FHIR URL passed to SoF client
@@ -140,8 +140,10 @@ services:
       - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.tls=true"
       - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
     networks:
-      - ingress
-      - internal
+      ingress:
+      internal:
+        aliases:
+          - pdmp-internal
     depends_on:
       - redis
 
