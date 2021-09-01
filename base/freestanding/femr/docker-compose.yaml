@@ -76,7 +76,6 @@ services:
       - "./config/keycloak/realm-data.json:/tmp/realm-data.json"
     depends_on:
       - db
-      - fhir
     networks:
       - ingress
       - internal
