@@ -24,8 +24,15 @@ services:
       - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.tls=true"
       - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
     networks:
-      - ingress
-      - internal
+      ingress:
+      internal:
+        aliases:
+          - fhir-internal
+
+
+  fhirwall:
+    env_file:
+      - ../../../dev/freestanding/femr/fhirwall.env
 
 
   # expose PDMP facade to internet
@@ -41,5 +48,12 @@ services:
       - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.tls=true"
       - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
     networks:
-      - ingress
-      - internal
+      ingress:
+      internal:
+        aliases:
+          - pdmp-internal
+
+
+  hydrant:
+    env_file:
+      - ../../../dev/freestanding/femr/hydrant.env
