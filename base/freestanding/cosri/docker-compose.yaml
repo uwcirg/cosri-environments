@@ -41,6 +41,7 @@ services:
       SOF_CLIENT_SCOPES: "patient/*.read launch openid profile"
       SOF_ACCESS_TOKEN_URL: 'https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token'
       SOF_AUTHORIZE_URL: 'https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/auth'
+      LOGSERVER_URL: "https://logs.${BASE_DOMAIN:-localtest.me}"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"
