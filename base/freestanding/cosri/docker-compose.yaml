@@ -53,6 +53,7 @@ services:
       - internal
     depends_on:
       - redis
+      - pdmp
 
 
   pdmp:
