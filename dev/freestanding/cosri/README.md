@@ -1,10 +1,8 @@
-# fEMR
-
-Sets up a copy of the fEMR
+# Cosri
+Sets up a copy of the Cosri SMART-on-FHIR app
 
 
 ## Setup
-
 Copy the default env files:
 
     for file in *.default; do
