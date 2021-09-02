@@ -2,4 +2,4 @@
 
 Deploys a Faux EMR (SMART-on-FHIR host) and Cosri (SMART-on-FHIR client app)
 
-Follow the instructions in each nested docker-compose project
+Follow Setup steps for [fEMR](./femr/README.md), [Cosri](./cosri/README.md) and [logs](./logs/README.md)
