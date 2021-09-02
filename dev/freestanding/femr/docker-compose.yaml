@@ -23,11 +23,6 @@ services:
       - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
       - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.tls=true"
       - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
-    networks:
-      ingress:
-      internal:
-        aliases:
-          - fhir-internal
 
 
   fhirwall:
@@ -47,11 +42,6 @@ services:
       - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
       - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.tls=true"
       - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
-    networks:
-      ingress:
-      internal:
-        aliases:
-          - pdmp-internal
 
 
   hydrant:
