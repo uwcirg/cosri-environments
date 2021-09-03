@@ -19,20 +19,52 @@ services:
   traefik-forward-auth:
     image: thomseddon/traefik-forward-auth:2
     environment:
-      - PROVIDERS_GOOGLE_CLIENT_ID=your-client-id
-      - PROVIDERS_GOOGLE_CLIENT_SECRET=your-client-secret
-      - SECRET=something-random
-      - INSECURE_COOKIE=true # Example assumes no https, do not use in production
+    #providers.oidc.issuer-url, providers.oidc.client-id and providers.oidc.client-secret
+      PROVIDERS_OIDC_CLIENT_ID: logserver
+      PROVIDERS_OIDC_CLIENT_SECRET: 821bd668-5e17-4372-a4bd-005838b8c7f7
+      PROVIDERS_OIDC_ISSUER_URL: https://keycloak.${BASE_DOMAIN}/auth/realms/fEMR
+
+      DEFAULT_PROVIDER: oidc
+      SECRET: HtW5SpDTCIGRdv9oc98Ruw==
+      INSECURE_COOKIE: "true"
+
+      #- PROVIDERS_GOOGLE_CLIENT_ID=your-client-id
+      #- PROVIDERS_GOOGLE_CLIENT_SECRET=your-client-secret
+      #- SECRET=something-random
+      #- INSECURE_COOKIE=true # Example assumes no https, do not use in production
     labels:
+      #- "traefik.http.middlewares.test-auth.forwardauth.address=https://authserver.com/auth"
       - "traefik.http.middlewares.traefik-forward-auth.forwardauth.address=http://traefik-forward-auth:4181"
       - "traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders=X-Forwarded-User"
       - "traefik.http.services.traefik-forward-auth.loadbalancer.server.port=4181"
+    networks:
+      - ingress
+      - internal
 
   whoami:
     image: containous/whoami
     labels:
-      - "traefik.http.routers.whoami.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
+      #- "traefik.http.routers.whoami.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
+      #- "traefik.http.routers.whoami.middlewares=traefik-forward-auth"
       - "traefik.http.routers.whoami.middlewares=traefik-forward-auth"
+###
+      - "traefik.enable=true"
+
+      - "traefik.http.routers.whoami.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
+
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.http.routers.whoami.tls=true"
+      - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
+
+###
+      - "traefik.http.middlewares.traefik-forward-auth.forwardauth.address=http://traefik-forward-auth:4181"
+      - "traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders=X-Forwarded-User"
+      #- 'traefik.http.middlewares.authme.forwardauth.address=http://authelia:9091/api/verify?rd=https://login.example.com/'
+      - 'traefik.http.middlewares.authme.forwardauth.trustforwardheader=true'
+      #- 'traefik.http.middlewares.authme.forwardauth.authresponseheaders=X-Forwarded-User'
+    networks:
+      - ingress
+      - internal
 
 
 
