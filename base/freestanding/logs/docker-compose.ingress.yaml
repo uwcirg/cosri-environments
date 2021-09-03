@@ -15,6 +15,27 @@ services:
     networks:
       - internal
 
+
+  traefik-forward-auth:
+    image: thomseddon/traefik-forward-auth:2
+    environment:
+      - PROVIDERS_GOOGLE_CLIENT_ID=your-client-id
+      - PROVIDERS_GOOGLE_CLIENT_SECRET=your-client-secret
+      - SECRET=something-random
+      - INSECURE_COOKIE=true # Example assumes no https, do not use in production
+    labels:
+      - "traefik.http.middlewares.traefik-forward-auth.forwardauth.address=http://traefik-forward-auth:4181"
+      - "traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders=X-Forwarded-User"
+      - "traefik.http.services.traefik-forward-auth.loadbalancer.server.port=4181"
+
+  whoami:
+    image: containous/whoami
+    labels:
+      - "traefik.http.routers.whoami.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.whoami.middlewares=traefik-forward-auth"
+
+
+
 networks:
   # internal network for backing services
   internal:
