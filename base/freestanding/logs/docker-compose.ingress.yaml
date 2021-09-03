@@ -37,8 +37,6 @@ services:
       PROVIDERS_OIDC_ISSUER_URL: https://keycloak.${BASE_DOMAIN}/auth/realms/fEMR
 
       SECRET: HtW5SpDTCIGRdv9oc98Ruw==
-      # Example assumes no https, do not use in production
-      INSECURE_COOKIE: "true"
     networks:
       ingress:
         aliases:
