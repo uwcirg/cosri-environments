@@ -32,11 +32,11 @@ services:
 
     environment:
       DEFAULT_PROVIDER: oidc
-      PROVIDERS_OIDC_CLIENT_ID: logserver
-      PROVIDERS_OIDC_CLIENT_SECRET: 821bd668-5e17-4372-a4bd-005838b8c7f7
+      PROVIDERS_OIDC_CLIENT_ID: logserver_openid_client
+      PROVIDERS_OIDC_CLIENT_SECRET: ${LOGSERVER_CLIENT_SECRET}
       PROVIDERS_OIDC_ISSUER_URL: https://keycloak.${BASE_DOMAIN}/auth/realms/fEMR
 
-      SECRET: HtW5SpDTCIGRdv9oc98Ruw==
+      SECRET: ${OIDC_PROXY_SECRET}
     networks:
       ingress:
         aliases:
