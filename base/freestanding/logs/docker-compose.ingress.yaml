@@ -10,31 +10,29 @@ services:
 
 
       - "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.middlewares=logserver-${COMPOSE_PROJECT_NAME}-forwardauth"
-      - "traefik.http.middlewares.logserver-${COMPOSE_PROJECT_NAME}-forwardauth.forwardauth.address=http://traefik-forward-auth:4181"
+      - "traefik.http.middlewares.logserver-${COMPOSE_PROJECT_NAME}-forwardauth.forwardauth.address=http://oidc-proxy:4181"
       - "traefik.http.middlewares.logserver-${COMPOSE_PROJECT_NAME}-forwardauth.forwardauth.authResponseHeaders=X-Forwarded-User"
     networks:
       - ingress
       - internal
+
 
   postgres:
     networks:
       - internal
 
 
-  traefik-forward-auth:
+  oidc-proxy:
     image: thomseddon/traefik-forward-auth:2
     environment:
-    #providers.oidc.issuer-url, providers.oidc.client-id and providers.oidc.client-secret
+      DEFAULT_PROVIDER: oidc
       PROVIDERS_OIDC_CLIENT_ID: logserver
       PROVIDERS_OIDC_CLIENT_SECRET: 821bd668-5e17-4372-a4bd-005838b8c7f7
       PROVIDERS_OIDC_ISSUER_URL: https://keycloak.${BASE_DOMAIN}/auth/realms/fEMR
 
-      DEFAULT_PROVIDER: oidc
       SECRET: HtW5SpDTCIGRdv9oc98Ruw==
       # Example assumes no https, do not use in production
       INSECURE_COOKIE: "true"
-    labels:
-      - "traefik.http.services.traefik-forward-auth.loadbalancer.server.port=4181"
     networks:
       - ingress
       - internal
