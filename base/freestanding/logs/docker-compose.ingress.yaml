@@ -2,32 +2,16 @@ version: "3.7"
 services:
   postgrest:
     labels:
-      #- "traefik.enable=true"
-      #- "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.rule=Host(`logs.${BASE_DOMAIN:-localtest.me}`)"
-      #- "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
-      #- "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.tls=true"
-      #- "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
-
-      #- "traefik.http.routers.whoami.rule=Host(`whoami.${BASE_DOMAIN:-localtest.me}`)"
-      #- "traefik.http.routers.whoami.middlewares=traefik-forward-auth"
-      - "traefik.http.routers.whoami.middlewares=traefik-forward-auth"
-###
       - "traefik.enable=true"
-
-      - "traefik.http.routers.whoami.rule=Host(`logs.${BASE_DOMAIN:-localtest.me}`)"
-
-      - "traefik.http.routers.whoami.entrypoints=websecure"
-      - "traefik.http.routers.whoami.tls=true"
-      - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
-
-###
-      - "traefik.http.middlewares.traefik-forward-auth.forwardauth.address=http://traefik-forward-auth:4181"
-      - "traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders=X-Forwarded-User"
-      #- 'traefik.http.middlewares.authme.forwardauth.address=http://authelia:9091/api/verify?rd=https://login.example.com/'
-      - 'traefik.http.middlewares.authme.forwardauth.trustforwardheader=true'
-      #- 'traefik.http.middlewares.authme.forwardauth.authresponseheaders=X-Forwarded-User'
+      - "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.rule=Host(`logs.${BASE_DOMAIN:-localtest.me}`)"
+      - "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.tls=true"
+      - "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
 
 
+      - "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.middlewares=logserver-${COMPOSE_PROJECT_NAME}-forwardauth"
+      - "traefik.http.middlewares.logserver-${COMPOSE_PROJECT_NAME}-forwardauth.forwardauth.address=http://traefik-forward-auth:4181"
+      - "traefik.http.middlewares.logserver-${COMPOSE_PROJECT_NAME}-forwardauth.forwardauth.authResponseHeaders=X-Forwarded-User"
     networks:
       - ingress
       - internal
@@ -47,16 +31,9 @@ services:
 
       DEFAULT_PROVIDER: oidc
       SECRET: HtW5SpDTCIGRdv9oc98Ruw==
+      # Example assumes no https, do not use in production
       INSECURE_COOKIE: "true"
-
-      #- PROVIDERS_GOOGLE_CLIENT_ID=your-client-id
-      #- PROVIDERS_GOOGLE_CLIENT_SECRET=your-client-secret
-      #- SECRET=something-random
-      #- INSECURE_COOKIE=true # Example assumes no https, do not use in production
     labels:
-      #- "traefik.http.middlewares.test-auth.forwardauth.address=https://authserver.com/auth"
-      - "traefik.http.middlewares.traefik-forward-auth.forwardauth.address=http://traefik-forward-auth:4181"
-      - "traefik.http.middlewares.traefik-forward-auth.forwardauth.authResponseHeaders=X-Forwarded-User"
       - "traefik.http.services.traefik-forward-auth.loadbalancer.server.port=4181"
     networks:
       - ingress
