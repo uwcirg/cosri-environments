@@ -25,6 +25,11 @@ services:
   oidc-proxy:
     # TODO replace with better-maintained oauth2-proxy
     image: thomseddon/traefik-forward-auth:2
+    command:
+      # POST requests to /events are authenticated by postgrest JWT
+      - --rule.post-events.action=allow
+      - --rule.post-events.rule=PathPrefix(`/events`) && Method(`POST`)
+
     environment:
       DEFAULT_PROVIDER: oidc
       PROVIDERS_OIDC_CLIENT_ID: logserver
