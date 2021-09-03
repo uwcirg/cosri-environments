@@ -3060,17 +3060,15 @@
       {
         "id": "323133ff-bbb9-49d4-910b-df8b464de715",
         "clientId": "logserver_openid_client",
+        "name": "Logserver",
+        "description": "Logserver",
         "surrogateAuthRequired": false,
         "enabled": true,
         "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
-        "secret": "**********",
-        "redirectUris": [
-          "*"
-        ],
-        "webOrigins": [
-          "*"
-        ],
+        "secret": "${__KEYCLOAK_FEMR_REALM_LOGSERVER_OPENID_CLIENT_SECRET}",
+        "redirectUris": ["*"],
+        "webOrigins": ["*"],
         "notBefore": 0,
         "bearerOnly": false,
         "consentRequired": false,
@@ -3086,6 +3084,7 @@
           "saml.force.post.binding": "false",
           "saml.multivalued.roles": "false",
           "saml.encrypt": "false",
+          "login_theme": "base",
           "saml.server.signature": "false",
           "saml.server.signature.keyinfo.ext": "false",
           "exclude.session.state.from.auth.response": "false",
@@ -3111,7 +3110,12 @@
           "phone",
           "offline_access",
           "microprofile-jwt"
-        ]
+        ],
+        "access": {
+          "view": true,
+          "configure": true,
+          "manage": true
+        }
       }
     ],
     "clientScopes": [
