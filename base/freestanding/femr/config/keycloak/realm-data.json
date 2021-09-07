@@ -3038,6 +3038,21 @@
         "authenticationFlowBindingOverrides": {},
         "fullScopeAllowed": true,
         "nodeReRegistrationTimeout": -1,
+        "protocolMappers" : [ {
+          "id" : "ce38c2d5-0c80-4943-a370-eb5f95c4b67d",
+          "name" : "DEA",
+          "protocol" : "openid-connect",
+          "protocolMapper" : "oidc-usermodel-attribute-mapper",
+          "consentRequired" : false,
+          "config" : {
+            "userinfo.token.claim" : "true",
+            "user.attribute" : "DEA",
+            "id.token.claim" : "true",
+            "access.token.claim" : "true",
+            "claim.name" : "DEA",
+            "jsonType.label" : "String"
+          }
+        } ],
         "defaultClientScopes": [
           "web-origins",
           "role_list",
