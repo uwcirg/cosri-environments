@@ -5,7 +5,6 @@ services:
     environment:
       OIDC_AUTHORIZE_URL: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/auth"
       OIDC_CLIENT_ID: femr_openid_client
-      OIDC_CLIENT_SECRET: 92e9861c-a2f3-40dd-8872-e2ee57a55afe
       OIDC_ISSUER: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR"
       OIDC_REDIRECT_URIS: "https://keycloak.${BASE_DOMAIN:-localtest.me}/oidc_callback"
       OIDC_USERINFO_URI: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/userinfo"
