@@ -3,17 +3,14 @@ services:
   dashboard:
     image: uwcirg/cosri-patientsearch:${DASHBOARD_IMAGE_TAG:-develop}
     environment:
-      OIDC_CLIENT_SECRETS: '
-        {"web": {
-          "auth_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/auth",
-          "client_id": "femr_openid_client",
-          "client_secret": "92e9861c-a2f3-40dd-8872-e2ee57a55afe",
-          "issuer": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR",
-          "redirect_uris": ["https://keycloak.${BASE_DOMAIN:-localtest.me}/oidc_callback"],
-          "userinfo_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/userinfo",
-          "token_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token",
-          "token_introspection_uri": "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token/introspect"
-        }}'
+      OIDC_AUTHORIZE_URL: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/auth"
+      OIDC_CLIENT_ID: femr_openid_client
+      OIDC_CLIENT_SECRET: 92e9861c-a2f3-40dd-8872-e2ee57a55afe
+      OIDC_ISSUER: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR"
+      OIDC_REDIRECT_URIS: "https://keycloak.${BASE_DOMAIN:-localtest.me}/oidc_callback"
+      OIDC_USERINFO_URI: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/userinfo"
+      OIDC_TOKEN_URI: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token"
+      OIDC_TOKEN_INTROSPECTION_URI: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token/introspect"
       EXTERNAL_FHIR_API: 'http://pdmp-internal:8008/v/r2/fhir/'
       # FHIR URL queried by PDMP integration backend
       MAP_API: "http://fhir-internal:8080/hapi-fhir-jpaserver/fhir/"
