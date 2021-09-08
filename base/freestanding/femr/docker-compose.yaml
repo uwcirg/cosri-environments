@@ -109,7 +109,7 @@ services:
 
 
   pdmp:
-    image: uwcirg/script-fhir-facade:${PDMP_IMAGE_TAG:-latest}
+    image: uwcirg/script-fhir-facade:${PDMP_IMAGE_TAG:-develop}
     environment:
       RXNAV_LOOKUP_ENABLED: "true"
       SCRIPT_MOCK_URL: https://github.com/uwcirg/pdmp-mock-data
