@@ -1,7 +1,0 @@
-# docker-compose development override for pdmp service
-version: "3.7"
-services:
-  pdmp:
-    volumes:
-    # set in .env
-      - '${PDMP_CHECKOUT_DIR}/:/opt/app'

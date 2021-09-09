@@ -3,21 +3,25 @@ services:
   dashboard:
     env_file:
       - ../../../dev/freestanding/femr/dashboard.env
+    restart: unless-stopped
 
 
   keycloak:
     env_file:
       - ../../../dev/freestanding/femr/keycloak.env
+    restart: unless-stopped
 
 
   fhirwall:
     env_file:
       - ../../../dev/freestanding/femr/fhirwall.env
+    restart: unless-stopped
 
 
   fhirwall:
     env_file:
       - ../../../dev/freestanding/femr/fhirwall.env
+    restart: unless-stopped
 
 
   pdmp:
@@ -25,6 +29,7 @@ services:
       - ../../../dev/freestanding/femr/pdmp.env
     volumes:
       - ../../../dev/freestanding/femr/config/pdmp/:/opt/app/config:ro
+    restart: unless-stopped
 
 
   hydrant:
