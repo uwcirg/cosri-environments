@@ -21,11 +21,3 @@ services:
       - ../../../dev/freestanding/cosri/pdmp.env
     volumes:
       - ../../../dev/freestanding/cosri/config/pdmp/:/opt/app/config:ro
-    networks:
-      - internal
-
-
-  redis:
-    image: redis
-    networks:
-      - internal
