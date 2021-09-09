@@ -2,8 +2,6 @@ version: "3.7"
 services:
   frontend:
     restart: unless-stopped
-    environment:
-      REACT_APP_SYSTEM_TYPE: production
     env_file:
       - ../../../dev/freestanding/cosri/frontend.env
 
@@ -20,3 +18,6 @@ services:
       - ../../../dev/freestanding/cosri/pdmp.env
     volumes:
       - ../../../dev/freestanding/cosri/config/pdmp/:/opt/app/config:ro
+
+  redis:
+    restart: unless-stopped
