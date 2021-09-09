@@ -70,6 +70,7 @@ services:
     volumes:
       - "./config/keycloak/docker-entrypoint-override.sh:/opt/jboss/tools/docker-entrypoint-override.sh:ro"
       - "./config/keycloak/realm-data.json:/tmp/realm-data.json"
+      - "./config/keycloak/cosri-keycloak-theme:/opt/jboss/keycloak/themes/cosri"
     depends_on:
       - db
     networks:
