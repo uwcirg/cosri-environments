@@ -60,7 +60,6 @@ services:
     image: uwcirg/script-fhir-facade:${PDMP_IMAGE_TAG:-develop}
     environment:
       RXNAV_LOOKUP_ENABLED: "true"
-      SCRIPT_MOCK_URL: https://github.com/uwcirg/pdmp-mock-data
       REQUEST_CACHE_URL: redis://redis:6379/0
     volumes:
       - ./config/pdmp:/opt/app/config:ro

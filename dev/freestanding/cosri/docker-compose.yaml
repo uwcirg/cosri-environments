@@ -17,6 +17,8 @@ services:
 
 
   pdmp:
+    environment:
+      SCRIPT_MOCK_URL: https://github.com/uwcirg/pdmp-mock-data
     env_file:
       - ../../../dev/freestanding/cosri/pdmp.env
     volumes:
