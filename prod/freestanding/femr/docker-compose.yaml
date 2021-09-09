@@ -15,33 +15,16 @@ services:
       - ../../../dev/freestanding/femr/fhirwall.env
 
 
-  # expose HAPI to internet
-  fhir:
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.rule=Host(`fhir.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
-      - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.tls=true"
-      - "traefik.http.routers.fhir-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
-
-
   fhirwall:
     env_file:
       - ../../../dev/freestanding/femr/fhirwall.env
 
 
-  # expose PDMP facade to internet
   pdmp:
     env_file:
       - ../../../dev/freestanding/femr/pdmp.env
     volumes:
       - ../../../dev/freestanding/femr/config/pdmp/:/opt/app/config:ro
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.rule=Host(`pdmp.${BASE_DOMAIN:-localtest.me}`)"
-      - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
-      - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.tls=true"
-      - "traefik.http.routers.pdmp-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
 
 
   hydrant:
