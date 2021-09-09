@@ -1,3 +1,6 @@
 [submodule "base/freestanding/logs/logserver"]
 	path = base/freestanding/logs/logserver
 	url = https://github.com/uwcirg/logserver
+[submodule "base/freestanding/femr/config/keycloak/cosri-keycloak-theme"]
+	path = base/freestanding/femr/config/keycloak/cosri-keycloak-theme
+	url = https://github.com/uwcirg/cosri-keycloak-theme
