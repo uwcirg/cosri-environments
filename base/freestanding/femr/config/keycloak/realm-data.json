@@ -3649,9 +3649,9 @@
       "ssl": "",
       "port": "587",
       "host": "mail.cirg.washington.edu",
-      "replyTo": "support+cosri@cirg.washington.edu",
-      "from": "support@cirg.washington.edu",
-      "fromDisplayName": "Cosri",
+      "replyTo": "help@cosri.on.spiceworks.com",
+      "from": "noreply@cirg.washington.edu",
+      "fromDisplayName": "Cosri Support",
       "user": "${__KEYCLOAK_EMAIL_USER}",
       "password": "${__KEYCLOAK_EMAIL_PASSWORD}"
     },
