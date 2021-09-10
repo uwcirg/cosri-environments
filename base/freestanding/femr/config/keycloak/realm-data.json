@@ -3643,10 +3643,10 @@
     },
     "smtpServer": {
       "replyToDisplayName": "CIRG Support",
-      "starttls": "",
+      "starttls": "true",
       "auth": "true",
       "envelopeFrom": "support@cirg.washington.edu",
-      "ssl": "true",
+      "ssl": "",
       "port": "587",
       "host": "mail.cirg.washington.edu",
       "replyTo": "support+cosri@cirg.washington.edu",
