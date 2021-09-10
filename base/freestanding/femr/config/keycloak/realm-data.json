@@ -3655,9 +3655,10 @@
       "user": "${__KEYCLOAK_EMAIL_USER}",
       "password": "${__KEYCLOAK_EMAIL_PASSWORD}"
     },
-    "loginTheme": "base",
-    "accountTheme": "base",
-    "adminTheme": "base",
+    "loginTheme": "cosri",
+    "accountTheme": "keycloak",
+    "adminTheme": "keycloak",
+    "emailTheme": "keycloak",
     "eventsEnabled": true,
     "eventsListeners": ["jboss-logging"],
     "enabledEventTypes": [
