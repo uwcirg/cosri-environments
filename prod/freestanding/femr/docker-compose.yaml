@@ -2,36 +2,36 @@ version: "3.7"
 services:
   dashboard:
     env_file:
-      - ../../../dev/freestanding/femr/dashboard.env
+      - ../../../prod/freestanding/femr/dashboard.env
     restart: unless-stopped
 
 
   keycloak:
     env_file:
-      - ../../../dev/freestanding/femr/keycloak.env
+      - ../../../prod/freestanding/femr/keycloak.env
     restart: unless-stopped
 
 
   fhirwall:
     env_file:
-      - ../../../dev/freestanding/femr/fhirwall.env
+      - ../../../prod/freestanding/femr/fhirwall.env
     restart: unless-stopped
 
 
   fhirwall:
     env_file:
-      - ../../../dev/freestanding/femr/fhirwall.env
+      - ../../../prod/freestanding/femr/fhirwall.env
     restart: unless-stopped
 
 
   pdmp:
     env_file:
-      - ../../../dev/freestanding/femr/pdmp.env
+      - ../../../prod/freestanding/femr/pdmp.env
     volumes:
-      - ../../../dev/freestanding/femr/config/pdmp/:/opt/app/config:ro
+      - ../../../prod/freestanding/femr/config/pdmp/:/opt/app/config:ro
     restart: unless-stopped
 
 
   hydrant:
     env_file:
-      - ../../../dev/freestanding/femr/hydrant.env
+      - ../../../prod/freestanding/femr/hydrant.env

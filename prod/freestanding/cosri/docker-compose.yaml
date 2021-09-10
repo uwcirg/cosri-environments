@@ -3,21 +3,21 @@ services:
   frontend:
     restart: unless-stopped
     env_file:
-      - ../../../dev/freestanding/cosri/frontend.env
+      - ../../../prod/freestanding/cosri/frontend.env
 
 
   backend:
     restart: unless-stopped
     env_file:
-      - ../../../dev/freestanding/cosri/backend.env
+      - ../../../prod/freestanding/cosri/backend.env
 
 
   pdmp:
     restart: unless-stopped
     env_file:
-      - ../../../dev/freestanding/cosri/pdmp.env
+      - ../../../prod/freestanding/cosri/pdmp.env
     volumes:
-      - ../../../dev/freestanding/cosri/config/pdmp/:/opt/app/config:ro
+      - ../../../prod/freestanding/cosri/config/pdmp/:/opt/app/config:ro
 
   redis:
     restart: unless-stopped
