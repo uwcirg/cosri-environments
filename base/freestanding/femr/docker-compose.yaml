@@ -128,7 +128,7 @@ services:
     image: ghcr.io/uwcirg/hydrant:${HYDRANT_IMAGE_TAG:-develop}
     environment:
       PREFERRED_URL_SCHEME: https
-      FHIR_SERVER_URL: "fhir-internal:8080/hapi-fhir-jpaserver/fhir"
+      FHIR_SERVER_URL: 'https://fhir.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir'
 
 
   redis:
