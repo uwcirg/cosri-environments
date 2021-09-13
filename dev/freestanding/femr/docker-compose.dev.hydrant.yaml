@@ -3,7 +3,7 @@
 version: "3.7"
 services:
   hydrant:
-    command: sh -c "cd /opt/app && flask run --host 0.0.0.0 --port ${PORT:-8000}"
+    command: sh -c "flask run --host 0.0.0.0 --port ${PORT:-8000}"
     environment:
       FLASK_ENV: development
       FLASK_APP: hydrant.app:create_app()
