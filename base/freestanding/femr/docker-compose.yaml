@@ -129,6 +129,7 @@ services:
     environment:
       PREFERRED_URL_SCHEME: https
       FHIR_SERVER_URL: "http://fhir-internal:8080/hapi-fhir-jpaserver/fhir"
+      LOGSERVER_URL: "https://logs.${BASE_DOMAIN:-localtest.me}"
     networks:
       - internal
 
