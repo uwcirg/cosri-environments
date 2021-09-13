@@ -1,6 +1,8 @@
 version: "3.7"
 services:
   dashboard:
+    environment:
+      LOG_LEVEL: WARN
     env_file:
       - ../../../prod/freestanding/femr/dashboard.env
     restart: unless-stopped
@@ -19,6 +21,8 @@ services:
 
 
   pdmp:
+    environment:
+      LOG_LEVEL: WARN
     env_file:
       - ../../../prod/freestanding/femr/pdmp.env
     volumes:
@@ -27,5 +31,7 @@ services:
 
 
   hydrant:
+    environment:
+      LOG_LEVEL: WARN
     env_file:
       - ../../../prod/freestanding/femr/hydrant.env

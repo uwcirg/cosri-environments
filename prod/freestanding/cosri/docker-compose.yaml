@@ -8,12 +8,16 @@ services:
 
   backend:
     restart: unless-stopped
+    environment:
+      LOG_LEVEL: WARN
     env_file:
       - ../../../prod/freestanding/cosri/backend.env
 
 
   pdmp:
     restart: unless-stopped
+    environment:
+      LOG_LEVEL: WARN
     env_file:
       - ../../../prod/freestanding/cosri/pdmp.env
     volumes:
