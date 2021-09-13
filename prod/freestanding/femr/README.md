@@ -21,6 +21,14 @@ Copy PDMP public certificate and private key into [./config/pdmp/certs](./config
 
 ### Keycloak
 
+#### Users
+
+To update the `admin` password, log in as `admin`. Click the account drop-down for **Admin** and select **Manage account**, then click **Password** on the right menu. Enter the current password (typically `admin`) into the **Password** field, along with the new desired password into **New Password** and **Confirmation** and click **Save**.
+
+
+To delete the `test` user, click **Users** on the right menu, then click **View all users**. Click the **Delete** button in the row
+
+
 #### Rotating Keys
 New keys should be generated, and old keys disabled.
 
