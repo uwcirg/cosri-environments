@@ -1,0 +1,12 @@
+# docker-compose development override for hydrant service
+---
+version: "3.7"
+services:
+  hydrant:
+    command: sh -c "cd /opt/app && flask run --host 0.0.0.0 --port ${PORT:-8000}"
+    environment:
+      FLASK_ENV: development
+      FLASK_APP: hydrant.app:create_app()
+    volumes:
+    # set in .env
+      - "${HYDRANT_CHECKOUT_DIR}/:/opt/app"
