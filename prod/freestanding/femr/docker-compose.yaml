@@ -18,12 +18,6 @@ services:
     restart: unless-stopped
 
 
-  fhirwall:
-    env_file:
-      - ../../../prod/freestanding/femr/fhirwall.env
-    restart: unless-stopped
-
-
   pdmp:
     env_file:
       - ../../../prod/freestanding/femr/pdmp.env
