@@ -1,4 +1,4 @@
-# Cosri Development Config
+# Cosri Production Config
 
 Elements specific only to production
 
