@@ -2954,7 +2954,6 @@
           "saml.force.post.binding": "false",
           "saml.multivalued.roles": "false",
           "saml.encrypt": "false",
-          "login_theme": "cosri",
           "saml.server.signature": "false",
           "saml.server.signature.keyinfo.ext": "false",
           "exclude.session.state.from.auth.response": "false",
