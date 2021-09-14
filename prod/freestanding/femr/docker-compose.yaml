@@ -1,0 +1,37 @@
+version: "3.7"
+services:
+  dashboard:
+    environment:
+      LOG_LEVEL: WARN
+    env_file:
+      - ../../../prod/freestanding/femr/dashboard.env
+    restart: unless-stopped
+
+
+  keycloak:
+    env_file:
+      - ../../../prod/freestanding/femr/keycloak.env
+    restart: unless-stopped
+
+
+  fhirwall:
+    env_file:
+      - ../../../prod/freestanding/femr/fhirwall.env
+    restart: unless-stopped
+
+
+  pdmp:
+    environment:
+      LOG_LEVEL: WARN
+    env_file:
+      - ../../../prod/freestanding/femr/pdmp.env
+    volumes:
+      - ../../../prod/freestanding/femr/config/pdmp/:/opt/app/config:ro
+    restart: unless-stopped
+
+
+  hydrant:
+    environment:
+      LOG_LEVEL: WARN
+    env_file:
+      - ../../../prod/freestanding/femr/hydrant.env

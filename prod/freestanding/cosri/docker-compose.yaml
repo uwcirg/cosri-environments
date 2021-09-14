@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  frontend:
+    restart: unless-stopped
+    env_file:
+      - ../../../prod/freestanding/cosri/frontend.env
+
+
+  backend:
+    restart: unless-stopped
+    environment:
+      LOG_LEVEL: WARN
+    env_file:
+      - ../../../prod/freestanding/cosri/backend.env
+
+
+  pdmp:
+    restart: unless-stopped
+    environment:
+      LOG_LEVEL: WARN
+    env_file:
+      - ../../../prod/freestanding/cosri/pdmp.env
+    volumes:
+      - ../../../prod/freestanding/cosri/config/pdmp/:/opt/app/config:ro
+
+  redis:
+    restart: unless-stopped
