@@ -1,0 +1,11 @@
+embed-server --std-out=echo --server-config=standalone-ha.xml
+
+# Change to JSON formatting
+/subsystem=logging/json-formatter=JSON:add(exception-output-type=formatted)
+/subsystem=logging/console-handler=CONSOLE:write-attribute(name=named-formatter,value=JSON)
+
+# To pick up LOGIN and other events, tune keycloak.events to level DEBUG
+/subsystem=logging/logger=org.keycloak.events:add
+/subsystem=logging/logger=org.keycloak.events:write-attribute(name=level,value=DEBUG)
+
+stop-embedded-server
