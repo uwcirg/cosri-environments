@@ -8,6 +8,8 @@ services:
   keycloak:
     env_file:
       - ../../../dev/freestanding/femr/keycloak.env
+    volumes:
+      - "./config/keycloak/disable-theme-cache.cli:/opt/jboss/startup-scripts/disable-theme-cache.cli"
 
 
   fhirwall:

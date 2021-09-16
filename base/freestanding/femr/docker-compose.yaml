@@ -71,7 +71,6 @@ services:
       - "./config/keycloak/docker-entrypoint-override.sh:/opt/jboss/tools/docker-entrypoint-override.sh:ro"
       - "./config/keycloak/realm-data.json:/tmp/realm-data.json"
       - "./config/keycloak/cosri-keycloak-theme:/opt/jboss/keycloak/themes/cosri"
-      - "./config/keycloak/disable-theme-cache.cli:/opt/jboss/startup-scripts/disable-theme-cache.cli"
       - "./config/keycloak/jboss-logging-config.cli:/opt/jboss/startup-scripts/jboss-logging-config.cli"
     depends_on:
       - db
