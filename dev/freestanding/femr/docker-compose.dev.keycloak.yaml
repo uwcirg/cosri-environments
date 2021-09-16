@@ -1,0 +1,6 @@
+# docker-compose override to disable theme caching
+version: "3.7"
+services:
+  keycloak:
+    volumes:
+      - "./config/keycloak/disable-theme-cache.cli:/opt/jboss/startup-scripts/disable-theme-cache.cli"
