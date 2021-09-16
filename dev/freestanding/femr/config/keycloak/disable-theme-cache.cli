@@ -1,3 +1,6 @@
+# disable Keycloak theme caching
+# configure Keycloak to re-render themes on every request
+
 embed-server --std-out=echo --server-config=standalone-ha.xml
 /subsystem=keycloak-server/theme=defaults/:write-attribute(name=cacheThemes,value=false)
 /subsystem=keycloak-server/theme=defaults/:write-attribute(name=cacheTemplates,value=false)
