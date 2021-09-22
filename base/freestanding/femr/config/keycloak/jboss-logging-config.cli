@@ -5,6 +5,7 @@ embed-server --std-out=echo --server-config=standalone-ha.xml
 if (outcome!=success) of /subsystem=logging/json-formatter=JSON:read-resource
     echo "Adding JSON formatter"
     /subsystem=logging/json-formatter=JSON:add(exception-output-type=formatted)
+    /subsystem=logging/console-handler=CONSOLE:write-attribute(name=named-formatter,value=JSON)
 else
     echo "JSON formatter already present"
 end-if
