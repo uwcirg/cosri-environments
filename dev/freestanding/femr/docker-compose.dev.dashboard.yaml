@@ -6,7 +6,6 @@ services:
     command: sh -c "cd /opt/app && flask run --host 0.0.0.0 --port ${PORT:-8000}"
     environment:
       FLASK_ENV: development
-      FLASK_APP: patientsearch:create_app()
       # use static frontend built in docker image
       STATIC_DIR: /opt/cosri-patientsearch/patientsearch/static/
     volumes:
