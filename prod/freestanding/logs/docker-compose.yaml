@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  postgrest:
+    restart: unless-stopped
+
+  postgres:
+    restart: unless-stopped
+
+  oidc-proxy:
+    restart: unless-stopped
