@@ -35,3 +35,4 @@ services:
       LOG_LEVEL: WARN
     env_file:
       - ../../../prod/freestanding/femr/hydrant.env
+    restart: unless-stopped
