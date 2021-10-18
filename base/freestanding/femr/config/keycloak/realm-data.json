@@ -2253,7 +2253,7 @@
     "enabled": true,
     "sslRequired": "external",
     "registrationAllowed": false,
-    "registrationEmailAsUsername": true,
+    "registrationEmailAsUsername": false,
     "rememberMe": true,
     "verifyEmail": false,
     "loginWithEmailAllowed": true,
