@@ -2,7 +2,7 @@
 
 cmdname="$(basename "$0")"
 bin_path="$(cd "$(dirname "$0")" && pwd)"
-repo_path="${bin_path}/.."
+repo_path="$(readlink -f ${bin_path}/..)"
 
 
 usage() {
@@ -96,6 +96,8 @@ if [ -z "$(docker-compose ps --quiet $DATABASE_SERVICE_NAME)" ]; then
     >&2 echo "Error: database not running"
     exit 1
 fi
+
+echo Backing up services in $docker_compose_directory...
 
 # get COMPOSE_PROJECT_NAME (see .env)
 compose_project_name="$(
