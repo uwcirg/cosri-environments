@@ -45,8 +45,18 @@ shift
 COMPOSE_PROJECT_SERVICES=$@
 
 # if none given, back up all
+# TODO introspect postgres to enumerate all DBs
 if [ -z "$COMPOSE_PROJECT_SERVICES" ]; then
-    COMPOSE_PROJECT_SERVICES="keycloak fhir"
+    if [ $COMPOSE_PROJECT_DIR = femr ]; then
+        COMPOSE_PROJECT_SERVICES="keycloak fhir"
+    elif [ $COMPOSE_PROJECT_DIR = logs ]; then
+        COMPOSE_PROJECT_SERVICES="postgrest"
+    fi
+fi
+
+DATABASE_SERVICE_NAME=db
+if [ $COMPOSE_PROJECT_DIR = logs ]; then
+    DATABASE_SERVICE_NAME=postgres
 fi
 
 
@@ -63,9 +73,11 @@ dump_db() {
     local db_name="$1"
     local dump_filename="$2"
 
+    local POSTGRES_USER="$(docker-compose exec -T $DATABASE_SERVICE_NAME printenv POSTGRES_USER)"
     echo Backing up $db_name...
-    docker-compose exec -T --user postgres db bash -c "\
+    docker-compose exec -T --user postgres $DATABASE_SERVICE_NAME bash -c "\
         pg_dump \
+            --username $POSTGRES_USER \
             --dbname $db_name \
             --no-acl \
             --no-owner \
@@ -80,22 +92,21 @@ docker_compose_directory="$(get_compose_project "$repo_path" "$COMPOSE_PROJECT_D
 # docker-compose commands must be run in the same directory as docker-compose.yaml
 cd "${docker_compose_directory}"
 
-if [ -z "$(docker-compose ps --quiet db)" ]; then
+if [ -z "$(docker-compose ps --quiet $DATABASE_SERVICE_NAME)" ]; then
     >&2 echo "Error: database not running"
     exit 1
 fi
 
 # get COMPOSE_PROJECT_NAME (see .env)
 compose_project_name="$(
-    docker inspect "$(docker-compose ps --quiet db)" \
+    docker inspect "$(docker-compose ps --quiet $DATABASE_SERVICE_NAME)" \
         --format '{{ index .Config.Labels "com.docker.compose.project"}}'
 )"
 dump_filename="psql_dump-$(date --iso-8601=minutes)-${compose_project_name}"
 
 for service_name in $COMPOSE_PROJECT_SERVICES; do
-    if [ $service_name = fhir ]; then
-        # HAPI db name does not match service name (fhir)
-        service_name=hapifhir
-    fi
+    # HAPI DB name does not match service name (fhir)
+    if [ $service_name = fhir ]; then service_name=hapifhir; fi
+    if [ $service_name = postgrest ]; then service_name=app_db; fi
     dump_db $service_name $dump_filename
 done
