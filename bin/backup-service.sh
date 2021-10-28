@@ -79,7 +79,6 @@ dump_db() {
         pg_dump \
             --username $POSTGRES_USER \
             --dbname $db_name \
-            --no-acl \
             --no-owner \
             --encoding utf8 "\
     > "${BACKUPS_DIR}/${dump_filename}-${db_name}.sql"
