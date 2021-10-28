@@ -3,17 +3,22 @@
 cmdname="$(basename "$0")"
 bin_path="$(cd "$(dirname "$0")" && pwd)"
 repo_path="$(readlink -f ${bin_path}/..)"
-
+default_backups_dir=/tmp
 
 usage() {
     cat << USAGE >&2
 Usage:
     $cmdname [-h] [-b backup_location] compose_project_dir [compose_project_services...]
     -h     Show this help message
-    -b     Override default backup location (/tmp)
+    -b     Override default backup location ($default_backups_dir)
 
     Application backup script
     Dump application database and uploaded content
+
+    compose_project_dir
+        docker-compose project directory name eg femr, logs, cosri
+    compose_project_services
+        space-separated list of service names to backup; if omitted, defaults to all services
 
 USAGE
     exit 1
@@ -34,7 +39,7 @@ while getopts "hb:" option; do
 done
 shift $((OPTIND-1))
 
-default_backups_dir=/tmp
+
 BACKUPS_DIR="${backups_dir:-$default_backups_dir}"
 
 COMPOSE_PROJECT_DIR="$1"
