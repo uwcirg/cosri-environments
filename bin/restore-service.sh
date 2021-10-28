@@ -19,7 +19,7 @@ Usage:
     compose_project_service
         service name to restore
     database_dump
-        filepath to database dump to load
+        filepath of database dump to load
 
 USAGE
     exit 1
