@@ -3,6 +3,7 @@
 cmdname="$(basename "$0")"
 bin_path="$(cd "$(dirname "$0")" && pwd)"
 repo_path="$(readlink -f ${bin_path}/..)"
+
 default_backups_dir=/tmp
 
 usage() {
@@ -80,11 +81,11 @@ dump_db() {
 
     local POSTGRES_USER="$(docker-compose exec -T $DATABASE_SERVICE_NAME printenv POSTGRES_USER)"
     echo Backing up $db_name...
+    # ACLs are needed by postgrest; do not include `--no-acl`
     docker-compose exec -T --user postgres $DATABASE_SERVICE_NAME bash -c "\
         pg_dump \
             --username $POSTGRES_USER \
             --dbname $db_name \
-            --no-acl \
             --no-owner \
             --encoding utf8 "\
     > "${BACKUPS_DIR}/${dump_filename}-${db_name}.sql"
