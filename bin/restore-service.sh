@@ -34,7 +34,7 @@ COMPOSE_PROJECT_DIR="$1"
 COMPOSE_PROJECT_SERVICE="$2"
 SQL_DUMP="$3"
 if [ ! -s "$SQL_DUMP" ]; then
-    echo "Error: ${SQL_DUMP} is not non-zero file"
+    echo "Error: ${SQL_DUMP} is empty or does not exist"
     exit 1
 fi
 
