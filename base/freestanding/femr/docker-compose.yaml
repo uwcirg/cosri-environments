@@ -33,7 +33,7 @@ services:
 
 
   keycloak:
-    image: jboss/keycloak:9.0.0
+    image: jboss/keycloak:${KEYCLOAK_IMAGE_TAG:-15.0.1}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.keycloak-${COMPOSE_PROJECT_NAME}.rule=Host(`keycloak.${BASE_DOMAIN:-localtest.me}`)"
