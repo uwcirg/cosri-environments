@@ -1604,12 +1604,14 @@
         "authenticationExecutions": [
           {
             "authenticator": "idp-email-verification",
+            "authenticatorFlow": false,
             "requirement": "ALTERNATIVE",
             "priority": 10,
             "userSetupAllowed": false,
             "autheticatorFlow": false
           },
           {
+            "authenticatorFlow": true,
             "requirement": "ALTERNATIVE",
             "priority": 20,
             "flowAlias": "Verify Existing Account by Re-authentication",
@@ -3898,6 +3900,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "basic-auth",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
@@ -3905,6 +3908,7 @@
           },
           {
             "authenticator": "basic-auth-otp",
+            "authenticatorFlow": false,
             "requirement": "DISABLED",
             "priority": 20,
             "userSetupAllowed": false,
@@ -3912,6 +3916,7 @@
           },
           {
             "authenticator": "auth-spnego",
+            "authenticatorFlow": false,
             "requirement": "DISABLED",
             "priority": 30,
             "userSetupAllowed": false,
@@ -3929,6 +3934,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "conditional-user-configured",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
@@ -3936,6 +3942,7 @@
           },
           {
             "authenticator": "auth-otp-form",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 20,
             "userSetupAllowed": false,
@@ -3953,6 +3960,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "conditional-user-configured",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
@@ -3960,6 +3968,7 @@
           },
           {
             "authenticator": "direct-grant-validate-otp",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 20,
             "userSetupAllowed": false,
@@ -3977,6 +3986,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "conditional-user-configured",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
@@ -3984,6 +3994,7 @@
           },
           {
             "authenticator": "auth-otp-form",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 20,
             "userSetupAllowed": false,
