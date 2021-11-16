@@ -5,6 +5,7 @@
     "displayName": "Keycloak",
     "displayNameHtml": "<div class=\"kc-logo-text\"><span>Keycloak</span></div>",
     "notBefore": 0,
+    "defaultSignatureAlgorithm": "RS256",
     "revokeRefreshToken": false,
     "refreshTokenMaxReuse": 0,
     "accessTokenLifespan": 60,
@@ -23,6 +24,8 @@
     "accessCodeLifespanLogin": 1800,
     "actionTokenGeneratedByAdminLifespan": 43200,
     "actionTokenGeneratedByUserLifespan": 300,
+    "oauth2DeviceCodeLifespan": 600,
+    "oauth2DevicePollingInterval": 5,
     "enabled": true,
     "sslRequired": "external",
     "registrationAllowed": false,
@@ -552,12 +555,28 @@
             "clientRole": true,
             "containerId": "463eac7c-dd52-4cad-88d8-5e4f39dd5010",
             "attributes": {}
+          },
+          {
+            "id": "f55ebadc-992b-4aed-b643-9545a1a77a3d",
+            "name": "delete-account",
+            "description": "${role_delete-account}",
+            "composite": false,
+            "clientRole": true,
+            "containerId": "463eac7c-dd52-4cad-88d8-5e4f39dd5010",
+            "attributes": {}
           }
         ]
       }
     },
     "groups": [],
-    "defaultRoles": ["offline_access", "uma_authorization"],
+    "defaultRole": {
+      "id": "20dd80b5-9b81-44ed-8bb9-c392e1f8554e",
+      "name": "default-roles-master",
+      "description": "${role_default-roles}",
+      "composite": true,
+      "clientRole": false,
+      "containerId": "master"
+    },
     "requiredCredentials": ["password"],
     "passwordPolicy": "upperCase(1) and lowerCase(1) and digits(1) and length(8) and passwordHistory(5)",
     "otpPolicyType": "totp",
@@ -655,7 +674,6 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
           "profile",
           "roles",
           "email"
@@ -678,7 +696,6 @@
         "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "${__KEYCLOAK_MASTER_REALM_ACCOUNT_CLIENT_SECRET}",
-        "defaultRoles": ["view-profile", "manage-account"],
         "redirectUris": ["/realms/master/account/*"],
         "webOrigins": [],
         "notBefore": 0,
@@ -697,7 +714,6 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
           "profile",
           "roles",
           "email"
@@ -750,7 +766,6 @@
         ],
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
           "profile",
           "roles",
           "email"
@@ -789,7 +804,6 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
           "profile",
           "roles",
           "email"
@@ -828,7 +842,6 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
           "profile",
           "roles",
           "email"
@@ -866,7 +879,6 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
           "profile",
           "roles",
           "email"
@@ -926,7 +938,6 @@
         ],
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
           "profile",
           "roles",
           "email"
@@ -1452,6 +1463,8 @@
     "enabledEventTypes": [],
     "adminEventsEnabled": false,
     "adminEventsDetailsEnabled": false,
+    "identityProviders": [],
+    "identityProviderMappers": [],
     "components": {
       "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy": [
         {
@@ -2191,6 +2204,15 @@
         "enabled": true,
         "defaultAction": false,
         "priority": 50,
+        "config": {}
+      },
+      {
+        "alias": "delete_account",
+        "name": "Delete Account",
+        "providerId": "delete_account",
+        "enabled": false,
+        "defaultAction": false,
+        "priority": 60,
         "config": {}
       },
       {
