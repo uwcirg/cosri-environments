@@ -3201,6 +3201,26 @@
         ]
       },
       {
+        "id": "18295a0a-daaf-448d-8793-cb39b36703cd",
+        "name": "patient/*.read",
+        "description": "SoF: Read all data for launch patient",
+        "protocol": "openid-connect",
+        "attributes": {
+          "include.in.token.scope": "true",
+          "display.on.consent.screen": "true"
+        }
+      },
+      {
+        "id": "78ad99cd-c336-42ed-a55a-ddbe6119c928",
+        "name": "launch",
+        "description": "SoF: launch token",
+        "protocol": "openid-connect",
+        "attributes": {
+          "include.in.token.scope": "true",
+          "display.on.consent.screen": "true"
+        }
+      },
+      {
         "id": "d18d2cb5-b102-4229-a958-4870bbc3e6cb",
         "name": "web-origins",
         "description": "OpenID Connect scope for add allowed web origins to the access token",
