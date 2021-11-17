@@ -2265,6 +2265,8 @@
     "offlineSessionIdleTimeout": 2592000,
     "offlineSessionMaxLifespanEnabled": false,
     "offlineSessionMaxLifespan": 5184000,
+    "clientSessionIdleTimeout": 0,
+    "clientSessionMaxLifespan": 0,
     "accessCodeLifespan": 60,
     "accessCodeLifespanUserAction": 300,
     "accessCodeLifespanLogin": 1800,
@@ -2704,9 +2706,8 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
-          "profile",
           "roles",
+          "profile",
           "email"
         ],
         "optionalClientScopes": [
@@ -2757,9 +2758,8 @@
         ],
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
-          "profile",
           "roles",
+          "profile",
           "email"
         ],
         "optionalClientScopes": [
@@ -2796,9 +2796,8 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
-          "profile",
           "roles",
+          "profile",
           "email"
         ],
         "optionalClientScopes": [
@@ -2835,9 +2834,217 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
-          "profile",
           "roles",
+          "profile",
+          "email"
+        ],
+        "optionalClientScopes": [
+          "address",
+          "phone",
+          "offline_access",
+          "microprofile-jwt"
+        ]
+      },
+      {
+        "id": "fe6ccba2-7bef-47db-8ca7-32b916dcdd8a",
+        "clientId": "cosri_openid_client",
+        "name": "Cosri",
+        "description": "Cosri SoF client app",
+        "surrogateAuthRequired": false,
+        "enabled": true,
+        "alwaysDisplayInConsole": false,
+        "clientAuthenticatorType": "client-secret",
+        "secret": "${__KEYCLOAK_FEMR_REALM_COSRI_OPENID_CLIENT_SECRET}",
+        "redirectUris": [
+          "*"
+        ],
+        "webOrigins": [
+          "*"
+        ],
+        "notBefore": 0,
+        "bearerOnly": false,
+        "consentRequired": false,
+        "standardFlowEnabled": true,
+        "implicitFlowEnabled": false,
+        "directAccessGrantsEnabled": true,
+        "serviceAccountsEnabled": false,
+        "publicClient": false,
+        "frontchannelLogout": false,
+        "protocol": "openid-connect",
+        "attributes": {
+          "saml.assertion.signature": "false",
+          "saml.force.post.binding": "false",
+          "saml.multivalued.roles": "false",
+          "saml.encrypt": "false",
+          "login_theme": "base",
+          "saml.server.signature": "false",
+          "saml.server.signature.keyinfo.ext": "false",
+          "exclude.session.state.from.auth.response": "false",
+          "saml_force_name_id_format": "false",
+          "saml.client.signature": "false",
+          "tls.client.certificate.bound.access.tokens": "false",
+          "saml.authnstatement": "false",
+          "display.on.consent.screen": "false",
+          "saml.onetimeuse.condition": "false"
+        },
+        "authenticationFlowBindingOverrides": {},
+        "fullScopeAllowed": true,
+        "nodeReRegistrationTimeout": -1,
+        "protocolMappers": [
+          {
+            "id": "ce38c2d5-0c80-4943-a370-eb5f95c4b67d",
+            "name": "DEA",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-attribute-mapper",
+            "consentRequired": false,
+            "config": {
+              "userinfo.token.claim": "true",
+              "user.attribute": "DEA",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "DEA",
+              "jsonType.label": "String"
+            }
+          }
+        ],
+        "defaultClientScopes": [
+          "web-origins",
+          "roles",
+          "profile",
+          "email"
+        ],
+        "optionalClientScopes": [
+          "address",
+          "phone",
+          "offline_access",
+          "microprofile-jwt"
+        ]
+      },
+      {
+        "id": "e1e8c399-f31a-436c-8874-33e93759580f",
+        "clientId": "femr_openid_client",
+        "name": "fEMR",
+        "description": "fEMR OIDC client",
+        "rootUrl": "",
+        "adminUrl": "",
+        "baseUrl": "",
+        "surrogateAuthRequired": false,
+        "enabled": true,
+        "alwaysDisplayInConsole": false,
+        "clientAuthenticatorType": "client-secret",
+        "secret": "${__KEYCLOAK_FEMR_REALM_FEMR_OPENID_CLIENT_SECRET}",
+        "redirectUris": [
+          "*"
+        ],
+        "webOrigins": [
+          "*"
+        ],
+        "notBefore": 0,
+        "bearerOnly": false,
+        "consentRequired": false,
+        "standardFlowEnabled": true,
+        "implicitFlowEnabled": false,
+        "directAccessGrantsEnabled": true,
+        "serviceAccountsEnabled": false,
+        "publicClient": false,
+        "frontchannelLogout": false,
+        "protocol": "openid-connect",
+        "attributes": {
+          "saml.assertion.signature": "false",
+          "saml.force.post.binding": "false",
+          "saml.multivalued.roles": "false",
+          "saml.encrypt": "false",
+          "saml.server.signature": "false",
+          "saml.server.signature.keyinfo.ext": "false",
+          "exclude.session.state.from.auth.response": "false",
+          "saml_force_name_id_format": "false",
+          "saml.client.signature": "false",
+          "tls.client.certificate.bound.access.tokens": "false",
+          "saml.authnstatement": "false",
+          "display.on.consent.screen": "false",
+          "saml.onetimeuse.condition": "false"
+        },
+        "authenticationFlowBindingOverrides": {},
+        "fullScopeAllowed": true,
+        "nodeReRegistrationTimeout": -1,
+        "protocolMappers": [
+          {
+            "id": "de38c2d5-0c80-4943-a370-eb5f95c4b67c",
+            "name": "DEA",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-attribute-mapper",
+            "consentRequired": false,
+            "config": {
+              "userinfo.token.claim": "true",
+              "user.attribute": "DEA",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "DEA",
+              "jsonType.label": "String"
+            }
+          }
+        ],
+        "defaultClientScopes": [
+          "web-origins",
+          "roles",
+          "profile",
+          "email"
+        ],
+        "optionalClientScopes": [
+          "address",
+          "phone",
+          "offline_access",
+          "microprofile-jwt"
+        ]
+      },
+      {
+        "id": "323133ff-bbb9-49d4-910b-df8b464de715",
+        "clientId": "logserver_openid_client",
+        "name": "Logserver",
+        "description": "Logserver",
+        "surrogateAuthRequired": false,
+        "enabled": true,
+        "alwaysDisplayInConsole": false,
+        "clientAuthenticatorType": "client-secret",
+        "secret": "${__KEYCLOAK_FEMR_REALM_LOGSERVER_OPENID_CLIENT_SECRET}",
+        "redirectUris": [
+          "*"
+        ],
+        "webOrigins": [
+          "*"
+        ],
+        "notBefore": 0,
+        "bearerOnly": false,
+        "consentRequired": false,
+        "standardFlowEnabled": true,
+        "implicitFlowEnabled": false,
+        "directAccessGrantsEnabled": true,
+        "serviceAccountsEnabled": false,
+        "publicClient": false,
+        "frontchannelLogout": false,
+        "protocol": "openid-connect",
+        "attributes": {
+          "saml.assertion.signature": "false",
+          "saml.force.post.binding": "false",
+          "saml.multivalued.roles": "false",
+          "saml.encrypt": "false",
+          "saml.server.signature": "false",
+          "saml.server.signature.keyinfo.ext": "false",
+          "exclude.session.state.from.auth.response": "false",
+          "saml_force_name_id_format": "false",
+          "saml.client.signature": "false",
+          "tls.client.certificate.bound.access.tokens": "false",
+          "saml.authnstatement": "false",
+          "display.on.consent.screen": "false",
+          "saml.onetimeuse.condition": "false"
+        },
+        "authenticationFlowBindingOverrides": {},
+        "fullScopeAllowed": true,
+        "nodeReRegistrationTimeout": -1,
+        "defaultClientScopes": [
+          "web-origins",
+          "roles",
+          "profile",
           "email"
         ],
         "optionalClientScopes": [
@@ -2874,9 +3081,8 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
-          "profile",
           "roles",
+          "profile",
           "email"
         ],
         "optionalClientScopes": [
@@ -2897,8 +3103,12 @@
         "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "${__KEYCLOAK_FEMR_REALM_SECURITY_ADMIN_CONSOLE_CLIENT_SECRET}",
-        "redirectUris": ["/admin/fEMR/console/*"],
-        "webOrigins": ["+"],
+        "redirectUris": [
+          "/admin/fEMR/console/*"
+        ],
+        "webOrigins": [
+          "+"
+        ],
         "notBefore": 0,
         "bearerOnly": false,
         "consentRequired": false,
@@ -2934,9 +3144,8 @@
         ],
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
-          "profile",
           "roles",
+          "profile",
           "email"
         ],
         "optionalClientScopes": [
@@ -2945,212 +3154,6 @@
           "offline_access",
           "microprofile-jwt"
         ]
-      },
-      {
-        "id": "e1e8c399-f31a-436c-8874-33e93759580f",
-        "clientId": "femr_openid_client",
-        "name": "fEMR",
-        "description": "fEMR OIDC client",
-        "rootUrl": "",
-        "adminUrl": "",
-        "baseUrl": "",
-        "surrogateAuthRequired": false,
-        "enabled": true,
-        "alwaysDisplayInConsole": false,
-        "clientAuthenticatorType": "client-secret",
-        "secret": "${__KEYCLOAK_FEMR_REALM_FEMR_OPENID_CLIENT_SECRET}",
-        "redirectUris": ["*"],
-        "webOrigins": ["*"],
-        "notBefore": 0,
-        "bearerOnly": false,
-        "consentRequired": false,
-        "standardFlowEnabled": true,
-        "implicitFlowEnabled": false,
-        "directAccessGrantsEnabled": true,
-        "serviceAccountsEnabled": false,
-        "publicClient": false,
-        "frontchannelLogout": false,
-        "protocol": "openid-connect",
-        "attributes": {
-          "saml.assertion.signature": "false",
-          "saml.force.post.binding": "false",
-          "saml.multivalued.roles": "false",
-          "saml.encrypt": "false",
-          "saml.server.signature": "false",
-          "saml.server.signature.keyinfo.ext": "false",
-          "exclude.session.state.from.auth.response": "false",
-          "saml_force_name_id_format": "false",
-          "saml.client.signature": "false",
-          "tls.client.certificate.bound.access.tokens": "false",
-          "saml.authnstatement": "false",
-          "display.on.consent.screen": "false",
-          "saml.onetimeuse.condition": "false"
-        },
-        "authenticationFlowBindingOverrides": {},
-        "fullScopeAllowed": true,
-        "nodeReRegistrationTimeout": -1,
-        "protocolMappers" : [ {
-          "id" : "de38c2d5-0c80-4943-a370-eb5f95c4b67c",
-          "name" : "DEA",
-          "protocol" : "openid-connect",
-          "protocolMapper" : "oidc-usermodel-attribute-mapper",
-          "consentRequired" : false,
-          "config" : {
-            "userinfo.token.claim" : "true",
-            "user.attribute" : "DEA",
-            "id.token.claim" : "true",
-            "access.token.claim" : "true",
-            "claim.name" : "DEA",
-            "jsonType.label" : "String"
-          }
-        } ],
-        "defaultClientScopes": [
-          "web-origins",
-          "role_list",
-          "profile",
-          "roles",
-          "email"
-        ],
-        "optionalClientScopes": [
-          "address",
-          "phone",
-          "offline_access",
-          "microprofile-jwt"
-        ]
-      },
-      {
-        "id": "fe6ccba2-7bef-47db-8ca7-32b916dcdd8a",
-        "clientId": "cosri_openid_client",
-        "name": "Cosri",
-        "description": "Cosri SoF client app",
-        "surrogateAuthRequired": false,
-        "enabled": true,
-        "alwaysDisplayInConsole": false,
-        "clientAuthenticatorType": "client-secret",
-        "secret": "${__KEYCLOAK_FEMR_REALM_COSRI_OPENID_CLIENT_SECRET}",
-        "redirectUris": ["*"],
-        "webOrigins": ["*"],
-        "notBefore": 0,
-        "bearerOnly": false,
-        "consentRequired": false,
-        "standardFlowEnabled": true,
-        "implicitFlowEnabled": false,
-        "directAccessGrantsEnabled": true,
-        "serviceAccountsEnabled": false,
-        "publicClient": false,
-        "frontchannelLogout": false,
-        "protocol": "openid-connect",
-        "attributes": {
-          "saml.assertion.signature": "false",
-          "saml.force.post.binding": "false",
-          "saml.multivalued.roles": "false",
-          "saml.encrypt": "false",
-          "login_theme": "base",
-          "saml.server.signature": "false",
-          "saml.server.signature.keyinfo.ext": "false",
-          "exclude.session.state.from.auth.response": "false",
-          "saml_force_name_id_format": "false",
-          "saml.client.signature": "false",
-          "tls.client.certificate.bound.access.tokens": "false",
-          "saml.authnstatement": "false",
-          "display.on.consent.screen": "false",
-          "saml.onetimeuse.condition": "false"
-        },
-        "authenticationFlowBindingOverrides": {},
-        "fullScopeAllowed": true,
-        "nodeReRegistrationTimeout": -1,
-        "protocolMappers" : [ {
-          "id" : "ce38c2d5-0c80-4943-a370-eb5f95c4b67d",
-          "name" : "DEA",
-          "protocol" : "openid-connect",
-          "protocolMapper" : "oidc-usermodel-attribute-mapper",
-          "consentRequired" : false,
-          "config" : {
-            "userinfo.token.claim" : "true",
-            "user.attribute" : "DEA",
-            "id.token.claim" : "true",
-            "access.token.claim" : "true",
-            "claim.name" : "DEA",
-            "jsonType.label" : "String"
-          }
-        } ],
-        "defaultClientScopes": [
-          "web-origins",
-          "role_list",
-          "profile",
-          "roles",
-          "email"
-        ],
-        "optionalClientScopes": [
-          "address",
-          "phone",
-          "offline_access",
-          "microprofile-jwt"
-        ],
-        "access": {
-          "view": true,
-          "configure": true,
-          "manage": true
-        }
-      },
-      {
-        "id": "323133ff-bbb9-49d4-910b-df8b464de715",
-        "clientId": "logserver_openid_client",
-        "name": "Logserver",
-        "description": "Logserver",
-        "surrogateAuthRequired": false,
-        "enabled": true,
-        "alwaysDisplayInConsole": false,
-        "clientAuthenticatorType": "client-secret",
-        "secret": "${__KEYCLOAK_FEMR_REALM_LOGSERVER_OPENID_CLIENT_SECRET}",
-        "redirectUris": ["*"],
-        "webOrigins": ["*"],
-        "notBefore": 0,
-        "bearerOnly": false,
-        "consentRequired": false,
-        "standardFlowEnabled": true,
-        "implicitFlowEnabled": false,
-        "directAccessGrantsEnabled": true,
-        "serviceAccountsEnabled": false,
-        "publicClient": false,
-        "frontchannelLogout": false,
-        "protocol": "openid-connect",
-        "attributes": {
-          "saml.assertion.signature": "false",
-          "saml.force.post.binding": "false",
-          "saml.multivalued.roles": "false",
-          "saml.encrypt": "false",
-          "saml.server.signature": "false",
-          "saml.server.signature.keyinfo.ext": "false",
-          "exclude.session.state.from.auth.response": "false",
-          "saml_force_name_id_format": "false",
-          "saml.client.signature": "false",
-          "tls.client.certificate.bound.access.tokens": "false",
-          "saml.authnstatement": "false",
-          "display.on.consent.screen": "false",
-          "saml.onetimeuse.condition": "false"
-        },
-        "authenticationFlowBindingOverrides": {},
-        "fullScopeAllowed": true,
-        "nodeReRegistrationTimeout": -1,
-        "defaultClientScopes": [
-          "web-origins",
-          "role_list",
-          "profile",
-          "roles",
-          "email"
-        ],
-        "optionalClientScopes": [
-          "address",
-          "phone",
-          "offline_access",
-          "microprofile-jwt"
-        ],
-        "access": {
-          "view": true,
-          "configure": true,
-          "manage": true
-        }
       }
     ],
     "clientScopes": [
@@ -3906,12 +3909,14 @@
         "authenticationExecutions": [
           {
             "authenticator": "idp-email-verification",
+            "authenticatorFlow": false,
             "requirement": "ALTERNATIVE",
             "priority": 10,
             "userSetupAllowed": false,
             "autheticatorFlow": false
           },
           {
+            "authenticatorFlow": true,
             "requirement": "ALTERNATIVE",
             "priority": 20,
             "flowAlias": "Verify Existing Account by Re-authentication",
@@ -4042,12 +4047,14 @@
         "authenticationExecutions": [
           {
             "authenticator": "idp-confirm-link",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
             "autheticatorFlow": false
           },
           {
+            "authenticatorFlow": true,
             "requirement": "REQUIRED",
             "priority": 20,
             "flowAlias": "Account verification options",
@@ -4066,6 +4073,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "conditional-user-configured",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
@@ -4073,6 +4081,7 @@
           },
           {
             "authenticator": "reset-otp",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 20,
             "userSetupAllowed": false,
@@ -4091,12 +4100,14 @@
           {
             "authenticatorConfig": "create unique user config",
             "authenticator": "idp-create-user-if-unique",
+            "authenticatorFlow": false,
             "requirement": "ALTERNATIVE",
             "priority": 10,
             "userSetupAllowed": false,
             "autheticatorFlow": false
           },
           {
+            "authenticatorFlow": true,
             "requirement": "ALTERNATIVE",
             "priority": 20,
             "flowAlias": "Handle Existing Account",
@@ -4115,12 +4126,14 @@
         "authenticationExecutions": [
           {
             "authenticator": "idp-username-password-form",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
             "autheticatorFlow": false
           },
           {
+            "authenticatorFlow": true,
             "requirement": "CONDITIONAL",
             "priority": 20,
             "flowAlias": "First broker login - Conditional OTP",
@@ -4139,6 +4152,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "auth-cookie",
+            "authenticatorFlow": false,
             "requirement": "ALTERNATIVE",
             "priority": 10,
             "userSetupAllowed": false,
@@ -4146,6 +4160,7 @@
           },
           {
             "authenticator": "auth-spnego",
+            "authenticatorFlow": false,
             "requirement": "DISABLED",
             "priority": 20,
             "userSetupAllowed": false,
@@ -4153,12 +4168,14 @@
           },
           {
             "authenticator": "identity-provider-redirector",
+            "authenticatorFlow": false,
             "requirement": "ALTERNATIVE",
             "priority": 25,
             "userSetupAllowed": false,
             "autheticatorFlow": false
           },
           {
+            "authenticatorFlow": true,
             "requirement": "ALTERNATIVE",
             "priority": 30,
             "flowAlias": "forms",
@@ -4177,6 +4194,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "client-secret",
+            "authenticatorFlow": false,
             "requirement": "ALTERNATIVE",
             "priority": 10,
             "userSetupAllowed": false,
@@ -4184,6 +4202,7 @@
           },
           {
             "authenticator": "client-jwt",
+            "authenticatorFlow": false,
             "requirement": "ALTERNATIVE",
             "priority": 20,
             "userSetupAllowed": false,
@@ -4191,6 +4210,7 @@
           },
           {
             "authenticator": "client-secret-jwt",
+            "authenticatorFlow": false,
             "requirement": "ALTERNATIVE",
             "priority": 30,
             "userSetupAllowed": false,
@@ -4198,6 +4218,7 @@
           },
           {
             "authenticator": "client-x509",
+            "authenticatorFlow": false,
             "requirement": "ALTERNATIVE",
             "priority": 40,
             "userSetupAllowed": false,
@@ -4215,6 +4236,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "direct-grant-validate-username",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
@@ -4222,12 +4244,14 @@
           },
           {
             "authenticator": "direct-grant-validate-password",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 20,
             "userSetupAllowed": false,
             "autheticatorFlow": false
           },
           {
+            "authenticatorFlow": true,
             "requirement": "CONDITIONAL",
             "priority": 30,
             "flowAlias": "Direct Grant - Conditional OTP",
@@ -4246,6 +4270,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "docker-http-basic-authenticator",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
@@ -4264,12 +4289,14 @@
           {
             "authenticatorConfig": "review profile config",
             "authenticator": "idp-review-profile",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
             "autheticatorFlow": false
           },
           {
+            "authenticatorFlow": true,
             "requirement": "REQUIRED",
             "priority": 20,
             "flowAlias": "User creation or linking",
@@ -4288,12 +4315,14 @@
         "authenticationExecutions": [
           {
             "authenticator": "auth-username-password-form",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
             "autheticatorFlow": false
           },
           {
+            "authenticatorFlow": true,
             "requirement": "CONDITIONAL",
             "priority": 20,
             "flowAlias": "Browser - Conditional OTP",
@@ -4312,12 +4341,14 @@
         "authenticationExecutions": [
           {
             "authenticator": "no-cookie-redirect",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
             "autheticatorFlow": false
           },
           {
+            "authenticatorFlow": true,
             "requirement": "REQUIRED",
             "priority": 20,
             "flowAlias": "Authentication Options",
@@ -4336,6 +4367,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "registration-page-form",
+            "authenticatorFlow": true,
             "requirement": "REQUIRED",
             "priority": 10,
             "flowAlias": "registration form",
@@ -4354,6 +4386,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "registration-user-creation",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 20,
             "userSetupAllowed": false,
@@ -4361,6 +4394,7 @@
           },
           {
             "authenticator": "registration-profile-action",
+            "authenticatorFlow": false,
             "requirement": "DISABLED",
             "priority": 40,
             "userSetupAllowed": false,
@@ -4368,6 +4402,7 @@
           },
           {
             "authenticator": "registration-password-action",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 50,
             "userSetupAllowed": false,
@@ -4375,6 +4410,7 @@
           },
           {
             "authenticator": "registration-recaptcha-action",
+            "authenticatorFlow": false,
             "requirement": "DISABLED",
             "priority": 60,
             "userSetupAllowed": false,
@@ -4392,6 +4428,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "reset-credentials-choose-user",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
@@ -4399,6 +4436,7 @@
           },
           {
             "authenticator": "reset-credential-email",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 20,
             "userSetupAllowed": false,
@@ -4406,12 +4444,14 @@
           },
           {
             "authenticator": "reset-password",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 30,
             "userSetupAllowed": false,
             "autheticatorFlow": false
           },
           {
+            "authenticatorFlow": true,
             "requirement": "CONDITIONAL",
             "priority": 40,
             "flowAlias": "Reset - Conditional OTP",
@@ -4430,6 +4470,7 @@
         "authenticationExecutions": [
           {
             "authenticator": "http-basic-authenticator",
+            "authenticatorFlow": false,
             "requirement": "REQUIRED",
             "priority": 10,
             "userSetupAllowed": false,
@@ -4517,45 +4558,21 @@
     "clientAuthenticationFlow": "clients",
     "dockerAuthenticationFlow": "docker auth",
     "attributes": {
-      "webAuthnPolicyAuthenticatorAttachment": "not specified",
-      "_browser_header.xRobotsTag": "none",
-      "webAuthnPolicyAttestationConveyancePreferencePasswordless": "not specified",
-      "webAuthnPolicyRequireResidentKeyPasswordless": "not specified",
-      "webAuthnPolicySignatureAlgorithmsPasswordless": "ES256",
-      "webAuthnPolicyRpEntityName": "keycloak",
-      "webAuthnPolicyAvoidSameAuthenticatorRegisterPasswordless": "false",
-      "failureFactor": "30",
-      "webAuthnPolicyAuthenticatorAttachmentPasswordless": "not specified",
-      "actionTokenGeneratedByUserLifespan": "300",
-      "maxDeltaTimeSeconds": "43200",
-      "webAuthnPolicySignatureAlgorithms": "ES256",
-      "webAuthnPolicyRpEntityNamePasswordless": "keycloak",
-      "offlineSessionMaxLifespan": "5184000",
-      "_browser_header.contentSecurityPolicyReportOnly": "",
-      "bruteForceProtected": "false",
-      "webAuthnPolicyRpIdPasswordless": "",
-      "_browser_header.contentSecurityPolicy": "frame-src 'self'; frame-ancestors 'self'; object-src 'none';",
-      "_browser_header.xXSSProtection": "1; mode=block",
-      "_browser_header.xFrameOptions": "SAMEORIGIN",
-      "_browser_header.strictTransportSecurity": "max-age=31536000; includeSubDomains",
-      "webAuthnPolicyUserVerificationRequirement": "not specified",
-      "permanentLockout": "false",
-      "quickLoginCheckMilliSeconds": "1000",
-      "webAuthnPolicyCreateTimeout": "0",
-      "webAuthnPolicyRequireResidentKey": "not specified",
-      "webAuthnPolicyRpId": "",
-      "webAuthnPolicyAttestationConveyancePreference": "not specified",
-      "maxFailureWaitSeconds": "900",
-      "minimumQuickLoginWaitSeconds": "60",
-      "webAuthnPolicyCreateTimeoutPasswordless": "0",
-      "webAuthnPolicyAvoidSameAuthenticatorRegister": "false",
-      "webAuthnPolicyUserVerificationRequirementPasswordless": "not specified",
-      "_browser_header.xContentTypeOptions": "nosniff",
-      "actionTokenGeneratedByAdminLifespan": "43200",
-      "waitIncrementSeconds": "60",
-      "offlineSessionMaxLifespanEnabled": "false"
+      "cibaBackchannelTokenDeliveryMode": "poll",
+      "cibaExpiresIn": "120",
+      "cibaAuthRequestedUserHint": "login_hint",
+      "oauth2DeviceCodeLifespan": "600",
+      "oauth2DevicePollingInterval": "5",
+      "parRequestUriLifespan": "60",
+      "cibaInterval": "5"
     },
-    "keycloakVersion": "9.0.0",
-    "userManagedAccessAllowed": true
+    "keycloakVersion": "15.0.1",
+    "userManagedAccessAllowed": true,
+    "clientProfiles": {
+      "profiles": []
+    },
+    "clientPolicies": {
+      "policies": []
+    }
   }
 ]
