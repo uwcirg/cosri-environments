@@ -83,6 +83,11 @@ services:
     image: hapiproject/hapi:${FHIR_IMAGE_TAG:-v5.5.1}
     environment:
       SPRING_CONFIG_LOCATION: file:///opt/application.yaml
+      spring.datasource.url: jdbc:postgresql://db:5432/hapifhir
+      spring.datasource.username: postgres
+      spring.datasource.password: postgres
+      spring.datasource.driverClassName: org.postgresql.Driver
+      spring.jpa.hibernate.dialect: org.hibernate.dialect.PostgreSQL94Dialect
 
     volumes:
       - "./config/fhir/application.yaml:/opt/application.yaml:ro"
