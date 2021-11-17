@@ -3204,6 +3204,7 @@
       },
       {
         "id": "18295a0a-daaf-448d-8793-cb39b36703cd",
+        "_comment": "http://www.hl7.org/fhir/smart-app-launch/scopes-and-launch-context/",
         "name": "patient/*.read",
         "description": "SoF: Read all data for launch patient",
         "protocol": "openid-connect",
@@ -3214,6 +3215,7 @@
       },
       {
         "id": "78ad99cd-c336-42ed-a55a-ddbe6119c928",
+        "_comment": "http://www.hl7.org/fhir/smart-app-launch/scopes-and-launch-context/",
         "name": "launch",
         "description": "SoF: launch token",
         "protocol": "openid-connect",
