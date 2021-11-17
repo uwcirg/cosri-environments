@@ -2908,6 +2908,8 @@
           }
         ],
         "defaultClientScopes": [
+          "patient/*.read",
+          "launch",
           "web-origins",
           "roles",
           "profile",
