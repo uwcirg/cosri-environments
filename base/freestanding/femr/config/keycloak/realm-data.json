@@ -2674,9 +2674,8 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
-          "profile",
           "roles",
+          "profile",
           "email"
         ],
         "optionalClientScopes": [
@@ -2727,9 +2726,8 @@
         ],
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
-          "profile",
           "roles",
+          "profile",
           "email"
         ],
         "optionalClientScopes": [
@@ -2766,9 +2764,8 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
-          "profile",
           "roles",
+          "profile",
           "email"
         ],
         "optionalClientScopes": [
@@ -2805,9 +2802,217 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
-          "profile",
           "roles",
+          "profile",
+          "email"
+        ],
+        "optionalClientScopes": [
+          "address",
+          "phone",
+          "offline_access",
+          "microprofile-jwt"
+        ]
+      },
+      {
+        "id": "fe6ccba2-7bef-47db-8ca7-32b916dcdd8a",
+        "clientId": "cosri_openid_client",
+        "name": "Cosri",
+        "description": "Cosri SoF client app",
+        "surrogateAuthRequired": false,
+        "enabled": true,
+        "alwaysDisplayInConsole": false,
+        "clientAuthenticatorType": "client-secret",
+        "secret": "${__KEYCLOAK_FEMR_REALM_COSRI_OPENID_CLIENT_SECRET}",
+        "redirectUris": [
+          "*"
+        ],
+        "webOrigins": [
+          "*"
+        ],
+        "notBefore": 0,
+        "bearerOnly": false,
+        "consentRequired": false,
+        "standardFlowEnabled": true,
+        "implicitFlowEnabled": false,
+        "directAccessGrantsEnabled": true,
+        "serviceAccountsEnabled": false,
+        "publicClient": false,
+        "frontchannelLogout": false,
+        "protocol": "openid-connect",
+        "attributes": {
+          "saml.assertion.signature": "false",
+          "saml.force.post.binding": "false",
+          "saml.multivalued.roles": "false",
+          "saml.encrypt": "false",
+          "login_theme": "base",
+          "saml.server.signature": "false",
+          "saml.server.signature.keyinfo.ext": "false",
+          "exclude.session.state.from.auth.response": "false",
+          "saml_force_name_id_format": "false",
+          "saml.client.signature": "false",
+          "tls.client.certificate.bound.access.tokens": "false",
+          "saml.authnstatement": "false",
+          "display.on.consent.screen": "false",
+          "saml.onetimeuse.condition": "false"
+        },
+        "authenticationFlowBindingOverrides": {},
+        "fullScopeAllowed": true,
+        "nodeReRegistrationTimeout": -1,
+        "protocolMappers": [
+          {
+            "id": "ce38c2d5-0c80-4943-a370-eb5f95c4b67d",
+            "name": "DEA",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-attribute-mapper",
+            "consentRequired": false,
+            "config": {
+              "userinfo.token.claim": "true",
+              "user.attribute": "DEA",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "DEA",
+              "jsonType.label": "String"
+            }
+          }
+        ],
+        "defaultClientScopes": [
+          "web-origins",
+          "roles",
+          "profile",
+          "email"
+        ],
+        "optionalClientScopes": [
+          "address",
+          "phone",
+          "offline_access",
+          "microprofile-jwt"
+        ]
+      },
+      {
+        "id": "e1e8c399-f31a-436c-8874-33e93759580f",
+        "clientId": "femr_openid_client",
+        "name": "fEMR",
+        "description": "fEMR OIDC client",
+        "rootUrl": "",
+        "adminUrl": "",
+        "baseUrl": "",
+        "surrogateAuthRequired": false,
+        "enabled": true,
+        "alwaysDisplayInConsole": false,
+        "clientAuthenticatorType": "client-secret",
+        "secret": "${__KEYCLOAK_FEMR_REALM_FEMR_OPENID_CLIENT_SECRET}",
+        "redirectUris": [
+          "*"
+        ],
+        "webOrigins": [
+          "*"
+        ],
+        "notBefore": 0,
+        "bearerOnly": false,
+        "consentRequired": false,
+        "standardFlowEnabled": true,
+        "implicitFlowEnabled": false,
+        "directAccessGrantsEnabled": true,
+        "serviceAccountsEnabled": false,
+        "publicClient": false,
+        "frontchannelLogout": false,
+        "protocol": "openid-connect",
+        "attributes": {
+          "saml.assertion.signature": "false",
+          "saml.force.post.binding": "false",
+          "saml.multivalued.roles": "false",
+          "saml.encrypt": "false",
+          "saml.server.signature": "false",
+          "saml.server.signature.keyinfo.ext": "false",
+          "exclude.session.state.from.auth.response": "false",
+          "saml_force_name_id_format": "false",
+          "saml.client.signature": "false",
+          "tls.client.certificate.bound.access.tokens": "false",
+          "saml.authnstatement": "false",
+          "display.on.consent.screen": "false",
+          "saml.onetimeuse.condition": "false"
+        },
+        "authenticationFlowBindingOverrides": {},
+        "fullScopeAllowed": true,
+        "nodeReRegistrationTimeout": -1,
+        "protocolMappers": [
+          {
+            "id": "de38c2d5-0c80-4943-a370-eb5f95c4b67c",
+            "name": "DEA",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-attribute-mapper",
+            "consentRequired": false,
+            "config": {
+              "userinfo.token.claim": "true",
+              "user.attribute": "DEA",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "DEA",
+              "jsonType.label": "String"
+            }
+          }
+        ],
+        "defaultClientScopes": [
+          "web-origins",
+          "roles",
+          "profile",
+          "email"
+        ],
+        "optionalClientScopes": [
+          "address",
+          "phone",
+          "offline_access",
+          "microprofile-jwt"
+        ]
+      },
+      {
+        "id": "323133ff-bbb9-49d4-910b-df8b464de715",
+        "clientId": "logserver_openid_client",
+        "name": "Logserver",
+        "description": "Logserver",
+        "surrogateAuthRequired": false,
+        "enabled": true,
+        "alwaysDisplayInConsole": false,
+        "clientAuthenticatorType": "client-secret",
+        "secret": "${__KEYCLOAK_FEMR_REALM_LOGSERVER_OPENID_CLIENT_SECRET}",
+        "redirectUris": [
+          "*"
+        ],
+        "webOrigins": [
+          "*"
+        ],
+        "notBefore": 0,
+        "bearerOnly": false,
+        "consentRequired": false,
+        "standardFlowEnabled": true,
+        "implicitFlowEnabled": false,
+        "directAccessGrantsEnabled": true,
+        "serviceAccountsEnabled": false,
+        "publicClient": false,
+        "frontchannelLogout": false,
+        "protocol": "openid-connect",
+        "attributes": {
+          "saml.assertion.signature": "false",
+          "saml.force.post.binding": "false",
+          "saml.multivalued.roles": "false",
+          "saml.encrypt": "false",
+          "saml.server.signature": "false",
+          "saml.server.signature.keyinfo.ext": "false",
+          "exclude.session.state.from.auth.response": "false",
+          "saml_force_name_id_format": "false",
+          "saml.client.signature": "false",
+          "tls.client.certificate.bound.access.tokens": "false",
+          "saml.authnstatement": "false",
+          "display.on.consent.screen": "false",
+          "saml.onetimeuse.condition": "false"
+        },
+        "authenticationFlowBindingOverrides": {},
+        "fullScopeAllowed": true,
+        "nodeReRegistrationTimeout": -1,
+        "defaultClientScopes": [
+          "web-origins",
+          "roles",
+          "profile",
           "email"
         ],
         "optionalClientScopes": [
@@ -2844,9 +3049,8 @@
         "nodeReRegistrationTimeout": 0,
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
-          "profile",
           "roles",
+          "profile",
           "email"
         ],
         "optionalClientScopes": [
@@ -2867,8 +3071,12 @@
         "alwaysDisplayInConsole": false,
         "clientAuthenticatorType": "client-secret",
         "secret": "${__KEYCLOAK_FEMR_REALM_SECURITY_ADMIN_CONSOLE_CLIENT_SECRET}",
-        "redirectUris": ["/admin/fEMR/console/*"],
-        "webOrigins": ["+"],
+        "redirectUris": [
+          "/admin/fEMR/console/*"
+        ],
+        "webOrigins": [
+          "+"
+        ],
         "notBefore": 0,
         "bearerOnly": false,
         "consentRequired": false,
@@ -2904,9 +3112,8 @@
         ],
         "defaultClientScopes": [
           "web-origins",
-          "role_list",
-          "profile",
           "roles",
+          "profile",
           "email"
         ],
         "optionalClientScopes": [
@@ -2915,215 +3122,52 @@
           "offline_access",
           "microprofile-jwt"
         ]
-      },
-      {
-        "id": "e1e8c399-f31a-436c-8874-33e93759580f",
-        "clientId": "femr_openid_client",
-        "name": "fEMR",
-        "description": "fEMR OIDC client",
-        "rootUrl": "",
-        "adminUrl": "",
-        "baseUrl": "",
-        "surrogateAuthRequired": false,
-        "enabled": true,
-        "alwaysDisplayInConsole": false,
-        "clientAuthenticatorType": "client-secret",
-        "secret": "${__KEYCLOAK_FEMR_REALM_FEMR_OPENID_CLIENT_SECRET}",
-        "redirectUris": ["*"],
-        "webOrigins": ["*"],
-        "notBefore": 0,
-        "bearerOnly": false,
-        "consentRequired": false,
-        "standardFlowEnabled": true,
-        "implicitFlowEnabled": false,
-        "directAccessGrantsEnabled": true,
-        "serviceAccountsEnabled": false,
-        "publicClient": false,
-        "frontchannelLogout": false,
-        "protocol": "openid-connect",
-        "attributes": {
-          "saml.assertion.signature": "false",
-          "saml.force.post.binding": "false",
-          "saml.multivalued.roles": "false",
-          "saml.encrypt": "false",
-          "saml.server.signature": "false",
-          "saml.server.signature.keyinfo.ext": "false",
-          "exclude.session.state.from.auth.response": "false",
-          "saml_force_name_id_format": "false",
-          "saml.client.signature": "false",
-          "tls.client.certificate.bound.access.tokens": "false",
-          "saml.authnstatement": "false",
-          "display.on.consent.screen": "false",
-          "saml.onetimeuse.condition": "false"
-        },
-        "authenticationFlowBindingOverrides": {},
-        "fullScopeAllowed": true,
-        "nodeReRegistrationTimeout": -1,
-        "protocolMappers" : [ {
-          "id" : "de38c2d5-0c80-4943-a370-eb5f95c4b67c",
-          "name" : "DEA",
-          "protocol" : "openid-connect",
-          "protocolMapper" : "oidc-usermodel-attribute-mapper",
-          "consentRequired" : false,
-          "config" : {
-            "userinfo.token.claim" : "true",
-            "user.attribute" : "DEA",
-            "id.token.claim" : "true",
-            "access.token.claim" : "true",
-            "claim.name" : "DEA",
-            "jsonType.label" : "String"
-          }
-        } ],
-        "defaultClientScopes": [
-          "web-origins",
-          "role_list",
-          "profile",
-          "roles",
-          "email"
-        ],
-        "optionalClientScopes": [
-          "address",
-          "phone",
-          "offline_access",
-          "microprofile-jwt"
-        ]
-      },
-      {
-        "id": "fe6ccba2-7bef-47db-8ca7-32b916dcdd8a",
-        "clientId": "cosri_openid_client",
-        "name": "Cosri",
-        "description": "Cosri SoF client app",
-        "surrogateAuthRequired": false,
-        "enabled": true,
-        "alwaysDisplayInConsole": false,
-        "clientAuthenticatorType": "client-secret",
-        "secret": "${__KEYCLOAK_FEMR_REALM_COSRI_OPENID_CLIENT_SECRET}",
-        "redirectUris": ["*"],
-        "webOrigins": ["*"],
-        "notBefore": 0,
-        "bearerOnly": false,
-        "consentRequired": false,
-        "standardFlowEnabled": true,
-        "implicitFlowEnabled": false,
-        "directAccessGrantsEnabled": true,
-        "serviceAccountsEnabled": false,
-        "publicClient": false,
-        "frontchannelLogout": false,
-        "protocol": "openid-connect",
-        "attributes": {
-          "saml.assertion.signature": "false",
-          "saml.force.post.binding": "false",
-          "saml.multivalued.roles": "false",
-          "saml.encrypt": "false",
-          "login_theme": "base",
-          "saml.server.signature": "false",
-          "saml.server.signature.keyinfo.ext": "false",
-          "exclude.session.state.from.auth.response": "false",
-          "saml_force_name_id_format": "false",
-          "saml.client.signature": "false",
-          "tls.client.certificate.bound.access.tokens": "false",
-          "saml.authnstatement": "false",
-          "display.on.consent.screen": "false",
-          "saml.onetimeuse.condition": "false"
-        },
-        "authenticationFlowBindingOverrides": {},
-        "fullScopeAllowed": true,
-        "nodeReRegistrationTimeout": -1,
-        "protocolMappers" : [ {
-          "id" : "ce38c2d5-0c80-4943-a370-eb5f95c4b67d",
-          "name" : "DEA",
-          "protocol" : "openid-connect",
-          "protocolMapper" : "oidc-usermodel-attribute-mapper",
-          "consentRequired" : false,
-          "config" : {
-            "userinfo.token.claim" : "true",
-            "user.attribute" : "DEA",
-            "id.token.claim" : "true",
-            "access.token.claim" : "true",
-            "claim.name" : "DEA",
-            "jsonType.label" : "String"
-          }
-        } ],
-        "defaultClientScopes": [
-          "web-origins",
-          "role_list",
-          "profile",
-          "roles",
-          "email"
-        ],
-        "optionalClientScopes": [
-          "address",
-          "phone",
-          "offline_access",
-          "microprofile-jwt"
-        ],
-        "access": {
-          "view": true,
-          "configure": true,
-          "manage": true
-        }
-      },
-      {
-        "id": "323133ff-bbb9-49d4-910b-df8b464de715",
-        "clientId": "logserver_openid_client",
-        "name": "Logserver",
-        "description": "Logserver",
-        "surrogateAuthRequired": false,
-        "enabled": true,
-        "alwaysDisplayInConsole": false,
-        "clientAuthenticatorType": "client-secret",
-        "secret": "${__KEYCLOAK_FEMR_REALM_LOGSERVER_OPENID_CLIENT_SECRET}",
-        "redirectUris": ["*"],
-        "webOrigins": ["*"],
-        "notBefore": 0,
-        "bearerOnly": false,
-        "consentRequired": false,
-        "standardFlowEnabled": true,
-        "implicitFlowEnabled": false,
-        "directAccessGrantsEnabled": true,
-        "serviceAccountsEnabled": false,
-        "publicClient": false,
-        "frontchannelLogout": false,
-        "protocol": "openid-connect",
-        "attributes": {
-          "saml.assertion.signature": "false",
-          "saml.force.post.binding": "false",
-          "saml.multivalued.roles": "false",
-          "saml.encrypt": "false",
-          "saml.server.signature": "false",
-          "saml.server.signature.keyinfo.ext": "false",
-          "exclude.session.state.from.auth.response": "false",
-          "saml_force_name_id_format": "false",
-          "saml.client.signature": "false",
-          "tls.client.certificate.bound.access.tokens": "false",
-          "saml.authnstatement": "false",
-          "display.on.consent.screen": "false",
-          "saml.onetimeuse.condition": "false"
-        },
-        "authenticationFlowBindingOverrides": {},
-        "fullScopeAllowed": true,
-        "nodeReRegistrationTimeout": -1,
-        "defaultClientScopes": [
-          "web-origins",
-          "role_list",
-          "profile",
-          "roles",
-          "email"
-        ],
-        "optionalClientScopes": [
-          "address",
-          "phone",
-          "offline_access",
-          "microprofile-jwt"
-        ],
-        "access": {
-          "view": true,
-          "configure": true,
-          "manage": true
-        }
       }
     ],
     "clientScopes": [
+      {
+        "id": "a25e6d0c-4c0a-4106-9699-2113596a0fe0",
+        "name": "microprofile-jwt",
+        "description": "Microprofile - JWT built-in scope",
+        "protocol": "openid-connect",
+        "attributes": {
+          "include.in.token.scope": "true",
+          "display.on.consent.screen": "false"
+        },
+        "protocolMappers": [
+          {
+            "id": "debf781f-5e1e-46b3-a8c7-3908d9dfadaa",
+            "name": "groups",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-realm-role-mapper",
+            "consentRequired": false,
+            "config": {
+              "multivalued": "true",
+              "userinfo.token.claim": "true",
+              "user.attribute": "foo",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "groups",
+              "jsonType.label": "String"
+            }
+          },
+          {
+            "id": "053622e9-f076-41a3-a00f-776ada39e9e4",
+            "name": "upn",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-property-mapper",
+            "consentRequired": false,
+            "config": {
+              "userinfo.token.claim": "true",
+              "user.attribute": "username",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "upn",
+              "jsonType.label": "String"
+            }
+          }
+        ]
+      },
       {
         "id": "d18d2cb5-b102-4229-a958-4870bbc3e6cb",
         "name": "web-origins",
@@ -3191,6 +3235,123 @@
             "protocolMapper": "oidc-audience-resolve-mapper",
             "consentRequired": false,
             "config": {}
+          }
+        ]
+      },
+      {
+        "id": "9e7b835c-db77-4af9-affc-fa931445479d",
+        "name": "phone",
+        "description": "OpenID Connect built-in scope: phone",
+        "protocol": "openid-connect",
+        "attributes": {
+          "include.in.token.scope": "true",
+          "display.on.consent.screen": "true",
+          "consent.screen.text": "${phoneScopeConsentText}"
+        },
+        "protocolMappers": [
+          {
+            "id": "de328838-1fcb-4934-a173-8d713675afbf",
+            "name": "phone number verified",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-attribute-mapper",
+            "consentRequired": false,
+            "config": {
+              "userinfo.token.claim": "true",
+              "user.attribute": "phoneNumberVerified",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "phone_number_verified",
+              "jsonType.label": "boolean"
+            }
+          },
+          {
+            "id": "b44e936e-f184-4f72-943b-c5c90afcaba0",
+            "name": "phone number",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-attribute-mapper",
+            "consentRequired": false,
+            "config": {
+              "userinfo.token.claim": "true",
+              "user.attribute": "phoneNumber",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "phone_number",
+              "jsonType.label": "String"
+            }
+          }
+        ]
+      },
+      {
+        "id": "12ec0212-052e-453b-98e1-df86c3dbcbd9",
+        "name": "address",
+        "description": "OpenID Connect built-in scope: address",
+        "protocol": "openid-connect",
+        "attributes": {
+          "include.in.token.scope": "true",
+          "display.on.consent.screen": "true",
+          "consent.screen.text": "${addressScopeConsentText}"
+        },
+        "protocolMappers": [
+          {
+            "id": "38bfa2f1-8cc9-4894-8f3d-f56f206d5f27",
+            "name": "address",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-address-mapper",
+            "consentRequired": false,
+            "config": {
+              "user.attribute.formatted": "formatted",
+              "user.attribute.country": "country",
+              "user.attribute.postal_code": "postal_code",
+              "userinfo.token.claim": "true",
+              "user.attribute.street": "street",
+              "id.token.claim": "true",
+              "user.attribute.region": "region",
+              "access.token.claim": "true",
+              "user.attribute.locality": "locality"
+            }
+          }
+        ]
+      },
+      {
+        "id": "616c17f3-efc9-4439-b1cb-b1ef175c938f",
+        "name": "email",
+        "description": "OpenID Connect built-in scope: email",
+        "protocol": "openid-connect",
+        "attributes": {
+          "include.in.token.scope": "true",
+          "display.on.consent.screen": "true",
+          "consent.screen.text": "${emailScopeConsentText}"
+        },
+        "protocolMappers": [
+          {
+            "id": "c7ac504a-79b3-4adf-a069-888e97c3fff2",
+            "name": "email",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-property-mapper",
+            "consentRequired": false,
+            "config": {
+              "userinfo.token.claim": "true",
+              "user.attribute": "email",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "email",
+              "jsonType.label": "String"
+            }
+          },
+          {
+            "id": "3ba8fff2-84fe-4468-bd4b-860398b9a178",
+            "name": "email verified",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-usermodel-property-mapper",
+            "consentRequired": false,
+            "config": {
+              "userinfo.token.claim": "true",
+              "user.attribute": "emailVerified",
+              "id.token.claim": "true",
+              "access.token.claim": "true",
+              "claim.name": "email_verified",
+              "jsonType.label": "boolean"
+            }
           }
         ]
       },
@@ -3415,90 +3576,6 @@
         ]
       },
       {
-        "id": "a25e6d0c-4c0a-4106-9699-2113596a0fe0",
-        "name": "microprofile-jwt",
-        "description": "Microprofile - JWT built-in scope",
-        "protocol": "openid-connect",
-        "attributes": {
-          "include.in.token.scope": "true",
-          "display.on.consent.screen": "false"
-        },
-        "protocolMappers": [
-          {
-            "id": "debf781f-5e1e-46b3-a8c7-3908d9dfadaa",
-            "name": "groups",
-            "protocol": "openid-connect",
-            "protocolMapper": "oidc-usermodel-realm-role-mapper",
-            "consentRequired": false,
-            "config": {
-              "multivalued": "true",
-              "userinfo.token.claim": "true",
-              "user.attribute": "foo",
-              "id.token.claim": "true",
-              "access.token.claim": "true",
-              "claim.name": "groups",
-              "jsonType.label": "String"
-            }
-          },
-          {
-            "id": "053622e9-f076-41a3-a00f-776ada39e9e4",
-            "name": "upn",
-            "protocol": "openid-connect",
-            "protocolMapper": "oidc-usermodel-property-mapper",
-            "consentRequired": false,
-            "config": {
-              "userinfo.token.claim": "true",
-              "user.attribute": "username",
-              "id.token.claim": "true",
-              "access.token.claim": "true",
-              "claim.name": "upn",
-              "jsonType.label": "String"
-            }
-          }
-        ]
-      },
-      {
-        "id": "12ec0212-052e-453b-98e1-df86c3dbcbd9",
-        "name": "address",
-        "description": "OpenID Connect built-in scope: address",
-        "protocol": "openid-connect",
-        "attributes": {
-          "include.in.token.scope": "true",
-          "display.on.consent.screen": "true",
-          "consent.screen.text": "${addressScopeConsentText}"
-        },
-        "protocolMappers": [
-          {
-            "id": "38bfa2f1-8cc9-4894-8f3d-f56f206d5f27",
-            "name": "address",
-            "protocol": "openid-connect",
-            "protocolMapper": "oidc-address-mapper",
-            "consentRequired": false,
-            "config": {
-              "user.attribute.formatted": "formatted",
-              "user.attribute.country": "country",
-              "user.attribute.postal_code": "postal_code",
-              "userinfo.token.claim": "true",
-              "user.attribute.street": "street",
-              "id.token.claim": "true",
-              "user.attribute.region": "region",
-              "access.token.claim": "true",
-              "user.attribute.locality": "locality"
-            }
-          }
-        ]
-      },
-      {
-        "id": "71ea9b80-784c-4fc2-b1b6-98681ad072d7",
-        "name": "offline_access",
-        "description": "OpenID Connect built-in scope: offline_access",
-        "protocol": "openid-connect",
-        "attributes": {
-          "consent.screen.text": "${offlineAccessScopeConsentText}",
-          "display.on.consent.screen": "true"
-        }
-      },
-      {
         "id": "00308c42-c9b7-4aa4-b60d-344ec69cce38",
         "name": "role_list",
         "description": "SAML role list",
@@ -3523,90 +3600,14 @@
         ]
       },
       {
-        "id": "9e7b835c-db77-4af9-affc-fa931445479d",
-        "name": "phone",
-        "description": "OpenID Connect built-in scope: phone",
+        "id": "71ea9b80-784c-4fc2-b1b6-98681ad072d7",
+        "name": "offline_access",
+        "description": "OpenID Connect built-in scope: offline_access",
         "protocol": "openid-connect",
         "attributes": {
-          "include.in.token.scope": "true",
-          "display.on.consent.screen": "true",
-          "consent.screen.text": "${phoneScopeConsentText}"
-        },
-        "protocolMappers": [
-          {
-            "id": "de328838-1fcb-4934-a173-8d713675afbf",
-            "name": "phone number verified",
-            "protocol": "openid-connect",
-            "protocolMapper": "oidc-usermodel-attribute-mapper",
-            "consentRequired": false,
-            "config": {
-              "userinfo.token.claim": "true",
-              "user.attribute": "phoneNumberVerified",
-              "id.token.claim": "true",
-              "access.token.claim": "true",
-              "claim.name": "phone_number_verified",
-              "jsonType.label": "boolean"
-            }
-          },
-          {
-            "id": "b44e936e-f184-4f72-943b-c5c90afcaba0",
-            "name": "phone number",
-            "protocol": "openid-connect",
-            "protocolMapper": "oidc-usermodel-attribute-mapper",
-            "consentRequired": false,
-            "config": {
-              "userinfo.token.claim": "true",
-              "user.attribute": "phoneNumber",
-              "id.token.claim": "true",
-              "access.token.claim": "true",
-              "claim.name": "phone_number",
-              "jsonType.label": "String"
-            }
-          }
-        ]
-      },
-      {
-        "id": "616c17f3-efc9-4439-b1cb-b1ef175c938f",
-        "name": "email",
-        "description": "OpenID Connect built-in scope: email",
-        "protocol": "openid-connect",
-        "attributes": {
-          "include.in.token.scope": "true",
-          "display.on.consent.screen": "true",
-          "consent.screen.text": "${emailScopeConsentText}"
-        },
-        "protocolMappers": [
-          {
-            "id": "c7ac504a-79b3-4adf-a069-888e97c3fff2",
-            "name": "email",
-            "protocol": "openid-connect",
-            "protocolMapper": "oidc-usermodel-property-mapper",
-            "consentRequired": false,
-            "config": {
-              "userinfo.token.claim": "true",
-              "user.attribute": "email",
-              "id.token.claim": "true",
-              "access.token.claim": "true",
-              "claim.name": "email",
-              "jsonType.label": "String"
-            }
-          },
-          {
-            "id": "3ba8fff2-84fe-4468-bd4b-860398b9a178",
-            "name": "email verified",
-            "protocol": "openid-connect",
-            "protocolMapper": "oidc-usermodel-property-mapper",
-            "consentRequired": false,
-            "config": {
-              "userinfo.token.claim": "true",
-              "user.attribute": "emailVerified",
-              "id.token.claim": "true",
-              "access.token.claim": "true",
-              "claim.name": "email_verified",
-              "jsonType.label": "boolean"
-            }
-          }
-        ]
+          "consent.screen.text": "${offlineAccessScopeConsentText}",
+          "display.on.consent.screen": "true"
+        }
       }
     ],
     "defaultDefaultClientScopes": [
