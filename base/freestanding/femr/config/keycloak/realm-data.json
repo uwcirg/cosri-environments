@@ -2233,6 +2233,8 @@
     "offlineSessionIdleTimeout": 2592000,
     "offlineSessionMaxLifespanEnabled": false,
     "offlineSessionMaxLifespan": 5184000,
+    "clientSessionIdleTimeout": 0,
+    "clientSessionMaxLifespan": 0,
     "accessCodeLifespan": 60,
     "accessCodeLifespanUserAction": 300,
     "accessCodeLifespanLogin": 1800,
@@ -4531,7 +4533,13 @@
       "parRequestUriLifespan": "60",
       "cibaInterval": "5"
     },
-    "keycloakVersion": "9.0.0",
-    "userManagedAccessAllowed": true
+    "keycloakVersion": "15.0.1",
+    "userManagedAccessAllowed": true,
+    "clientProfiles": {
+      "profiles": []
+    },
+    "clientPolicies": {
+      "policies": []
+    }
   }
 ]
