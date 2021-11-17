@@ -80,12 +80,12 @@ services:
 
 
   fhir:
-    image: uwcirg/hapi-fhir-oauth2-starter:${FHIR_IMAGE_TAG:-latest}
+    image: hapiproject/hapi:${FHIR_IMAGE_TAG:-v5.5.1}
     environment:
-      JAVA_OPTIONS: "-Dhapi.properties=/opt/hapi.properties"
-      HAPI_SERVER_ADDRESS: 'https://dashboard.${BASE_DOMAIN:-localtest.me}/fhir/'
+      SPRING_CONFIG_LOCATION: file:///opt/application.yaml
+
     volumes:
-      - "./config/fhir/hapi.properties:/opt/hapi.properties:ro"
+      - "./config/fhir/application.yaml:/opt/application.yaml:ro"
     depends_on:
       - db
     networks:
