@@ -55,7 +55,7 @@ services:
       - "-Dkeycloak.migration.file=/opt/jboss/keycloak/realm-data.json"
       - "-Dkeycloak.migration.strategy=IGNORE_EXISTING"
     environment:
-      KEYCLOAK_HOSTNAME: "keycloak.${BASE_DOMAIN:-localtest.me}"
+      KEYCLOAK_FRONTEND_URL: "keycloak.${BASE_DOMAIN:-localtest.me}"
       PROXY_ADDRESS_FORWARDING: "true"
       DB_VENDOR: postgres
       DB_ADDR: db
