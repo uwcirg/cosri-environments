@@ -12,9 +12,9 @@ services:
       OIDC_TOKEN_INTROSPECTION_URI: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/token/introspect"
       EXTERNAL_FHIR_API: 'http://pdmp-internal:8008/v/r2/fhir/'
       # FHIR URL queried by PDMP integration backend
-      MAP_API: "http://fhir-internal:8080/hapi-fhir-jpaserver/fhir/"
+      MAP_API: "http://fhir-internal:8080/fhir/"
       # FHIR URL passed to SoF client
-      SOF_HOST_FHIR_URL: 'https://fhirwall.${BASE_DOMAIN:-localtest.me}/hapi-fhir-jpaserver/fhir'
+      SOF_HOST_FHIR_URL: 'https://fhirwall.${BASE_DOMAIN:-localtest.me}/fhir'
       SOF_CLIENT_LAUNCH_URL: 'https://backend.${BASE_DOMAIN:-localtest.me}/auth/launch'
       LOGSERVER_URL: "https://logs.${BASE_DOMAIN:-localtest.me}"
       REDIS_URL: redis://redis:6379/1
@@ -80,12 +80,17 @@ services:
 
 
   fhir:
-    image: uwcirg/hapi-fhir-oauth2-starter:${FHIR_IMAGE_TAG:-latest}
+    image: hapiproject/hapi:${FHIR_IMAGE_TAG:-v5.5.1}
     environment:
-      JAVA_OPTIONS: "-Dhapi.properties=/opt/hapi.properties"
-      HAPI_SERVER_ADDRESS: 'https://dashboard.${BASE_DOMAIN:-localtest.me}/fhir/'
+      SPRING_CONFIG_LOCATION: file:///opt/application.yaml
+      spring.datasource.url: jdbc:postgresql://db:5432/hapifhir
+      spring.datasource.username: postgres
+      spring.datasource.password: postgres
+      spring.datasource.driverClassName: org.postgresql.Driver
+      spring.jpa.hibernate.dialect: org.hibernate.dialect.PostgreSQL94Dialect
+
     volumes:
-      - "./config/fhir/hapi.properties:/opt/hapi.properties:ro"
+      - "./config/fhir/application.yaml:/opt/application.yaml:ro"
     depends_on:
       - db
     networks:
@@ -99,6 +104,7 @@ services:
     environment:
       UPSTREAM_SERVER: "http://fhir-internal:8080"
       JWKS_URL: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/certs"
+      PATH_WHITELIST: /fhir/metadata
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.fhirwall-${COMPOSE_PROJECT_NAME}.rule=Host(`fhirwall.${BASE_DOMAIN:-localtest.me}`)"
@@ -129,7 +135,7 @@ services:
     image: ghcr.io/uwcirg/hydrant:${HYDRANT_IMAGE_TAG:-develop}
     environment:
       PREFERRED_URL_SCHEME: https
-      FHIR_SERVER_URL: "http://fhir-internal:8080/hapi-fhir-jpaserver/fhir"
+      FHIR_SERVER_URL: "http://fhir-internal:8080/fhir"
       LOGSERVER_URL: "https://logs.${BASE_DOMAIN:-localtest.me}"
     networks:
       - internal
