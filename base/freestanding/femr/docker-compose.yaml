@@ -91,7 +91,7 @@ services:
 
       # make URLs relative to dashboard to allow pagination
       # TODO remove when dashboard is able to rewrite URLs
-      HAPI_SERVER_ADDRESS: 'https://dashboard.${BASE_DOMAIN:-localtest.me}/fhir/'
+      hapi.fhir.server_address: 'https://dashboard.${BASE_DOMAIN:-localtest.me}/fhir/'
 
     volumes:
       - "./config/fhir/application.yaml:/opt/application.yaml:ro"
