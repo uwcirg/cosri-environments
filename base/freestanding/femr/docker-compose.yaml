@@ -63,6 +63,8 @@ services:
       DB_DATABASE: keycloak
       DB_USER: postgres
       DB_PASSWORD: postgres
+      # https://nvd.nist.gov/vuln/detail/CVE-2021-44228
+      LOG4J_FORMAT_MSG_NO_LOOKUPS: "true"
 
       # environment variables used to configure docker-entrypoint-override.sh
       __KEYCLOAK_INPUT_CONFIG: /tmp/realm-data.json
@@ -92,6 +94,9 @@ services:
       # make URLs relative to dashboard to allow pagination
       # TODO remove when dashboard is able to rewrite URLs
       hapi.fhir.server_address: 'https://dashboard.${BASE_DOMAIN:-localtest.me}/fhir/'
+
+      # https://nvd.nist.gov/vuln/detail/CVE-2021-44228
+      LOG4J_FORMAT_MSG_NO_LOOKUPS: "true"
 
     volumes:
       - "./config/fhir/application.yaml:/opt/application.yaml:ro"
