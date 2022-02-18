@@ -1,0 +1,11 @@
+# docker-compose development override for gwen service
+---
+version: "3.7"
+services:
+  gwen:
+    command: sh -c "flask run --host 0.0.0.0 --port ${PORT:-5000}"
+    environment:
+      FLASK_ENV: development
+    volumes:
+    # set in .env
+      - "${GWEN_CHECKOUT_DIR}/:/opt/app"

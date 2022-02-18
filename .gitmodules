@@ -4,3 +4,6 @@
 [submodule "base/freestanding/femr/config/keycloak/cosri-keycloak-theme"]
 	path = base/freestanding/femr/config/keycloak/cosri-keycloak-theme
 	url = https://github.com/uwcirg/cosri-keycloak-theme
+[submodule "base/freestanding/logs/gwen"]
+	path = base/freestanding/logs/gwen
+	url = https://github.com/uwcirg/gwen
