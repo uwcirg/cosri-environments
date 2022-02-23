@@ -12,6 +12,7 @@ services:
       - "traefik.http.routers.gwen-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
 
       # traefik forwardauth: require that requests are validated (return 200) by oidc-proxy before forwarding to service
+      # https://doc.traefik.io/traefik/middlewares/http/forwardauth/
       - "traefik.http.routers.gwen-${COMPOSE_PROJECT_NAME}.middlewares=gwen-${COMPOSE_PROJECT_NAME}-forwardauth"
       - "traefik.http.middlewares.gwen-${COMPOSE_PROJECT_NAME}-forwardauth.forwardauth.address=http://oidc-proxy-${COMPOSE_PROJECT_NAME}:4181"
       - "traefik.http.middlewares.gwen-${COMPOSE_PROJECT_NAME}-forwardauth.forwardauth.authResponseHeaders=X-Forwarded-User"
@@ -28,6 +29,7 @@ services:
       - "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
 
       # traefik forwardauth: require that requests are validated (return 200) by oidc-proxy before forwarding to service
+      # https://doc.traefik.io/traefik/middlewares/http/forwardauth/
       - "traefik.http.routers.logserver-${COMPOSE_PROJECT_NAME}.middlewares=logserver-${COMPOSE_PROJECT_NAME}-forwardauth"
       - "traefik.http.middlewares.logserver-${COMPOSE_PROJECT_NAME}-forwardauth.forwardauth.address=http://oidc-proxy-${COMPOSE_PROJECT_NAME}:4181"
       - "traefik.http.middlewares.logserver-${COMPOSE_PROJECT_NAME}-forwardauth.forwardauth.authResponseHeaders=X-Forwarded-User"
