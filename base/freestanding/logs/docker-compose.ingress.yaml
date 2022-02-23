@@ -10,6 +10,10 @@ services:
       - "traefik.http.routers.gwen-${COMPOSE_PROJECT_NAME}.entrypoints=websecure"
       - "traefik.http.routers.gwen-${COMPOSE_PROJECT_NAME}.tls=true"
       - "traefik.http.routers.gwen-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt"
+
+      - "traefik.http.routers.gwen-${COMPOSE_PROJECT_NAME}.middlewares=gwen-${COMPOSE_PROJECT_NAME}-forwardauth"
+      - "traefik.http.middlewares.gwen-${COMPOSE_PROJECT_NAME}-forwardauth.forwardauth.address=http://oidc-proxy-${COMPOSE_PROJECT_NAME}:4181"
+      - "traefik.http.middlewares.gwen-${COMPOSE_PROJECT_NAME}-forwardauth.forwardauth.authResponseHeaders=X-Forwarded-User"
     networks:
       - ingress
       - internal
