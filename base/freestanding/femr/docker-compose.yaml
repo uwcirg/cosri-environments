@@ -146,6 +146,16 @@ services:
       PREFERRED_URL_SCHEME: https
       FHIR_SERVER_URL: "http://fhir-internal:8080/fhir"
       LOGSERVER_URL: "https://logs.${BASE_DOMAIN:-localtest.me}"
+
+      # Keycloak database config
+      DB_VENDOR: postgres
+      DB_ADDR: db
+      DB_PORT: 5432
+      DB_DATABASE: keycloak
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    depends_on:
+      - db
     networks:
       - internal
 
