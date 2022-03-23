@@ -4,9 +4,8 @@
 title Authentication Sequence with OpenID Connect
 
 participant "User's Browser (User-Agent)" as UserAgent
-participant "Website (Relying Party)" as RP
-participant "OIDC Provider (OP)" as OP
-participant "LDAP, GitHub, etc. (IdP)" as IdP
+participant "fEMR Dashboard OIDC client (Relying Party)" as RP
+participant "Keycloak OIDC Provider (OP)" as OP
 
 
 note over UserAgent: User visits https:\/\/rp.example.net
@@ -24,8 +23,6 @@ note left of RP:GET /authorize parameters:\nstate=xxx (CSRF protection)\nnonce=x
 UserAgent->OP: GET https:\/\/op.example.net/authorize?[...]
 OP->UserAgent: Show hosted login page
 UserAgent->OP: Performs login
-OP->IdP: authenticate user (via OIDC or other means)
-IdP->OP: return user attributes
 OP->UserAgent: 302 Redirect to https:\/\/rp.example.net/callback?[...] (redirect_uri)
 
 note left of RP:GET /callback parameters:\nstate=xxx\ncode=xxx
