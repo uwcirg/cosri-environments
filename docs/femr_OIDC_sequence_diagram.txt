@@ -1,7 +1,7 @@
 # This file can be used with https://sequencediagram.org/
 # And rendered to an image file
 
-title Authentication Sequence with OpenID Connect
+title fEMR Authentication Sequence with OpenID Connect
 
 participant "User's Browser (User-Agent)" as UserAgent
 participant "fEMR Dashboard OIDC client (Relying Party)" as RP
