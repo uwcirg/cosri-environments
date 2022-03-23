@@ -1,3 +1,6 @@
+# https://infosec.mozilla.org/guidelines/iam/openid_connect.html
+# https://github.com/mozilla/infosec.mozilla.org/blob/master/docs/guidelines/assets/images/OIDC_sequence_diagram.txt
+
 # This file can be used with https://sequencediagram.org/
 # And rendered to an image file
 
