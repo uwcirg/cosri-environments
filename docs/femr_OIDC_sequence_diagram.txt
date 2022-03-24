@@ -15,11 +15,11 @@ UserAgent->RP: GET https:\/\/dashboard.cosri.app/
 # flask-oidc uses deploy-specific config values instead of introspecting .well-known/
 RP->OP: GET https:\/\/keycloak.cosri.app/auth/realms/fEMR/.well-known/openid-configuration
 OP->RP: JSON metadata document
-note left of OP:JSON metadata document:\n{\n    "token_endpoint": "https:\/\/keycloak.cosri.app/auth/realms/fEMR/protocol/openid-connect/token", \n    "authorization_endpoint":"https:\/\/keycloak.cosri.app/auth/realms/fEMR/protocol/openid-connect/auth?...",\n    ...\n}
+note left of OP:JSON response:\n{\n    "token_endpoint": "https:\/\/keycloak.cosri.app/auth/realms/fEMR/protocol/openid-connect/token", \n    "authorization_endpoint ":"https:\/\/keycloak.cosri.app/auth/realms/fEMR/protocol/openid-connect/auth?...",\n    ...\n}
 
 RP->UserAgent: 302 Redirect to https:\/\/keycloak.cosri.app/auth/realms/fEMR/protocol/openid-connect/auth?[...]
 
-note left of RP:GET /auth/realms/fEMR/protocol/openid-connect/auth parameters:\nstate=xxx (CSRF protection)\nnonce=xxx (server-side replay protection)\nscope=openid email profile\nredirect_uri=https:\/\/dashboard.cosri.app/oidc_callback (OP will redirect here)\nresponse_type=code\nclient_id=xxx (RP identifier)
+note left of RP:GET /auth/realms/fEMR/protocol/openid-connect/auth \nparameters:\nstate=xxx (CSRF protection)\nnonce=xxx (server-side replay protection)\nscope=openid email profile\nredirect_uri=https:\/\/dashboard.cosri.app/oidc_callback (OP will redirect here)\nresponse_type=code\nclient_id=xxx (RP identifier)
 
 
 UserAgent->OP: GET https:\/\/keycloak.cosri.app/auth/realms/fEMR/protocol/openid-connect/auth?[...]
@@ -32,12 +32,12 @@ note left of RP:GET /callback parameters:\nstate=xxx\ncode=xxx
 UserAgent->RP: GET https:\/\/dashboard.cosri.app/oidc_callback?[...]
 RP->OP: POST https:\/\/keycloak.cosri.app/auth/realms/fEMR/protocol/openid-connect/token
 
-note right of RP:POST /auth/realms/fEMR/protocol/openid-connect/token parameters:\nclient_id=xxx\nclient_secret=xxx (secret identifying the RP to the OP)\ngrant_type=authorization_code\ncode=xxx\nstate=xxx
+note right of RP:POST /auth/realms/fEMR/protocol/openid-connect/token\nparameters:\nclient_id=xxx\nclient_secret=xxx (secret identifying the RP to the OP)\ngrant_type=authorization_code\ncode=xxx\nstate=xxx
 
 
 OP->RP: JSON {"base64(id_token)", "access_token", ...}
 
-note right of RP:JSON Document:\n{\n\n  "id_token": ADNqVMtqKeYp5w==...,\n  "access_token": xxx,\n  "email": "test@dashboard.cosri.app,\n  "attribute1": ...,\n  "attribute2": ...,\n   ...\n}
+note right of RP:JSON Response:\n{\n  "id_token": ADNqVMtqKeYp5w==...,\n  "access_token": xxx,\n  "email": "test@dashboard.cosri.app,\n  "attribute1": ...,\n  "attribute2": ...,\n   ...\n}
 
 RP->RP: Verify id_token signature is valid, signed by OP
 
