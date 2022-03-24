@@ -37,7 +37,7 @@ note right of RP:POST /auth/realms/fEMR/protocol/openid-connect/token\nparameter
 
 OP->RP: JSON {"base64(id_token)", "access_token", ...}
 
-note right of RP:JSON Response:\n{\n  "id_token": ADNqVMtqKeYp5w==...,\n  "access_token": xxx,\n  "email": "test@dashboard.cosri.app,\n  "attribute1": ...,\n  "attribute2": ...,\n   ...\n}
+note right of RP:JSON Response:\n{\n  "id_token": ADNqVMtqKeYp5w==... # generally a JWT,\n  "access_token": xxx # often a JWT,\n  "email": "test@dashboard.cosri.app,\n  "attribute1": ...,\n  "attribute2": ...,\n   ...\n}
 
 RP->RP: Verify id_token signature is valid, signed by OP
 
