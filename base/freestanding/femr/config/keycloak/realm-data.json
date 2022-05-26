@@ -3819,14 +3819,14 @@
     "identityProviderMappers": [
       {
         "id": "ee95ff98-627d-4aaa-a1dd-9b123267b770",
-        "name": "uwemail-to-email",
+        "name": "givenname-to-firstname",
         "identityProviderAlias": "uw-netid",
         "identityProviderMapper": "saml-user-attribute-idp-mapper",
         "config": {
           "syncMode": "INHERIT",
-          "user.attribute": "email",
+          "user.attribute": "firstName",
           "attributes": "[]",
-          "attribute.friendly.name": "uwEduEmail"
+          "attribute.friendly.name": "givenName"
         }
       },
       {
@@ -3855,14 +3855,14 @@
       },
       {
         "id": "0fd064ee-bcf3-4861-ae75-5798a91e71f9",
-        "name": "givenname-to-firstname",
+        "name": "uwemail-to-email",
         "identityProviderAlias": "uw-netid",
         "identityProviderMapper": "saml-user-attribute-idp-mapper",
         "config": {
           "syncMode": "INHERIT",
-          "user.attribute": "firstName",
+          "user.attribute": "email",
           "attributes": "[]",
-          "attribute.friendly.name": "givenName"
+          "attribute.friendly.name": "uwEduEmail"
         }
       }
     ],
