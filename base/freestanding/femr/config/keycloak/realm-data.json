@@ -3809,7 +3809,6 @@
           "authnContextComparisonType": "exact",
           "postBindingAuthnRequest": "true",
           "syncMode": "IMPORT",
-          "forceAuthn": "true",
           "singleSignOnServiceUrl": "https://idp.u.washington.edu/idp/profile/SAML2/POST/SSO",
           "wantAuthnRequestsSigned": "false",
           "addExtensionsElementWithKeyInfo": "false",
