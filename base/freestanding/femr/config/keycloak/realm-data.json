@@ -3800,7 +3800,7 @@
           "nameIDPolicyFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
           "postBindingResponse": "true",
           "principalAttribute": "eduPersonPrincipalName",
-          "entityId": "https://keycloak.cosri-dev.cact.us.eu.org/auth/realms/fEMR",
+          "entityId": "${__KEYCLOAK_BASE_URL}/auth/realms/fEMR",
           "signatureAlgorithm": "RSA_SHA256",
           "xmlSigKeyInfoKeyNameTransformer": "KEY_ID",
           "useJwksUrl": "true",
