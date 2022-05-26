@@ -3783,7 +3783,7 @@
       {
         "alias": "uw-netid",
         "displayName": "UW NetID",
-        "internalId": "c751407b-2bc3-4d86-bc84-38c275561e68",
+        "internalId": "02474217-3843-4206-9b37-b5d392d2a8a9",
         "providerId": "saml",
         "enabled": true,
         "updateProfileFirstLoginMode": "on",
@@ -3818,7 +3818,7 @@
     ],
     "identityProviderMappers": [
       {
-        "id": "ab860f58-6470-463a-86a9-270124840acf",
+        "id": "ee95ff98-627d-4aaa-a1dd-9b123267b770",
         "name": "uwemail-to-email",
         "identityProviderAlias": "uw-netid",
         "identityProviderMapper": "saml-user-attribute-idp-mapper",
@@ -3830,7 +3830,7 @@
         }
       },
       {
-        "id": "79bb0558-844c-4dad-838b-e8545e7d8c49",
+        "id": "22f5790d-bdfc-44c2-8c47-a5c73b6e2447",
         "name": "netid-to-username",
         "identityProviderAlias": "uw-netid",
         "identityProviderMapper": "saml-username-idp-mapper",
@@ -3842,7 +3842,7 @@
         }
       },
       {
-        "id": "5a1d341f-f3c2-4fa4-82f2-216383aceabf",
+        "id": "e591da73-9fdd-4f42-98f4-9f0d09274365",
         "name": "surname-to-lastname",
         "identityProviderAlias": "uw-netid",
         "identityProviderMapper": "saml-user-attribute-idp-mapper",
@@ -3854,7 +3854,7 @@
         }
       },
       {
-        "id": "d3452f4e-69dc-4af5-b5b4-66f33fdeec00",
+        "id": "0fd064ee-bcf3-4861-ae75-5798a91e71f9",
         "name": "givenname-to-firstname",
         "identityProviderAlias": "uw-netid",
         "identityProviderMapper": "saml-user-attribute-idp-mapper",
