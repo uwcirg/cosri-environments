@@ -4533,7 +4533,7 @@
         "alias": "terms_and_conditions",
         "name": "Terms and Conditions",
         "providerId": "terms_and_conditions",
-        "enabled": true,
+        "enabled": false,
         "defaultAction": true,
         "priority": 20,
         "config": {}
