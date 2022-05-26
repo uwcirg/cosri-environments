@@ -3783,9 +3783,9 @@
       {
         "alias": "uw-netid",
         "displayName": "UW NetID",
-        "internalId": "02474217-3843-4206-9b37-b5d392d2a8a9",
+        "internalId": "c751407b-2bc3-4d86-bc84-38c275561e68",
         "providerId": "saml",
-        "enabled": false,
+        "enabled": true,
         "updateProfileFirstLoginMode": "on",
         "trustEmail": true,
         "storeToken": false,
@@ -3800,7 +3800,7 @@
           "nameIDPolicyFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
           "postBindingResponse": "true",
           "principalAttribute": "eduPersonPrincipalName",
-          "entityId": "${__KEYCLOAK_BASE_URL}/auth/realms/fEMR",
+          "entityId": "https://keycloak.acc.dev.cosri.cirg.washington.edu/auth/realms/fEMR",
           "signatureAlgorithm": "RSA_SHA256",
           "xmlSigKeyInfoKeyNameTransformer": "KEY_ID",
           "useJwksUrl": "true",
@@ -3809,7 +3809,6 @@
           "authnContextComparisonType": "exact",
           "postBindingAuthnRequest": "true",
           "syncMode": "IMPORT",
-          "forceAuthn": "true",
           "singleSignOnServiceUrl": "https://idp.u.washington.edu/idp/profile/SAML2/POST/SSO",
           "wantAuthnRequestsSigned": "false",
           "addExtensionsElementWithKeyInfo": "false",
@@ -3819,19 +3818,19 @@
     ],
     "identityProviderMappers": [
       {
-        "id": "ee95ff98-627d-4aaa-a1dd-9b123267b770",
-        "name": "givenname-to-firstname",
+        "id": "ab860f58-6470-463a-86a9-270124840acf",
+        "name": "uwemail-to-email",
         "identityProviderAlias": "uw-netid",
         "identityProviderMapper": "saml-user-attribute-idp-mapper",
         "config": {
           "syncMode": "INHERIT",
-          "user.attribute": "firstName",
+          "user.attribute": "email",
           "attributes": "[]",
-          "attribute.friendly.name": "givenName"
+          "attribute.friendly.name": "uwEduEmail"
         }
       },
       {
-        "id": "22f5790d-bdfc-44c2-8c47-a5c73b6e2447",
+        "id": "79bb0558-844c-4dad-838b-e8545e7d8c49",
         "name": "netid-to-username",
         "identityProviderAlias": "uw-netid",
         "identityProviderMapper": "saml-username-idp-mapper",
@@ -3843,7 +3842,7 @@
         }
       },
       {
-        "id": "e591da73-9fdd-4f42-98f4-9f0d09274365",
+        "id": "5a1d341f-f3c2-4fa4-82f2-216383aceabf",
         "name": "surname-to-lastname",
         "identityProviderAlias": "uw-netid",
         "identityProviderMapper": "saml-user-attribute-idp-mapper",
@@ -3855,15 +3854,15 @@
         }
       },
       {
-        "id": "0fd064ee-bcf3-4861-ae75-5798a91e71f9",
-        "name": "uwemail-to-email",
+        "id": "d3452f4e-69dc-4af5-b5b4-66f33fdeec00",
+        "name": "givenname-to-firstname",
         "identityProviderAlias": "uw-netid",
         "identityProviderMapper": "saml-user-attribute-idp-mapper",
         "config": {
           "syncMode": "INHERIT",
-          "user.attribute": "email",
+          "user.attribute": "firstName",
           "attributes": "[]",
-          "attribute.friendly.name": "uwEduEmail"
+          "attribute.friendly.name": "givenName"
         }
       }
     ],
