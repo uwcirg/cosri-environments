@@ -3785,7 +3785,7 @@
         "displayName": "UW NetID",
         "internalId": "02474217-3843-4206-9b37-b5d392d2a8a9",
         "providerId": "saml",
-        "enabled": false,
+        "enabled": true,
         "updateProfileFirstLoginMode": "on",
         "trustEmail": true,
         "storeToken": false,
