@@ -3860,7 +3860,7 @@
         "identityProviderAlias": "uw-netid",
         "identityProviderMapper": "saml-user-attribute-idp-mapper",
         "config": {
-          "syncMode": "IMPORT",
+          "syncMode": "INHERIT",
           "user.attribute": "email",
           "attributes": "[]",
           "attribute.friendly.name": "uwEduEmail"
