@@ -3779,6 +3779,93 @@
     ],
     "adminEventsEnabled": true,
     "adminEventsDetailsEnabled": false,
+    "identityProviders": [
+      {
+        "alias": "uw-netid",
+        "displayName": "UW NetID",
+        "internalId": "02474217-3843-4206-9b37-b5d392d2a8a9",
+        "providerId": "saml",
+        "enabled": true,
+        "updateProfileFirstLoginMode": "on",
+        "trustEmail": true,
+        "storeToken": false,
+        "addReadTokenRoleOnCreate": false,
+        "authenticateByDefault": false,
+        "linkOnly": false,
+        "firstBrokerLoginFlowAlias": "first broker login",
+        "config": {
+          "validateSignature": "true",
+          "signingCertificate": "MIIDuTCCAqGgAwIBAgIJAKJ/HGIkuxTwMA0GCSqGSIb3DQEBCwUAMHMxCzAJBgNV\nBAYTAlVTMQswCQYDVQQIDAJXQTEVMBMGA1UEBwwMRGVmYXVsdCBDaXR5MSEwHwYD\nVQQKDBhVbml2ZXJzaXR5IG9mIFdhc2hpbmd0b24xHTAbBgNVBAMMFGlkcC51Lndh\nc2hpbmd0b24uZWR1MB4XDTIxMDMyOTIwNTg1MloXDTQxMDMyNDIwNTg1MlowczEL\nMAkGA1UEBhMCVVMxCzAJBgNVBAgMAldBMRUwEwYDVQQHDAxEZWZhdWx0IENpdHkx\nITAfBgNVBAoMGFVuaXZlcnNpdHkgb2YgV2FzaGluZ3RvbjEdMBsGA1UEAwwUaWRw\nLnUud2FzaGluZ3Rvbi5lZHUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB\nAQDB/RvJuvC9B3/W5n+P+3PhEcYA0K26udDX0otmE0FnNb3lCD2G2ctWoEjbnOHc\nJ90bQtLjkG3TU2FAIlU3GIGmHHiVQe7Mln/UMhiK4JWTzLvfHOYVm+76sL7Ond7N\nkpu7QYm9r+sUAw4meCicaXQL7KD0JZhnYKRX5gLImK52BVy0x4G4AnP2IVfJbm02\npFHSN2zGFn4fXZI/g1RlJrdoC7UFM27h/BFOOL514K0GElzUJJkXMqBN64+EYYW7\nv6eQ9z/p7jrpC2BTi0WjXoohsk7tz+4LXP3cv1I1K3/qR++VFFOy29+vXRhH2cL1\nbSE17HcqdKQX7p+Aj/NPB/TdAgMBAAGjUDBOMB0GA1UdDgQWBBQ/mybHdlgo4MyQ\nOCWRNt268twZgDAfBgNVHSMEGDAWgBQ/mybHdlgo4MyQOCWRNt268twZgDAMBgNV\nHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQA0hM+G2sfyL6FHZNI0nTCIjVDi\nUvDnacpQgnpEvsS7l/6xQvuOwjeRxk66rpBMk+9T/Mk1AoNCqi4YP51JFHGYP+iu\nRosS6up+usX/tNgg5QhZwBaV+KXOxxVOuvGH5GnPLJmp7lMBBDsW9/LYMrLPX42L\nwDUOJ5rTF1PjnqdLEZVtXPYCJIiPrzkvQCY5YjcwHmZO4mw7F2HaqT+w3bCf7UWl\nPPKWoBBqR7kfH2WN2PJw/FhHU6XbBU2n4/RwRTZ3NwtY75mahb1dz2zyMbavAHN2\nRQ8TBe5L97w84ZZaoCK7laQgFczmMucg1JxBtU7jifO/ew4b/9zQ7JyggkYm",
+          "postBindingLogout": "false",
+          "nameIDPolicyFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient",
+          "postBindingResponse": "true",
+          "principalAttribute": "eduPersonPrincipalName",
+          "entityId": "${__KEYCLOAK_BASE_URL}/auth/realms/fEMR",
+          "signatureAlgorithm": "RSA_SHA256",
+          "xmlSigKeyInfoKeyNameTransformer": "KEY_ID",
+          "useJwksUrl": "true",
+          "loginHint": "false",
+          "allowCreate": "true",
+          "authnContextComparisonType": "exact",
+          "postBindingAuthnRequest": "true",
+          "syncMode": "IMPORT",
+          "singleSignOnServiceUrl": "https://idp.u.washington.edu/idp/profile/SAML2/POST/SSO",
+          "wantAuthnRequestsSigned": "false",
+          "addExtensionsElementWithKeyInfo": "false",
+          "principalType": "FRIENDLY_ATTRIBUTE"
+        }
+      }
+    ],
+    "identityProviderMappers": [
+      {
+        "id": "ee95ff98-627d-4aaa-a1dd-9b123267b770",
+        "name": "givenname-to-firstname",
+        "identityProviderAlias": "uw-netid",
+        "identityProviderMapper": "saml-user-attribute-idp-mapper",
+        "config": {
+          "syncMode": "INHERIT",
+          "user.attribute": "firstName",
+          "attributes": "[]",
+          "attribute.friendly.name": "givenName"
+        }
+      },
+      {
+        "id": "22f5790d-bdfc-44c2-8c47-a5c73b6e2447",
+        "name": "netid-to-username",
+        "identityProviderAlias": "uw-netid",
+        "identityProviderMapper": "saml-username-idp-mapper",
+        "config": {
+          "template": "${ATTRIBUTE.uid}",
+          "syncMode": "INHERIT",
+          "attributes": "[]",
+          "target": "LOCAL"
+        }
+      },
+      {
+        "id": "e591da73-9fdd-4f42-98f4-9f0d09274365",
+        "name": "surname-to-lastname",
+        "identityProviderAlias": "uw-netid",
+        "identityProviderMapper": "saml-user-attribute-idp-mapper",
+        "config": {
+          "syncMode": "INHERIT",
+          "user.attribute": "lastName",
+          "attributes": "[]",
+          "attribute.friendly.name": "surname"
+        }
+      },
+      {
+        "id": "0fd064ee-bcf3-4861-ae75-5798a91e71f9",
+        "name": "uwemail-to-email",
+        "identityProviderAlias": "uw-netid",
+        "identityProviderMapper": "saml-user-attribute-idp-mapper",
+        "config": {
+          "syncMode": "INHERIT",
+          "user.attribute": "email",
+          "attributes": "[]",
+          "attribute.friendly.name": "uwEduEmail"
+        }
+      }
+    ],
     "components": {
       "org.keycloak.services.clientregistration.policy.ClientRegistrationPolicy": [
         {
