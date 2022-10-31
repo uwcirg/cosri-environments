@@ -6,11 +6,6 @@ services:
       # confidential backend API endpoint
       # NB: domain is required for cookies to be set
       REACT_APP_CONF_API_URL: "https://backend.${BASE_DOMAIN:-localtest.me}"
-
-      REACT_APP_SECTION_HISTORICALTREATMENTS: hidden
-      REACT_APP_SECTION_NONPHARMACOLOGICTREATMENTS: hidden
-      REACT_APP_SUBSECTION_URINEDRUGSCREENS: hidden
-      REACT_APP_SUBSECTION_NALOXONEMEDICATIONS: hidden
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend-${COMPOSE_PROJECT_NAME}.rule=Host(`frontend.${BASE_DOMAIN:-localtest.me}`)"
