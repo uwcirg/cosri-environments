@@ -23,8 +23,6 @@ services:
   backend:
     image: uwcirg/sof-api-wrapper:${BACKEND_IMAGE_TAG:-develop}
     environment:
-      SECRET_KEY: ${SECRET_KEY:-qiLYeYMJf8i7y0xU}
-
       # client ID registered with SoF host
       SOF_CLIENT_ID: ${SOF_CLIENT_ID:-cosri_openid_client}
       SOF_CLIENT_SECRET: ${SOF_CLIENT_SECRET:-cosri_openid_client_secret}
