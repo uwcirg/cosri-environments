@@ -5,7 +5,6 @@ services:
     env_file:
       - ../../../dev/ehr-embedded/cosri/frontend.env
 
-
   backend:
     environment:
       DEBUG_OUTPUT_DIR: /var/local/backend-output
@@ -13,7 +12,6 @@ services:
       - ../../../dev/ehr-embedded/cosri/backend.env
     volumes:
       - ../../../dev/ehr-embedded/cosri/backend-output/:/var/local/backend-output
-
 
   pdmp:
     environment:
