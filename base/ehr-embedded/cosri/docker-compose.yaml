@@ -36,6 +36,7 @@ services:
 
       PDMP_URL: 'http://pdmp:8008'
       SESSION_REDIS: redis://redis:6379/0
+      REQUEST_CACHE_URL: redis://redis:6379/1
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"
