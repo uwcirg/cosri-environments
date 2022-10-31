@@ -54,7 +54,7 @@ services:
     image: uwcirg/script-fhir-facade:${PDMP_IMAGE_TAG:-develop}
     environment:
       RXNAV_LOOKUP_ENABLED: "true"
-      REQUEST_CACHE_URL: redis://redis:6379/0
+      REQUEST_CACHE_URL: redis://redis:6379/2
     volumes:
       - ./config/pdmp:/opt/app/config:ro
     networks:
