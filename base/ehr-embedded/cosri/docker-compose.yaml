@@ -18,22 +18,20 @@ services:
   backend:
     image: uwcirg/sof-api-wrapper:${BACKEND_IMAGE_TAG:-develop}
     environment:
-      SECRET_KEY: ${SECRET_KEY:-qiLYeYMJf8i7y0xU}
-
       # client ID registered with SoF host
       SOF_CLIENT_ID: ${SOF_CLIENT_ID:-cosri_openid_client}
       SOF_CLIENT_SECRET: ${SOF_CLIENT_SECRET:-cosri_openid_client_secret}
-
-      PREFERRED_URL_SCHEME: https
+      # do not pass launch/patient or Epic will infer standalone launch
+      SOF_CLIENT_SCOPES: ${SOF_CLIENT_SCOPES:-patient/*.read launch openid profile}
       # ultimate destination after SoF launch and backend auth
       LAUNCH_DEST: 'https://frontend.${BASE_DOMAIN:-localtest.me}/launch.html'
 
+      LOGSERVER_URL: "https://logs.${BASE_DOMAIN:-localtest.me}"
+      PREFERRED_URL_SCHEME: https
+
       PDMP_URL: 'http://pdmp:8008'
-
-      # do not pass launch/patient or Epic will infer standalone launch
-      SOF_CLIENT_SCOPES: ${SOF_CLIENT_SCOPES:-patient/*.read launch openid profile}
-
       SESSION_REDIS: redis://redis:6379/0
+      REQUEST_CACHE_URL: redis://redis:6379/1
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend-${COMPOSE_PROJECT_NAME}.rule=Host(`backend.${BASE_DOMAIN:-localtest.me}`)"
@@ -45,6 +43,7 @@ services:
       - internal
     depends_on:
       - redis
+      - pdmp
 
   redis:
     image: redis
@@ -52,13 +51,18 @@ services:
       - internal
 
   pdmp:
-    image: uwcirg/script-fhir-facade:${PDMP_IMAGE_TAG:-latest}
+    image: uwcirg/script-fhir-facade:${PDMP_IMAGE_TAG:-develop}
     environment:
-      RXNAV_LOOKUP_ENABLED: 'true'
+      RXNAV_LOOKUP_ENABLED: "true"
+      REQUEST_CACHE_URL: redis://redis:6379/2
     volumes:
       - ./config/pdmp:/opt/app/config:ro
     networks:
-      - internal
+      internal:
+        aliases:
+          - pdmp-internal
+    depends_on:
+      - redis
 
 networks:
   # internal network for backing services
