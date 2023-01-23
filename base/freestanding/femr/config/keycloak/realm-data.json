@@ -126,6 +126,14 @@
           "clientRole": false,
           "containerId": "master",
           "attributes": {}
+	},
+        {
+          "id": "08b6f5d4-889e-43f2-b458-7d09832f6340",
+          "name": "clinician",
+          "composite": false,
+          "clientRole": false,
+          "containerId": "femr",
+          "attributes": {}
         }
       ],
       "client": {
@@ -2653,7 +2661,7 @@
         ],
         "disableableCredentialTypes": [],
         "requiredActions": [],
-        "realmRoles": ["uma_authorization", "offline_access"],
+        "realmRoles": ["uma_authorization", "offline_access", "clinician"],
         "clientRoles": {
           "account": ["manage-account", "view-profile"]
         },
