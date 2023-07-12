@@ -36,8 +36,9 @@ services:
       # security settings
       OAUTH2_PROXY_COOKIE_DOMAINS: .${BASE_DOMAIN:-localtest.me}
       OAUTH2_PROXY_WHITELIST_DOMAINS: .${BASE_DOMAIN:-localtest.me}
+    # TODO fixup relative path
     env_file:
-      - ../../../dev/freestanding/femr/auth-proxy.env
+      - ../../../prod/freestanding/femr/auth-proxy.env
     labels:
       - traefik.enable=true
       - traefik.http.routers.auth-proxy-${COMPOSE_PROJECT_NAME}.rule=Host(`auth-proxy.${BASE_DOMAIN:-localtest.me}`) || PathPrefix(`/oauth2`)
