@@ -2267,7 +2267,7 @@
     "accessTokenLifespan": 1800,
     "accessTokenLifespanForImplicitFlow": 900,
     "ssoSessionIdleTimeout": 1800,
-    "ssoSessionMaxLifespan": 28800,
+    "ssoSessionMaxLifespan": 31536000,
     "ssoSessionIdleTimeoutRememberMe": 0,
     "ssoSessionMaxLifespanRememberMe": 0,
     "offlineSessionIdleTimeout": 2592000,
@@ -3086,11 +3086,12 @@
         "standardFlowEnabled": true,
         "implicitFlowEnabled": false,
         "directAccessGrantsEnabled": true,
-        "serviceAccountsEnabled": false,
+        "serviceAccountsEnabled": true,
         "publicClient": false,
         "frontchannelLogout": false,
         "protocol": "openid-connect",
         "attributes": {
+          "access.token.lifespan": "31536000"
         },
         "authenticationFlowBindingOverrides": {},
         "fullScopeAllowed": true,
@@ -3106,6 +3107,20 @@
           "phone",
           "offline_access",
           "microprofile-jwt"
+        ],
+        "protocolMappers": [
+          {
+            "id": "ab316630-3437-4517-b322-8219292d0f53",
+            "name": "Client ID in Audience",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-audience-mapper",
+            "consentRequired": false,
+            "config": {
+              "included.client.audience": "fhir_oauth2_proxy",
+              "id.token.claim": "false",
+              "access.token.claim": "true"
+            }
+          }
         ]
       },
       {
