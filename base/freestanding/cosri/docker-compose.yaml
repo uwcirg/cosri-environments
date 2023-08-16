@@ -35,6 +35,7 @@ services:
       # ultimate destination after SoF launch and backend auth
       LAUNCH_DEST: 'https://frontend.${BASE_DOMAIN:-localtest.me}/launch.html'
 
+      NEED_PATIENT_BANNER: "true"
       PDMP_URL: 'http://pdmp-internal:8008'
 
       # do not pass launch/patient or Epic will infer standalone launch
