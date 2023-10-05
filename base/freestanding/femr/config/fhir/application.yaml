@@ -1,3 +1,5 @@
+# https://raw.githubusercontent.com/hapifhir/hapi-fhir-jpaserver-starter/v6.2.2/src/main/resources/application.yaml
+
 #Adds the option to go to eg. http://localhost:8080/actuator/health for seeing the running configuration
 #see https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.endpoints
 management:
