@@ -99,8 +99,6 @@ services:
 
       hapi.fhir.bulk_export_enabled: "true"
       hapi.fhir.bulk_import_enabled: "true"
-      # allow FHIR resources to be written even if resources they refer to are not present on the same server
-      hapi.fhir.enforce_referential_integrity_on_write: "false"
       # TODO remove when cascading delete generally available in FHIR REST API
       hapi.fhir.enforce_referential_integrity_on_delete: "false"
       # allow direct assignment of resource IDs in any format
