@@ -29,7 +29,6 @@ services:
 
       # OIDC integration settings
       OAUTH2_PROXY_PROVIDER: oidc
-      # OAUTH2_PROXY_CLIENT_ID: logserver_openid_client
       OAUTH2_PROXY_SCOPE: openid profile email
       OAUTH2_PROXY_OIDC_ISSUER_URL: https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR
 
