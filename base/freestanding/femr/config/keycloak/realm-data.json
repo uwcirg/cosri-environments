@@ -2267,7 +2267,7 @@
     "accessTokenLifespan": 1800,
     "accessTokenLifespanForImplicitFlow": 900,
     "ssoSessionIdleTimeout": 1800,
-    "ssoSessionMaxLifespan": 28800,
+    "ssoSessionMaxLifespan": 31536000,
     "ssoSessionIdleTimeoutRememberMe": 0,
     "ssoSessionMaxLifespanRememberMe": 0,
     "offlineSessionIdleTimeout": 2592000,
@@ -3062,6 +3062,65 @@
           "phone",
           "offline_access",
           "microprofile-jwt"
+        ]
+      },
+      {
+        "id": "32d2028f-19d4-4418-a86b-888d4dd7b304",
+        "clientId": "fhir_oauth2_proxy",
+        "name": "FHIR proxy",
+        "description": "FHIR server authenticated access",
+        "surrogateAuthRequired": false,
+        "enabled": true,
+        "alwaysDisplayInConsole": false,
+        "clientAuthenticatorType": "client-secret",
+        "secret": "${__KEYCLOAK_FEMR_REALM_FHIR_PROXY_OPENID_CLIENT_SECRET}",
+        "redirectUris": [
+          "*"
+        ],
+        "webOrigins": [
+          "*"
+        ],
+        "notBefore": 0,
+        "bearerOnly": false,
+        "consentRequired": false,
+        "standardFlowEnabled": true,
+        "implicitFlowEnabled": false,
+        "directAccessGrantsEnabled": true,
+        "serviceAccountsEnabled": true,
+        "publicClient": false,
+        "frontchannelLogout": false,
+        "protocol": "openid-connect",
+        "attributes": {
+          "access.token.lifespan": "31536000"
+        },
+        "authenticationFlowBindingOverrides": {},
+        "fullScopeAllowed": true,
+        "nodeReRegistrationTimeout": -1,
+        "defaultClientScopes": [
+          "web-origins",
+          "roles",
+          "profile",
+          "email"
+        ],
+        "optionalClientScopes": [
+          "address",
+          "phone",
+          "offline_access",
+          "microprofile-jwt"
+        ],
+        "protocolMappers": [
+          {
+            "id": "ab316630-3437-4517-b322-8219292d0f53",
+            "name": "Client ID in Audience",
+            "protocol": "openid-connect",
+            "protocolMapper": "oidc-audience-mapper",
+            "consentRequired": false,
+            "config": {
+              "included.client.audience": "fhir_oauth2_proxy",
+              "id.token.claim": "false",
+              "access.token.claim": "true"
+            }
+          }
         ]
       },
       {
