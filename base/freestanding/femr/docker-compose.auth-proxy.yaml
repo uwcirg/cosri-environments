@@ -40,7 +40,8 @@ services:
       - ../../../prod/freestanding/femr/auth-proxy.env
     labels:
       - traefik.enable=true
-      - traefik.http.routers.auth-proxy-${COMPOSE_PROJECT_NAME}.rule=Host(`auth-proxy.${BASE_DOMAIN:-localtest.me}`) || PathPrefix(`/oauth2`)
+      # TODO fine-tune to catch any requests coming from this docker-compose project
+      - traefik.http.routers.auth-proxy-${COMPOSE_PROJECT_NAME}.rule=Host(`auth-proxy.${BASE_DOMAIN:-localtest.me}`) || (Host(`fhir-auth.${BASE_DOMAIN:-localtest.me}`) && PathPrefix(`/oauth2`))
       - traefik.http.routers.auth-proxy-${COMPOSE_PROJECT_NAME}.entrypoints=websecure
       - traefik.http.routers.auth-proxy-${COMPOSE_PROJECT_NAME}.tls=true
       - traefik.http.routers.auth-proxy-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt
