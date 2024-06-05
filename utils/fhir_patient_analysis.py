@@ -3,11 +3,18 @@
 This script generates a file that's an analysis of FHIR Patient resources.
 Input: PainTracker.created.Patient.resources.through2024-05-29AM.txt, which is
 a list of FHIR resource IDs, parsed from an elk log of ID's created by PainTracker.
-More info at https://uwnetid-my.sharepoint.com/:w:/r/personal/mcjustin_uw_edu/_layouts/15/doc.aspx?sourcedoc=%7B068d55a9-d4ce-4c48-a8d3-a5b865b1f7eb%7D&action=edit
+Use cases: https://docs.google.com/document/d/1OnMY60HwphwQg0IE_T48j-QG4cU05r_sFVu2HiePQ8M/edit#heading=h.xmqtrixb1y6x
 It's intended to be run from nihonium:/srv/www/cosri-uwmc-prod/cosri-environments/prod/freestanding/femr :
-sudo python3 ./fhir_patient_analysis.py
+  sudo python3 ./fhir_patient_analysis.py
 It requires no modification to be run from that location.
 It accepts no arguments.
+
+TODO:
+Modify to accept file args for input and output, e.g.:
+docker-compose run --volume=${PWD}/utils:/opt/utils \
+  --volume=/home/me/filein.txt:/opt/input/filein.txt \
+  --volume=/home/me/fileout.txt:/opt/output/fileout.txt \
+  femr python3 /opt/utils/analysis.py /opt/input/filein.txt /opt/output/fileout.txt
 '''
 
 import subprocess
