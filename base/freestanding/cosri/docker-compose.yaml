@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   frontend:
-    image: ghcr.io/uwcirg/cosri-pain-management-summary:${FRONTEND_IMAGE_TAG:-latest}
+    image: ghcr.io/uwcirg/cosri-pain-management-summary:${FRONTEND_IMAGE_TAG:-develop}
     environment:
       # confidential backend API endpoint
       # NB: domain is required for cookies to be set
