@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   dashboard:
-    image: uwcirg/cosri-patientsearch:${DASHBOARD_IMAGE_TAG:-develop}
+    image: ghcr.io/uwcirg/cosri-patientsearch:${DASHBOARD_IMAGE_TAG:-develop}
     environment:
       OIDC_AUTHORIZE_URL: "https://keycloak.${BASE_DOMAIN:-localtest.me}/auth/realms/fEMR/protocol/openid-connect/auth"
       OIDC_CLIENT_ID: femr_openid_client
@@ -33,7 +33,7 @@ services:
 
 
   keycloak:
-    image: jboss/keycloak:${KEYCLOAK_IMAGE_TAG:-15.0.2}
+    image: quay.io/keycloak/keycloak:${KEYCLOAK_IMAGE_TAG:-15.0.2}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.keycloak-${COMPOSE_PROJECT_NAME}.rule=Host(`keycloak.${BASE_DOMAIN:-localtest.me}`)"
