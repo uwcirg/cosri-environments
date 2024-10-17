@@ -13,6 +13,7 @@ services:
       EXTERNAL_FHIR_API: 'http://pdmp-internal:8008/v/r2/fhir/'
       # FHIR URL queried by PDMP integration backend
       MAP_API: "http://fhir-internal:8080/fhir/"
+      # fhir-migrations run against FHIR_URL
       FHIR_URL: "http://fhir-internal:8080/fhir/"
       MIGRATION_SCRIPTS_DIR: /opt/migrations
       # FHIR URL passed to SoF client
