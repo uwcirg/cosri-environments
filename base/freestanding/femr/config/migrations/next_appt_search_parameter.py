@@ -31,7 +31,7 @@ def upgrade():
         "code": "date-time-of-next-appointment",
         "base": [ "Patient" ],
         "type": "date",
-        "expression": "Patient.extension('http://www.uwmedicine.org/time_of_next_appointment').valueDateTime"
+        "expression": "Patient.extension('http://www.uwmedicine.org/time_of_next_appointment').value"
     }
     response = requests.put(f'{FHIR_SERVER_URL}SearchParameter/{SP_ID}', headers=HEADERS, data=json.dumps(sp_resource))
     response.raise_for_status()
