@@ -34,15 +34,10 @@ def upgrade():
         "expression": "Patient.extension('http://www.uwmedicine.org/time_of_next_appointment').valueDateTime"
     }
     response = requests.put(f'{FHIR_SERVER_URL}SearchParameter/{SP_ID}', headers=HEADERS, data=json.dumps(sp_resource))
-    if response.status_code == 200 or response.status_code == 201:
-        logging.info('SearchParameter created successfully.')
-    else:
-        logging.error(f'Failed to create SearchParameter: {response.status_code} {response.text}')
+    response.raise_for_status()
+
 
 def downgrade():
     # Reverse upgrade by deleting new SearchParameter
     response = requests.delete(f'{FHIR_SERVER_URL}SearchParameter/{SP_ID}', headers=HEADERS)
-    if response.status_code == 200 or response.status_code == 204:
-        logging.info('SearchParameter deleted successfully.')
-    else:
-        logging.error(f'Failed to delete SearchParameter: {response.status_code} {response.text}')
+    response.raise_for_status()
