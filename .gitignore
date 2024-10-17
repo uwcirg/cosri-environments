@@ -1,3 +1,4 @@
 *.env
 .env
 ehr/cosri/config/pdmp/certs/*
+*__pycache__
