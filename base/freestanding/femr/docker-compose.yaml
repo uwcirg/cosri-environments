@@ -131,7 +131,7 @@ services:
 
 
   pdmp:
-    image: uwcirg/script-fhir-facade:${PDMP_IMAGE_TAG:-develop}
+    image: ghcr.io/uwcirg/script-fhir-facade:${PDMP_IMAGE_TAG:-develop}
     environment:
       RXNAV_LOOKUP_ENABLED: "true"
       REQUEST_CACHE_URL: redis://redis:6379/0
