@@ -61,6 +61,9 @@ services:
   fhir:
     labels:
       - traefik.enable=true
+      # Hapi does not EXPOSE the ports it listens on, requiring explicit traefik configuration
+      - traefik.http.services.fhir-auth-${COMPOSE_PROJECT_NAME}.loadbalancer.server.port=8080
+
       - traefik.http.routers.fhir-auth-${COMPOSE_PROJECT_NAME}.rule=Host(`fhir-auth.${BASE_DOMAIN:-localtest.me}`)
       - traefik.http.routers.fhir-auth-${COMPOSE_PROJECT_NAME}.middlewares=oidc-auth-${COMPOSE_PROJECT_NAME}
       - traefik.http.routers.fhir-auth-${COMPOSE_PROJECT_NAME}.entrypoints=websecure
