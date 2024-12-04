@@ -115,6 +115,9 @@ services:
       - "./config/fhir/application.yaml:/opt/application.yaml:ro"
     depends_on:
       - db
+    # Hapi does not EXPOSE (advertise) the ports it listens on in its docker image
+    expose:
+      - 8080
     networks:
       internal:
         aliases:
