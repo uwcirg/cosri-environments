@@ -156,9 +156,9 @@ services:
       - redis
 
   rxcheck:
-  # TODO configure
+  # TODO make configurable
     image: rxcheck.azurecr.us/rxcheck-hce/srs:v3.1.b95
-    # TODO fix path
+    # TODO remove
     ports:
       - 8080:8080
       - 8443:8443
