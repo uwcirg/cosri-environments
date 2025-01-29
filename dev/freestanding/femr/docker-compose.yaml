@@ -44,6 +44,19 @@ services:
     networks:
       - ingress
 
+  rxcheck:
+    volumes:
+      # TODO move
+      - ../../../dev/freestanding/femr/config/logs:/rxcheck-srs/logs
+      - ../../../dev/freestanding/femr/config/rxcheck/application.yml:/rxcheck-srs/conf/application.yml:ro
+      - ../../../dev/freestanding/femr/config/rxcheck/rxcheck.pfx:/rxcheck-srs/conf/rxcheck.pfx:ro
+      - ../../../dev/freestanding/femr/config/rxcheck/default.properties:/rxcheck-srs/webapps/rxoutbound/WEB-INF/classes/default.properties:ro
+      - ../../../dev/freestanding/femr/config/rxcheck/logging.properties:/rxcheck-srs/webapps/rxoutbound/WEB-INF/classes/logging.properties:ro
+    env_file:
+        - ../../../dev/freestanding/femr/rxcheck.env
+    ports:
+      - 8080:8080
+      - 8443:8443
 
   hydrant:
     env_file:
