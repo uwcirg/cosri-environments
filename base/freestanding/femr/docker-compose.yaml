@@ -155,6 +155,30 @@ services:
     depends_on:
       - redis
 
+  rxcheck:
+  # TODO configure
+    image: rxcheck.azurecr.us/rxcheck-hce/srs:v3.1.b95
+    volumes:
+      #- ./config/rxcheck:/rxcheck-srs/conf:ro
+      #- ./config/rxcheck/application.yml:/rxcheck-srs/conf/application.yml:ro
+      - /home/ivanc/src/cosri-environments/dev/freestanding/femr/config/rxcheck/application.yml:/rxcheck-srs/conf/application.yml:ro
+      - /home/ivanc/src/cosri-environments/dev/freestanding/femr/config/rxcheck/rxcheck.pfx:/rxcheck-srs/conf/rxcheck.pfx:ro
+      # - /home/ivanc/src/cosri-environments/dev/freestanding/femr/config/rxcheck/default.properties:/rxcheck-srs/conf/default.properties:ro
+      # - /home/ivanc/src/cosri-environments/dev/freestanding/femr/config/rxcheck/default.properties:/rxcheck-srs/default.properties:ro
+      # - /home/ivanc/src/cosri-environments/dev/freestanding/femr/config/rxcheck/default.properties:/opt/java/openjdk/conf/default.properties:ro
+      - /home/ivanc/src/cosri-environments/dev/freestanding/femr/config/rxcheck/default.properties:/rxcheck-srs/webapps/rxoutbound/WEB-INF/classes/default.properties:ro
+      - /home/ivanc/src/cosri-environments/dev/freestanding/femr/config/rxcheck/logging.properties:/rxcheck-srs/webapps/rxoutbound/WEB-INF/classes/logging.properties:ro
+
+
+      # /rxcheck-srs/conf/application.yml
+      # TODO move
+      - ./config/logs:/rxcheck-srs/logs
+    # TODO fix path
+    env_file:
+        - /home/ivanc/src/cosri-environments/dev/freestanding/femr/rxcheck.env
+    ports:
+      - 8080:8080
+      - 8443:8443
 
   hydrant:
     image: ghcr.io/uwcirg/hydrant:${HYDRANT_IMAGE_TAG:-develop}
