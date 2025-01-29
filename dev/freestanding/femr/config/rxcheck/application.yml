@@ -1,0 +1,19 @@
+rx:
+  console:
+    baseUrl: https://test.rxcheck.org:18803/tetrus-rxcheck/
+    apiKey: QQ0afc7607-9600-4f42-93c5-af3a8b5db8e31734976001288
+    siteCode: QQ_UWH
+  outbound:
+    client:
+      connectionTimeout: 36000
+      receiveTimeout: 32000
+    keystore:
+      filePath: /rxcheck-srs/conf/rxcheck.pfx
+      type: pkcs12
+      keypasswd: uwcirg
+      storepasswd: uwcirg
+  role.mapping:
+logging:
+  level:
+    root: ERROR
+    com.tetrus.pmix: ERROR
