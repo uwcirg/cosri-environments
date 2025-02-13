@@ -1,0 +1,9 @@
+# docker-compose development override for timewarp service
+version: "3.7"
+services:
+  timewarp:
+    environment:
+      PLACEHOLDER: development
+    volumes:
+    # set in .env
+      - '${TIMEWARP_CHECKOUT_DIR}/:/opt/app'

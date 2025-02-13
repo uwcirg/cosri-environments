@@ -48,3 +48,7 @@ services:
   hydrant:
     env_file:
       - ../../../dev/freestanding/femr/hydrant.env
+
+  timewarp:
+    env_file:
+      - ../../../dev/freestanding/femr/timewarp.env

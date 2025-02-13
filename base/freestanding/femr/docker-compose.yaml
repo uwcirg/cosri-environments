@@ -175,6 +175,11 @@ services:
     networks:
       - internal
 
+  timewarp:
+    image: ghcr.io/uwcirg/fhir-mock-data:${TIMEWARP_IMAGE_TAG:-latest}
+    # include `--profile manual` in docker-compose calls; hiden by default
+    profiles:
+      - manual
 
   redis:
     image: redis
