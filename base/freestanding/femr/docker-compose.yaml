@@ -180,6 +180,8 @@ services:
     # include `--profile manual` in docker-compose calls; hiden by default
     profiles:
       - manual
+    networks:
+      - internal
 
   redis:
     image: redis
