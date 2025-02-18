@@ -46,12 +46,12 @@ services:
       - traefik.http.routers.auth-proxy-${COMPOSE_PROJECT_NAME}.tls=true
       - traefik.http.routers.auth-proxy-${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt
 
-      # oauth2-proxy does not EXPOSE the ports it listens on, requiring explicit traefik configuration
-      - traefik.http.services.auth-proxy-${COMPOSE_PROJECT_NAME}.loadbalancer.server.port=4180
-
       - traefik.http.middlewares.oidc-auth-${COMPOSE_PROJECT_NAME}.forwardAuth.address=http://auth-proxy-${COMPOSE_PROJECT_NAME}:4180/
       - traefik.http.middlewares.oidc-auth-${COMPOSE_PROJECT_NAME}.forwardAuth.trustForwardHeader=true
       - traefik.http.middlewares.oidc-auth-${COMPOSE_PROJECT_NAME}.forwardAuth.authResponseHeaders=X-Auth-Request-User,X-Auth-Request-Email,X-Auth-Request-Access-Token,Authorization
+    # oauth2-proxy does not EXPOSE (advertise) the ports it listens on in its docker image
+    expose:
+      - 4180
     networks:
       ingress:
         aliases:
